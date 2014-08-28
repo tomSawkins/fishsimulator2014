@@ -1,40 +1,56 @@
-﻿/// <reference path="Libs/datejs.d.ts" />
+﻿/// <reference path="Libs/jquery-blink.d.ts" />
+/// <reference path="Libs/datejs.d.ts" />
 /// <reference path="Libs/jquery.d.ts" />
 /// <reference path="Libs/linq.d.ts" />
 /// <reference path="Components/IComponent.ts" />
 var FishSim;
 (function (FishSim) {
-    var Sim = (function () {
-        function Sim() {
+    var App = (function () {
+        function App() {
         }
-        Sim.run = function () {
-            alert('running');
+        App.run = function () {
+            var _this = this;
+            $('.title').blink();
+
+            this.components.push(this.fish = new FishSim.Components.Fish());
 
             this.lastTickTime = (new Date());
 
-            setInterval(this.tick, this.fps);
+            setInterval(function () {
+                _this.tick();
+            }, 1000 / this.fps);
         };
 
-        Sim.tick = function () {
-            var tickTime = new Date();
+        App.tick = function () {
+            var tickTime = (new Date());
             var elapsed = tickTime.getTime() - this.lastTickTime.getTime();
 
-            var index = 0;
-            while (index < this.components.length) {
-                var component = this.components[index];
+            try  {
+                // TODO: Need to make this loop safe for when
+                // components are added/removed dynamically within
+                // the loop itself. (e.g. a component may create
+                // it's own components on the fly)
+                var index = 0;
+                while (index < App.components.length) {
+                    var component = App.components[index];
 
-                component.tick(elapsed);
+                    component.tick(elapsed);
+
+                    index++;
+                }
+            } finally {
+                this.lastTickTime = tickTime;
             }
         };
-        Sim.components = [];
+        App.components = [];
 
-        Sim.fps = 50;
-        return Sim;
+        App.fps = 1;
+        return App;
     })();
-    FishSim.Sim = Sim;
+    FishSim.App = App;
 
     window.onload = function () {
-        Sim.run();
+        App.run();
     };
 })(FishSim || (FishSim = {}));
 //# sourceMappingURL=App.js.map

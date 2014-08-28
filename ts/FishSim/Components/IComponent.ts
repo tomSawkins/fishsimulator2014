@@ -3,5 +3,7 @@
 	export interface IComponent
 	{
 		tick(elapsed: number): void;
+
+		windowResized?(): void;
 	}
 } 

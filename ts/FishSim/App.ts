@@ -1,44 +1,66 @@
-﻿/// <reference path="Libs/datejs.d.ts" />
+﻿/// <reference path="Libs/jquery-blink.d.ts" />
+/// <reference path="Libs/datejs.d.ts" />
 /// <reference path="Libs/jquery.d.ts" />
 /// <reference path="Libs/linq.d.ts" />
 /// <reference path="Components/IComponent.ts" />
 
 module FishSim
 {
-	export class Sim
+	export class App
 	{
 		public static components = <IComponent[]>[];
 
-		public static fps: number = 50;
+		public static fish: FishSim.Components.Fish;
+
+		public static fps: number = 1;
 
 		public static run(): void
 		{
-			alert('running');
+			$('.title').blink();
+
+			this.components.push(this.fish = new FishSim.Components.Fish());
 
 			this.lastTickTime = <IDateJS>(new Date());
 
-			setInterval(this.tick, this.fps);
+			setInterval(() =>
+			{
+				this.tick();
+			},
+			1000 / this.fps);
 		}
 
 		private static lastTickTime: IDateJS;
 
 		private static tick(): void
 		{
-			var tickTime = new Date();
+			var tickTime = <IDateJS>(new Date());
 			var elapsed = tickTime.getTime() - this.lastTickTime.getTime();
 
-			var index = 0;
-			while (index < this.components.length)
+			try
 			{
-				var component = this.components[index];
+				// TODO: Need to make this loop safe for when 
+				// components are added/removed dynamically within 
+				// the loop itself. (e.g. a component may create
+				// it's own components on the fly)
+				var index = 0;
+				while (index < App.components.length)
+				{
+					var component = App.components[index];
 
-				component.tick(elapsed);
+					component.tick(elapsed);
+
+					index++;
+				}
+			}
+			finally
+			{
+				this.lastTickTime = tickTime;
 			}
 		}
 	}
 
 	window.onload = () =>
 	{
-		Sim.run();
+		App.run();
 	};
 }

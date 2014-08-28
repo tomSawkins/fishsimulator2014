@@ -17,13 +17,19 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="css\app.css" />
+    <Content Include="css\app.css">
+      <DependentUpon>app.less</DependentUpon>
+    </Content>
     <Content Include="fishsim.css" />
     <Content Include="fishsim.js" />
+    <Content Include="index.htm" />
     <Content Include="index.html" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Extensions.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <Content Include="ts\FishSim\Libs\datejs.d.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />
     <Content Include="ts\FishSim\Libs\linq.d.ts" />
     <Content Include="web.config" />
@@ -32,6 +38,8 @@
     <TypeScriptCompile Include="ts\FishSim\App.ts" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\app.less" />
+    <Content Include="fonts\arcadeclassic.ttf" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

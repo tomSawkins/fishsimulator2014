@@ -1,4 +1,4 @@
-html, body {
+﻿html, body {
 	border: 0;
 	margin: 0;
 	padding: 0;
@@ -10,11 +10,14 @@ html {
 	height: 100%;
 }
 
-#fish {
-	background-image: url('fish.png');
+.fish {
+	background-image: url('../images/fish.png');
+	
 	width: 137px;
 	height: 95px;
 	z-index: 999;
+
+	position: fixed;
 }
 
 .faceLeft {
@@ -43,5 +46,5 @@ html {
 
 @font-face {
 	font-family: arcadeclassic;
-	src: url(arcadeclassic.ttf);
+	src: url(../arcadeclassic.ttf);
 }
