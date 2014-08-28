@@ -17,6 +17,15 @@ html {
 	z-index: 999;
 }
 
+.faceLeft {
+	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+	-ms-filter: "FlipH";
+}
+
 .thoughts, .title {
 	color: white;
 	font-size: 28pt;

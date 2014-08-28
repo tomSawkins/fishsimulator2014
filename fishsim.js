@@ -81,10 +81,12 @@ FS = {
 				change = '+=';
 				break;
 			case 'right':
+				this.fish.removeClass('faceLeft');
 				propertyName += 'Left';
 				change = '+=';
 				break;
 			case 'left':
+				this.fish.addClass('faceLeft');
 				propertyName += 'Left';
 				change = '-=';
 				break;

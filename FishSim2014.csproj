@@ -18,6 +18,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\app.css" />
+    <Content Include="fishsim.css" />
+    <Content Include="fishsim.js" />
     <Content Include="index.html" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
