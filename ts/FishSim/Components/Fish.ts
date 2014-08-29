@@ -110,6 +110,17 @@ module FishSim.Components
 				{
 					this.move();
 				}
+
+				// Chance a bubble to occur roughly every x milliseconds
+				if (Math.chance(elapsed, 3000))
+				{
+					var bubble = new Bubble({
+						x: this.element.position().left,
+						y: this.element.position().top
+					});
+
+					App.addComponent(bubble);
+				}
 			}
 		}
 

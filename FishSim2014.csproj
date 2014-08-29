@@ -20,6 +20,9 @@
     <Content Include="css\app.css">
       <DependentUpon>app.less</DependentUpon>
     </Content>
+    <Content Include="css\app.min.css">
+      <DependentUpon>app.less</DependentUpon>
+    </Content>
     <Content Include="fishsim.css" />
     <Content Include="fishsim.js" />
     <Content Include="index.htm" />
@@ -28,6 +31,7 @@
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
     <TypeScriptCompile Include="ts\FishSim\Extensions.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <Content Include="ts\FishSim\Libs\datejs.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />

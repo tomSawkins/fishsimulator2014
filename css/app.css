@@ -24,6 +24,13 @@ html {
   filter: FlipH;
   -ms-filter: "FlipH";
 }
+.bubble {
+  width: 48px;
+  height: 48px;
+  z-index: 1000;
+  position: fixed;
+  background-image: url('../images/bubble.png');
+}
 .thoughts,
 .title {
   color: white;

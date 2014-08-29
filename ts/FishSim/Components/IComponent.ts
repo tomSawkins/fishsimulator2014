@@ -4,6 +4,6 @@
 	{
 		tick(elapsed: number): void;
 
-		windowResized?(): void;
+		flaggedForRemoval?: boolean;
 	}
 } 

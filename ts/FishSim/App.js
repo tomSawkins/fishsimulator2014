@@ -8,11 +8,50 @@ var FishSim;
     var App = (function () {
         function App() {
         }
+        App.addComponent = function (component) {
+            this.components.push(component);
+        };
+
+        App.removeComponent = function (component) {
+            component.flaggedForRemoval = true;
+        };
+
+        App.forEachComponent = function (action) {
+            this.loopingThruComponentsCount++;
+            try  {
+                // Do a while loop to allow for additions to the components array
+                var index = 0;
+                while (index < this.components.length) {
+                    var component = this.components[index];
+
+                    if (!component.flaggedForRemoval) {
+                        action(component);
+                    }
+
+                    index++;
+                }
+            } finally {
+                this.loopingThruComponentsCount--;
+
+                if (this.loopingThruComponentsCount == 0) {
+                    var index = 0;
+                    while (index < this.components.length) {
+                        if (this.components[index].flaggedForRemoval) {
+                            this.components.splice(index, 1);
+                        } else {
+                            index++;
+                        }
+                    }
+                }
+            }
+        };
+
         App.run = function () {
             var _this = this;
             $('.title').blink();
 
-            this.components.push(this.fish = new FishSim.Components.Fish());
+            // Add components to the scene here (or alternatively on the fly within your own components)
+            this.addComponent(this.fish = new FishSim.Components.Fish());
 
             this.lastTickTime = (new Date());
 
@@ -26,23 +65,17 @@ var FishSim;
             var elapsed = tickTime.getTime() - this.lastTickTime.getTime();
 
             try  {
-                // TODO: Need to make this loop safe for when
-                // components are added/removed dynamically within
-                // the loop itself. (e.g. a component may create
-                // it's own components on the fly)
-                var index = 0;
-                while (index < App.components.length) {
-                    var component = App.components[index];
-
+                // Loop through each component in the scene and call their tick handler
+                this.forEachComponent(function (component) {
                     component.tick(elapsed);
-
-                    index++;
-                }
+                });
             } finally {
                 this.lastTickTime = tickTime;
             }
         };
         App.components = [];
+
+        App.loopingThruComponentsCount = 0;
 
         App.fps = 1;
         return App;
