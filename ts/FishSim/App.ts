@@ -86,6 +86,15 @@ module FishSim
 		{
 			$('.title').blink();
 
+			// Subscribe to events
+			var body = $('body');
+
+			body.keydown((e) => this.keydown(e));
+
+			body.keypress((e) => this.keypress(e));
+
+			body.keyup((e) => this.keyup(e));
+
 			// Add components to the scene here (or alternatively on the fly within your own components)
 			this.addComponent(this.fish = new FishSim.Components.Fish());
 
@@ -117,6 +126,39 @@ module FishSim
 			{
 				this.lastTickTime = tickTime;
 			}
+		}
+
+		private static keydown(event: JQueryKeyEventObject)
+		{
+			this.forEachComponent((component: IComponent) =>
+			{
+				if (component.keydown)
+				{
+					component.keydown(event);
+				}
+			});
+		}
+
+		private static keypress(event: JQueryKeyEventObject)
+		{
+			this.forEachComponent((component: IComponent) =>
+			{
+				if (component.keypress)
+				{
+					component.keypress(event);
+				}
+			});
+		}
+
+		private static keyup(event: JQueryKeyEventObject)
+		{
+			this.forEachComponent((component: IComponent) =>
+			{
+				if (component.keyup)
+				{
+					component.keyup(event);
+				}
+			});
 		}
 	}
 

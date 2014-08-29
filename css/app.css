@@ -13,7 +13,7 @@ html {
   background-image: url('../images/fish.png');
   width: 137px;
   height: 95px;
-  z-index: 999;
+  z-index: -10;
   position: fixed;
 }
 .faceLeft {
@@ -36,7 +36,7 @@ html {
   color: white;
   font-size: 28pt;
   font-family: arcadeclassic;
-  z-index: 999999999;
+  z-index: 10000;
   float: right;
 }
 .thoughts {

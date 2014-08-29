@@ -58,18 +58,32 @@ module FishSim.Components
 
 		private tilePosition: IVector;
 
+		private canMoveToTile(tile: IVector): boolean
+		{
+			if
+				(tile.x >= 0 && tile.x < Fish.maxTileCounts.x &&
+				tile.y >= 0 && tile.y < Fish.maxTileCounts.y)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
 		private getAvailableTilePositions(): IVector[]
 		{
 			var result = <IVector[]>[];
 
 			var min = {
-				x: Math.max(this.tilePosition.x - 1, 0),
-				y: Math.max(this.tilePosition.y - 1, 0)
+				x: this.tilePosition.x - 1,
+				y: this.tilePosition.y - 1
 			};
 
 			var max = {
-				x: Math.min(this.tilePosition.x + 1, Fish.maxTileCounts.x - 1),
-				y: Math.min(this.tilePosition.y + 1, Fish.maxTileCounts.y - 1)
+				x: this.tilePosition.x + 1,
+				y: this.tilePosition.y + 1
 			};
 
 			for (var x = min.x; x <= max.x; x++)
@@ -81,10 +95,12 @@ module FishSim.Components
 						continue;
 					}
 
-					result.push({
-						x: x,
-						y: y
-					});
+					var position = { x: x, y: y };
+
+					if (this.canMoveToTile(position))
+					{
+						result.push(position);
+					}
 				}
 			}
 
@@ -135,7 +151,7 @@ module FishSim.Components
 			};
 		}
 
-		private moveToTile(tile: IVector, animate: boolean): void
+		private moveToTile(tile: IVector, animate: boolean, animationComplete?: () => any): void
 		{
 			// Translate from tile to screen
 			var screen = Fish.tileToScreen(tile);
@@ -185,9 +201,49 @@ module FishSim.Components
 			// Pick a random available tile to move to
 			var availableTiles = this.getAvailableTilePositions();
 
+			if (availableTiles.length == 0)
+			{
+				console.log('no available tiles to move to');
+			}
+
 			var tile = availableTiles[Math.randomRange(0, availableTiles.length - 1)];
 
 			this.moveToTile(tile, true);
+		}
+
+		private keyup(e: JQueryKeyEventObject)
+		{
+			if (this.state == FishState.Idle)
+			{
+				var newPosition = Utils.clone(this.tilePosition);
+
+				//alert(e.keyCode);
+				switch (e.keyCode)
+				{
+					case 37: // Left
+						newPosition.x--;
+						break;
+
+					case 38: // Up
+						newPosition.y--;
+						break;
+
+					case 39: // Right
+						newPosition.x++;
+						break;
+
+					case 40: // Down
+						newPosition.y++;
+						break;
+				}
+
+				if (this.canMoveToTile(newPosition))
+				{
+					this.state = FishState.Moving;
+
+					this.moveToTile(newPosition, true);
+				}
+			}
 		}
 	}
 } 

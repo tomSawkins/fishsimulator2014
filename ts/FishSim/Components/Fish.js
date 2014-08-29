@@ -40,17 +40,25 @@ var FishSim;
                     _this.calculateDimensions();
                 });
             }
+            Fish.prototype.canMoveToTile = function (tile) {
+                if (tile.x >= 0 && tile.x < Fish.maxTileCounts.x && tile.y >= 0 && tile.y < Fish.maxTileCounts.y) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
             Fish.prototype.getAvailableTilePositions = function () {
                 var result = [];
 
                 var min = {
-                    x: Math.max(this.tilePosition.x - 1, 0),
-                    y: Math.max(this.tilePosition.y - 1, 0)
+                    x: this.tilePosition.x - 1,
+                    y: this.tilePosition.y - 1
                 };
 
                 var max = {
-                    x: Math.min(this.tilePosition.x + 1, Fish.maxTileCounts.x - 1),
-                    y: Math.min(this.tilePosition.y + 1, Fish.maxTileCounts.y - 1)
+                    x: this.tilePosition.x + 1,
+                    y: this.tilePosition.y + 1
                 };
 
                 for (var x = min.x; x <= max.x; x++) {
@@ -59,10 +67,11 @@ var FishSim;
                             continue;
                         }
 
-                        result.push({
-                            x: x,
-                            y: y
-                        });
+                        var position = { x: x, y: y };
+
+                        if (this.canMoveToTile(position)) {
+                            result.push(position);
+                        }
                     }
                 }
 
@@ -107,7 +116,7 @@ var FishSim;
                 };
             };
 
-            Fish.prototype.moveToTile = function (tile, animate) {
+            Fish.prototype.moveToTile = function (tile, animate, animationComplete) {
                 var _this = this;
                 // Translate from tile to screen
                 var screen = Fish.tileToScreen(tile);
@@ -146,9 +155,43 @@ var FishSim;
                 // Pick a random available tile to move to
                 var availableTiles = this.getAvailableTilePositions();
 
+                if (availableTiles.length == 0) {
+                    console.log('no available tiles to move to');
+                }
+
                 var tile = availableTiles[Math.randomRange(0, availableTiles.length - 1)];
 
                 this.moveToTile(tile, true);
+            };
+
+            Fish.prototype.keyup = function (e) {
+                if (this.state == 0 /* Idle */) {
+                    var newPosition = FishSim.Utils.clone(this.tilePosition);
+
+                    switch (e.keyCode) {
+                        case 37:
+                            newPosition.x--;
+                            break;
+
+                        case 38:
+                            newPosition.y--;
+                            break;
+
+                        case 39:
+                            newPosition.x++;
+                            break;
+
+                        case 40:
+                            newPosition.y++;
+                            break;
+                    }
+
+                    if (this.canMoveToTile(newPosition)) {
+                        this.state = 1 /* Moving */;
+
+                        this.moveToTile(newPosition, true);
+                    }
+                }
             };
             Fish.fishCount = 0;
 

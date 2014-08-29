@@ -62,6 +62,21 @@ var FishSim;
             var _this = this;
             $('.title').blink();
 
+            // Subscribe to events
+            var body = $('body');
+
+            body.keydown(function (e) {
+                return _this.keydown(e);
+            });
+
+            body.keypress(function (e) {
+                return _this.keypress(e);
+            });
+
+            body.keyup(function (e) {
+                return _this.keyup(e);
+            });
+
             // Add components to the scene here (or alternatively on the fly within your own components)
             this.addComponent(this.fish = new FishSim.Components.Fish());
 
@@ -84,6 +99,30 @@ var FishSim;
             } finally {
                 this.lastTickTime = tickTime;
             }
+        };
+
+        App.keydown = function (event) {
+            this.forEachComponent(function (component) {
+                if (component.keydown) {
+                    component.keydown(event);
+                }
+            });
+        };
+
+        App.keypress = function (event) {
+            this.forEachComponent(function (component) {
+                if (component.keypress) {
+                    component.keypress(event);
+                }
+            });
+        };
+
+        App.keyup = function (event) {
+            this.forEachComponent(function (component) {
+                if (component.keyup) {
+                    component.keyup(event);
+                }
+            });
         };
         App.components = [];
 
