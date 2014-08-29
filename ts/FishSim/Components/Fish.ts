@@ -27,12 +27,13 @@ module FishSim.Components
 
 			var body = $('body');
 
+			// Generate a new ID for the fishy
 			Fish.fishCount++;
-			var id = "fish" + Fish.fishCount;
+			this.id = "fish" + Fish.fishCount;
 
 			body.append('<div id="fish' + Fish.fishCount + '" class="fish"></div>');
 
-			this.element = $('#' + id);
+			this.element = $('#' + this.id);
 
 			// Pick a random starting tile
 			this.tilePosition = {
@@ -48,6 +49,8 @@ module FishSim.Components
 				this.calculateDimensions();
 			});
 		}
+
+		public id: string;
 
 		private element: JQuery;
 

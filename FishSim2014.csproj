@@ -36,6 +36,7 @@
     <TypeScriptCompile Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />
     <Content Include="ts\FishSim\Libs\linq.d.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Utils\Utils.ts" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -19,12 +19,13 @@ var FishSim;
 
                 var body = $('body');
 
+                // Generate a new ID for the fishy
                 Fish.fishCount++;
-                var id = "fish" + Fish.fishCount;
+                this.id = "fish" + Fish.fishCount;
 
                 body.append('<div id="fish' + Fish.fishCount + '" class="fish"></div>');
 
-                this.element = $('#' + id);
+                this.element = $('#' + this.id);
 
                 // Pick a random starting tile
                 this.tilePosition = {
@@ -89,7 +90,7 @@ var FishSim;
 
                     // Chance a bubble to occur roughly every x milliseconds
                     if (Math.chance(elapsed, 3000)) {
-                        var bubble = new Components.Bubble({
+                        var bubble = new FishSim.Components.Bubble({
                             x: this.element.position().left,
                             y: this.element.position().top
                         });

@@ -7,22 +7,28 @@ module FishSim.Components
 	{
 		private static bubbleCount = 0;
 
-		private element: JQuery;
-
-		private position: IVector;
-
 		constructor(position: IVector)
 		{
 			// Generate a new ID for this bubble
 			Bubble.bubbleCount++;
-			var id = 'bubble' + Bubble.bubbleCount;
+			this.id = 'bubble' + Bubble.bubbleCount;
+
+			// Dereference position
+			position = Utils.clone(position);
 
 			// Create the bubble element and add to the scene
-			var content = '<div id="{id}" class="bubble"></div>'.format({ id: id });
-			this.element = $('body').append(content);
+			var content = '<div id="{id}" class="bubble"></div>'.format(this);
+			$('body').append(content);
+			this.element = $('#' + this.id);
 
 			this.setPosition(position);
 		}
+
+		private element: JQuery;
+
+		private position: IVector;
+
+		public id: string;
 
 		private setPosition(position: IVector)
 		{
@@ -32,12 +38,20 @@ module FishSim.Components
 
 		public tick(elapsed: number): void
 		{
-			// Speed is pixels per second
+			// Speed in pixels per second
 			var speed = 150;
 
+			// Work out the distance to move based on speed and time passed
 			var distanceToMove = speed * elapsed / 1000;
 
-			this.setPosition({ x: this.position.x, y: this.position.y - distanceToMove });
+			// Work out new position
+			var newPosition = {
+				x: this.position.x,
+				y: this.position.y - distanceToMove
+			};
+
+			// Update position
+			this.setPosition(newPosition);
 
 			// If we've gone outside the top edge of the screen then 
 			// we can be cleaned up
@@ -45,6 +59,13 @@ module FishSim.Components
 			{
 				App.removeComponent(this);
 			}
+		}
+
+		public cleanUp(): void
+		{
+			// Remove bubble from dom
+			this.element = null;
+			$('body').remove('#' + this.id);
 		}
 	}
 }

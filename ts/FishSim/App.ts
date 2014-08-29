@@ -18,6 +18,32 @@ module FishSim
 		public static removeComponent(component: IComponent)
 		{
 			component.flaggedForRemoval = true;
+
+			if (component.cleanUp)
+			{
+				component.cleanUp();
+			}
+
+			if (this.loopingThruComponentsCount == 0)
+			{
+				this.removeFlaggedComponents();
+			}
+		}
+
+		private static removeFlaggedComponents(): void
+		{
+			var index = 0;
+			while (index < this.components.length)
+			{
+				if (this.components[index].flaggedForRemoval)
+				{
+					this.components.splice(index, 1);
+				}
+				else
+				{
+					index++;
+				}
+			}
 		}
 
 		private static loopingThruComponentsCount = 0;
@@ -47,25 +73,14 @@ module FishSim
 
 				if (this.loopingThruComponentsCount == 0)
 				{
-					var index = 0;
-					while (index < this.components.length)
-					{
-						if (this.components[index].flaggedForRemoval)
-						{
-							this.components.splice(index, 1);
-						}
-						else
-						{
-							index++;
-						}
-					}
+					this.removeFlaggedComponents();
 				}
 			}
 		}
 
 		public static fish: FishSim.Components.Fish;
 
-		public static fps: number = 1;
+		public static fps: number = 30;
 
 		public static run(): void
 		{

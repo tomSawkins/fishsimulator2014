@@ -14,6 +14,25 @@ var FishSim;
 
         App.removeComponent = function (component) {
             component.flaggedForRemoval = true;
+
+            if (component.cleanUp) {
+                component.cleanUp();
+            }
+
+            if (this.loopingThruComponentsCount == 0) {
+                this.removeFlaggedComponents();
+            }
+        };
+
+        App.removeFlaggedComponents = function () {
+            var index = 0;
+            while (index < this.components.length) {
+                if (this.components[index].flaggedForRemoval) {
+                    this.components.splice(index, 1);
+                } else {
+                    index++;
+                }
+            }
         };
 
         App.forEachComponent = function (action) {
@@ -34,14 +53,7 @@ var FishSim;
                 this.loopingThruComponentsCount--;
 
                 if (this.loopingThruComponentsCount == 0) {
-                    var index = 0;
-                    while (index < this.components.length) {
-                        if (this.components[index].flaggedForRemoval) {
-                            this.components.splice(index, 1);
-                        } else {
-                            index++;
-                        }
-                    }
+                    this.removeFlaggedComponents();
                 }
             }
         };
@@ -77,7 +89,7 @@ var FishSim;
 
         App.loopingThruComponentsCount = 0;
 
-        App.fps = 1;
+        App.fps = 30;
         return App;
     })();
     FishSim.App = App;
