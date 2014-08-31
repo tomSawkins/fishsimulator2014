@@ -11,13 +11,19 @@ html {
 }
 
 .fish {
-	background-image: url('../images/fish.png');
-	
 	width: 137px;
 	height: 95px;
 	z-index: -10;
 
 	position: fixed;
+}
+
+#ts8 {
+	background-image: url('../images/ts8.png');
+}
+
+#ts9 {
+	background-image: url('../images/ts9.png');
 }
 
 .faceLeft {
@@ -32,7 +38,7 @@ html {
 .bubble {
 	width: 48px;
 	height: 48px;
-	z-index: 1000;
+	z-index: -9;
 	position: fixed;
 	background-image: url('../images/bubble.png');
 }
@@ -55,5 +61,22 @@ html {
 
 @font-face {
 	font-family: arcadeclassic;
-	src: url(../arcadeclassic.ttf);
+	src: url(../fonts/arcadeclassic.ttf);
+}
+
+@font-face {
+	font-family: mk1;
+	src: url(../fonts/mk1.ttf);
+}
+
+span.fatality {
+	font-family: mk1;
+	font-size: 60pt;
+
+	width: 100%;
+	text-align: center;
+
+	position: fixed;
+
+	color: red;
 }

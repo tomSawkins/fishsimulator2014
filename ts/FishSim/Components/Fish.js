@@ -8,11 +8,13 @@ var FishSim;
         (function (FishState) {
             FishState[FishState["Idle"] = 0] = "Idle";
             FishState[FishState["Moving"] = 1] = "Moving";
+            FishState[FishState["Dying"] = 2] = "Dying";
+            FishState[FishState["Dead"] = 3] = "Dead";
         })(Components.FishState || (Components.FishState = {}));
         var FishState = Components.FishState;
 
         var Fish = (function () {
-            function Fish() {
+            function Fish(id) {
                 var _this = this;
                 this.state = 0 /* Idle */;
                 this.calculateDimensions();
@@ -20,10 +22,9 @@ var FishSim;
                 var body = $('body');
 
                 // Generate a new ID for the fishy
-                Fish.fishCount++;
-                this.id = "fish" + Fish.fishCount;
+                this.id = id;
 
-                body.append('<div id="fish' + Fish.fishCount + '" class="fish"></div>');
+                body.append('<div id="{id}" class="fish"></div>'.format(this));
 
                 this.element = $('#' + this.id);
 
@@ -33,7 +34,7 @@ var FishSim;
                     y: Math.randomRange(0, Fish.maxTileCounts.y - 1)
                 };
 
-                this.moveToTile(this.tilePosition, false);
+                this.moveToTile({ tile: this.tilePosition, animate: false });
 
                 // Handle window resize event
                 $(window).resize(function () {
@@ -94,17 +95,12 @@ var FishSim;
                 if (this.state == 0 /* Idle */) {
                     // Chance a movement animation roughly every x milliseconds
                     if (Math.chance(elapsed, 5000)) {
-                        this.move();
+                        this.moveRandomly();
                     }
 
                     // Chance a bubble to occur roughly every x milliseconds
                     if (Math.chance(elapsed, 3000)) {
-                        var bubble = new FishSim.Components.Bubble({
-                            x: this.element.position().left,
-                            y: this.element.position().top
-                        });
-
-                        FishSim.App.addComponent(bubble);
+                        this.makeBubble();
                     }
                 }
             };
@@ -116,10 +112,10 @@ var FishSim;
                 };
             };
 
-            Fish.prototype.moveToTile = function (tile, animate, animationComplete) {
+            Fish.prototype.moveToTile = function (options) {
                 var _this = this;
                 // Translate from tile to screen
-                var screen = Fish.tileToScreen(tile);
+                var screen = Fish.tileToScreen(options.tile);
 
                 // Center element within tile
                 screen.x = Math.floor(screen.x + (this.tileSize.x / 2) - (this.element.width() / 2));
@@ -130,16 +126,16 @@ var FishSim;
                     top: screen.y + 'px'
                 };
 
-                if (tile.x < this.tilePosition.x) {
+                if (options.tile.x < this.tilePosition.x) {
                     this.element.addClass('faceLeft');
-                } else if (tile.x > this.tilePosition.x) {
+                } else if (options.tile.x > this.tilePosition.x) {
                     this.element.removeClass('faceLeft');
                 }
 
-                this.tilePosition = tile;
+                this.tilePosition = FishSim.Utils.clone(options.tile);
 
-                if (animate) {
-                    this.element.animate(properties, 1000, function () {
+                if (options.animate) {
+                    this.element.animate(properties, options.duration || 1000, function () {
                         _this.state = 0 /* Idle */;
                     });
                 } else {
@@ -149,7 +145,7 @@ var FishSim;
                 }
             };
 
-            Fish.prototype.move = function () {
+            Fish.prototype.moveRandomly = function () {
                 this.state = 1 /* Moving */;
 
                 // Pick a random available tile to move to
@@ -161,7 +157,16 @@ var FishSim;
 
                 var tile = availableTiles[Math.randomRange(0, availableTiles.length - 1)];
 
-                this.moveToTile(tile, true);
+                this.moveToTile({ tile: tile, animate: true });
+            };
+
+            Fish.prototype.makeBubble = function () {
+                var bubble = new FishSim.Components.Bubble({
+                    x: this.element.position().left,
+                    y: this.element.position().top
+                });
+
+                FishSim.App.addComponent(bubble);
             };
 
             Fish.prototype.keyup = function (e) {
@@ -184,17 +189,19 @@ var FishSim;
                         case 40:
                             newPosition.y++;
                             break;
+
+                        case 32:
+                            this.makeBubble();
+                            break;
                     }
 
                     if (this.canMoveToTile(newPosition)) {
                         this.state = 1 /* Moving */;
 
-                        this.moveToTile(newPosition, true);
+                        this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
                     }
                 }
             };
-            Fish.fishCount = 0;
-
             Fish.maxTileCounts = { x: 10, y: 10 };
             return Fish;
         })();

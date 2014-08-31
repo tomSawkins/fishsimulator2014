@@ -78,7 +78,8 @@ var FishSim;
             });
 
             // Add components to the scene here (or alternatively on the fly within your own components)
-            this.addComponent(this.fish = new FishSim.Components.Fish());
+            this.addComponent(this.fish = new FishSim.Components.Fish('ts8'));
+            this.addComponent(this.fish = new FishSim.Components.Fish('ts9'));
 
             this.lastTickTime = (new Date());
 

@@ -64,8 +64,11 @@ module FishSim.Components
 		public cleanUp(): void
 		{
 			// Remove bubble from dom
+			var body = document.getElementById('body');
+			var element = document.getElementById(this.id);
+			body.removeChild(element);
+
 			this.element = null;
-			$('body').remove('#' + this.id);
 		}
 	}
 }

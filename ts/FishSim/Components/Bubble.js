@@ -49,8 +49,11 @@ var FishSim;
 
             Bubble.prototype.cleanUp = function () {
                 // Remove bubble from dom
+                var body = document.getElementById('body');
+                var element = document.getElementById(this.id);
+                body.removeChild(element);
+
                 this.element = null;
-                $('body').remove('#' + this.id);
             };
             Bubble.bubbleCount = 0;
             return Bubble;
