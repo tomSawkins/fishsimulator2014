@@ -39,7 +39,7 @@ module FishSim.Components
 		public tick(elapsed: number): void
 		{
 			// Speed in pixels per second
-			var speed = 150;
+			var speed = 200;
 
 			// Work out the distance to move based on speed and time passed
 			var distanceToMove = speed * elapsed / 1000;
@@ -49,6 +49,8 @@ module FishSim.Components
 				x: this.position.x,
 				y: this.position.y - distanceToMove
 			};
+
+			newPosition.x += Math.sin(newPosition.y / 10) * 3;
 
 			// Update position
 			this.setPosition(newPosition);
