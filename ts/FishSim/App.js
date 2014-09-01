@@ -129,7 +129,7 @@ var FishSim;
 
         App.loopingThruComponentsCount = 0;
 
-        App.fps = 30;
+        App.fps = 25;
         return App;
     })();
     FishSim.App = App;

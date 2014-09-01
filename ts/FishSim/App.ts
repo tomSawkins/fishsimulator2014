@@ -80,7 +80,7 @@ module FishSim
 
 		public static fish: FishSim.Components.Fish;
 
-		public static fps: number = 30;
+		public static fps: number = 25;
 
 		public static run(): void
 		{
