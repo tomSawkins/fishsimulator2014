@@ -128,7 +128,10 @@ module FishSim.Components
 				{
 					this.moveRandomly();
 				}
+			}
 
+			if (this.state == FishState.Idle || this.state == FishState.Moving)
+			{
 				// Chance a bubble to occur roughly every x milliseconds
 				if (Math.chance(elapsed, 3000))
 				{
@@ -245,11 +248,14 @@ module FishSim.Components
 						break;
 				}
 
-				if (this.canMoveToTile(newPosition))
+				if (newPosition.x != this.tilePosition.x || newPosition.y != this.tilePosition.y)
 				{
-					this.state = FishState.Moving;
+					if (this.canMoveToTile(newPosition))
+					{
+						this.state = FishState.Moving;
 
-					this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
+						this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
+					}
 				}
 			}
 		}

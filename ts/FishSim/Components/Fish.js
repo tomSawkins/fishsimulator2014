@@ -97,7 +97,9 @@ var FishSim;
                     if (Math.chance(elapsed, 5000)) {
                         this.moveRandomly();
                     }
+                }
 
+                if (this.state == 0 /* Idle */ || this.state == 1 /* Moving */) {
                     // Chance a bubble to occur roughly every x milliseconds
                     if (Math.chance(elapsed, 3000)) {
                         this.makeBubble();
@@ -195,10 +197,12 @@ var FishSim;
                             break;
                     }
 
-                    if (this.canMoveToTile(newPosition)) {
-                        this.state = 1 /* Moving */;
+                    if (newPosition.x != this.tilePosition.x || newPosition.y != this.tilePosition.y) {
+                        if (this.canMoveToTile(newPosition)) {
+                            this.state = 1 /* Moving */;
 
-                        this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
+                            this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
+                        }
                     }
                 }
             };
