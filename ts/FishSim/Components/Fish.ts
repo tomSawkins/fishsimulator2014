@@ -15,7 +15,7 @@ module FishSim.Components
 
 	export class Fish implements IComponent
 	{
-		private static maxTileCounts: IVector = { x: 10, y: 10 };
+		private static maxTileCounts: IVector = { x: 10, y: 8 };
 
 		private screenSize: IVector;
 

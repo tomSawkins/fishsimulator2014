@@ -206,7 +206,7 @@ var FishSim;
                     }
                 }
             };
-            Fish.maxTileCounts = { x: 10, y: 10 };
+            Fish.maxTileCounts = { x: 10, y: 8 };
             return Fish;
         })();
         Components.Fish = Fish;
