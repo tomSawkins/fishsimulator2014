@@ -1,4 +1,4 @@
-html,
+﻿html,
 body {
   border: 0;
   margin: 0;
@@ -35,6 +35,13 @@ html {
   z-index: -9;
   position: fixed;
   background-image: url('../images/bubble.png');
+}
+.seaweed {
+  width: 100px;
+  height: 100px;
+  z-index: -10;
+  position: fixed;
+  background-image: url('../images/seaweed.gif');
 }
 .thoughts,
 .title {

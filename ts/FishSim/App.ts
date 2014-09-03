@@ -3,6 +3,8 @@
 /// <reference path="Libs/jquery.d.ts" />
 /// <reference path="Libs/linq.d.ts" />
 /// <reference path="Components/IComponent.ts" />
+/// <reference path="Components/IVector.ts" />
+/// <reference path="Components/Seaweed.ts" />
 
 module FishSim
 {
@@ -85,6 +87,7 @@ module FishSim
 		}
 
 		public static fish: FishSim.Components.Fish;
+		public static seaweed: FishSim.Components.Seaweed;
 
 		public static fps: number = 25;
 
@@ -105,14 +108,17 @@ module FishSim
 			this.addComponent(this.fish = new FishSim.Components.Fish('ts8'));
 			this.addComponent(this.fish = new FishSim.Components.Fish('ts9'));
 
+			this.addComponent(this.seaweed = new FishSim.Components.Seaweed());
+
 			this.lastTickTime = <IDateJS>(new Date());
 
-			setInterval(() =>
-			{
-				this.tick();
-			},
-			1000 / this.fps);
+			//setInterval(() =>
+			//{
+			//	this.tick();
+			//},
+			//1000 / this.fps);
 		}
+
 
 		private static lastTickTime: IDateJS;
 
