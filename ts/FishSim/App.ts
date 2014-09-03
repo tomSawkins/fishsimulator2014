@@ -78,6 +78,12 @@ module FishSim
 			}
 		}
 
+		public static getComponentById(id: string): FishSim.IComponent
+		{
+			return Enumerable.From(this.components)
+				.FirstOrDefault(null, c => c.id == id);
+		}
+
 		public static fish: FishSim.Components.Fish;
 
 		public static fps: number = 25;

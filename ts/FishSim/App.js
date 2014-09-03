@@ -58,6 +58,12 @@ var FishSim;
             }
         };
 
+        App.getComponentById = function (id) {
+            return Enumerable.From(this.components).FirstOrDefault(null, function (c) {
+                return c.id == id;
+            });
+        };
+
         App.run = function () {
             var _this = this;
             $('.title').blink();
