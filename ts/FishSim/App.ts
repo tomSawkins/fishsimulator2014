@@ -86,10 +86,12 @@ module FishSim
 				.FirstOrDefault(null, c => c.id == id);
 		}
 
-		public static fish: FishSim.Components.Fish;
-		public static seaweed: FishSim.Components.Seaweed;
+		public static ts8: FishSim.Components.Fish;
+		public static ts9: FishSim.Components.Fish;
 
 		public static fps: number = 25;
+
+		public static paused: boolean = false;
 
 		public static run(): void
 		{
@@ -105,10 +107,20 @@ module FishSim
 			body.keyup((e) => this.keyup(e));
 
 			// Add components to the scene here (or alternatively on the fly within your own components)
-            this.addComponent(this.fish = new FishSim.Components.Fish('ts8'));
-            this.addComponent(this.fish = new FishSim.Components.Fish('ts9'));
+			this.addComponent(this.ts8 = new FishSim.Components.Fish('ts8'));
+			this.addComponent(this.ts9 = new FishSim.Components.Fish('ts9'));
+			this.addComponent(new FishSim.Components.Castle());
 
-			this.addComponent(this.seaweed = new FishSim.Components.Seaweed());
+			// Add a bunch of seaweed
+			var seaweedCount = 7;
+			var screenWidth: number = $(window).width()
+			var space = (screenWidth / seaweedCount + 1);
+			for (var i = 0; i < seaweedCount; i++)
+			{
+				var x = space * (i + 1) - (space / 2) + Math.randomRange(0, space);
+
+				this.addComponent(new FishSim.Components.Seaweed(x));
+			}
 
 			this.lastTickTime = <IDateJS>(new Date());
 
@@ -129,11 +141,14 @@ module FishSim
 
 			try
 			{
-				// Loop through each component in the scene and call their tick handler
-				this.forEachComponent((component: IComponent) =>
+				if (!this.paused)
 				{
-					component.tick(elapsed);
-				});
+					// Loop through each component in the scene and call their tick handler
+					this.forEachComponent((component: IComponent) =>
+					{
+						component.tick(elapsed);
+					});
+				}
 			}
 			finally
 			{
@@ -165,6 +180,11 @@ module FishSim
 
 		private static keyup(event: JQueryKeyEventObject)
 		{
+			if (event.keyCode == 80)
+			{
+				this.paused = !this.paused;
+			}
+
 			this.forEachComponent((component: IComponent) =>
 			{
 				if (component.keyup)

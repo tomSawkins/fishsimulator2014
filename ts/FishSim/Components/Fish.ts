@@ -157,40 +157,63 @@ module FishSim.Components
 			screen.x = Math.floor(screen.x + (this.tileSize.x / 2) - (this.element.width() / 2));
 			screen.y = Math.floor(screen.y + (this.tileSize.y / 2) - (this.element.height() / 2));
 
-            var rotationAmount = 0;
-            if (options.tile.y < this.tilePosition.y) {
-                // Move up
-                rotationAmount = Math.randomRange(5, 20);
-            }
-            else if (options.tile.y > this.tilePosition.y) {
-                // Move down
-                rotationAmount = Math.randomRange(-20, -5);
-            }
+			/*
+			Animated flip looked cool but kinda gave it a 3d feel
+			breaking the retro 2d 8bit game style we're going for...
 
-            var scaleXAmount = 1;
-            var changeScale = true;
+			The slight rotation was a nice touch though, TODO: add rotation back in
 
-            if (options.tile.x < this.tilePosition.x) {
-                // face left
-                scaleXAmount = -1;
-            }
-            else if (options.tile.x > this.tilePosition.x) {
-                // face right
-                scaleXAmount = 1;
-            }
-            else {
-                // Don't change facing
-                changeScale = false;
-            }
-            var properties:any = {
-                left: screen.x + 'px',
-                top: screen.y + 'px',
-                rotate: rotationAmount + 'deg'
-            };
+			var rotationAmount = 0;
+			if (options.tile.y < this.tilePosition.y) {
+				// Move up
+				rotationAmount = Math.randomRange(5, 20);
+			}
+			else if (options.tile.y > this.tilePosition.y) {
+				// Move down
+				rotationAmount = Math.randomRange(-20, -5);
+			}
 
-            if (changeScale) {
-                properties.scaleX = scaleXAmount;
-            }
+			var scaleXAmount = 1;
+			var changeScale = true;
+
+			if (options.tile.x < this.tilePosition.x) {
+				// face left
+				scaleXAmount = -1;
+			}
+			else if (options.tile.x > this.tilePosition.x) {
+				// face right
+				scaleXAmount = 1;
+			}
+			else {
+				// Don't change facing
+				changeScale = false;
+			}
+			var properties:any = {
+				left: screen.x + 'px',
+				top: screen.y + 'px',
+				rotate: rotationAmount + 'deg'
+			};
+
+			if (changeScale) {
+				properties.scaleX = scaleXAmount;
+			}
+			*/
+
+			if (options.tile.x < this.tilePosition.x)
+			{
+				// face left
+				this.element.addClass('faceLeft');
+			}
+			else if (options.tile.x > this.tilePosition.x)
+			{
+				// face right
+				this.element.removeClass('faceLeft');
+			}
+
+			var properties: any = {
+				left: screen.x + 'px',
+				top: screen.y + 'px'
+			};
 
 			this.tilePosition = Utils.clone(options.tile);
 

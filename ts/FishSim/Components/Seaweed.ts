@@ -14,7 +14,7 @@ module FishSim.Components
 
 		public id: string;
 
-		constructor()
+		constructor(xPosition: number)
 		{
 			// Generate a new ID
 			Seaweed.seaweedCount++;
@@ -25,16 +25,14 @@ module FishSim.Components
 			$('body').append(content);
 			this.element = $('#' + this.id);
 
-			this.setPosition();
+			// Assign a random opacity & position
+			this.element.css({ opacity: 0.5 + (Math.randomRange(1, 5) * 0.1) });
+			this.setPosition(xPosition);
 		}
 
-		private setPosition()
+		private setPosition(xPosition: number)
 		{
-			var screenWidth:number = $(window).width()
-			var screenHeight: number = $(window).height()
-			var randomXPos: number = Math.randomRange(10, screenWidth - 10);
-
-			this.element.css({ left: randomXPos + 'px', top: (screenHeight - 100) + 'px' });
+			this.element.css({ left: xPosition + 'px' });
 		}
 
 		private makeBubble(): void

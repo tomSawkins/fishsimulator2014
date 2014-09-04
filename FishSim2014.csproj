@@ -25,6 +25,7 @@
     </Content>
     <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
+    <Content Include="images\castle.png" />
     <Content Include="images\seaweed.gif" />
     <Content Include="images\ts8.png" />
     <Content Include="images\ts9.png" />
@@ -36,6 +37,8 @@
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
     <Content Include="scripts\QTransform.js" />
+    <TypeScriptCompile Include="ts\FishSim\Components\Castle.ts" />
+    <Content Include="ts\FishSim\Components\Seaweed.ts" />
     <Content Include="ts\FishSim\Libs\datejs.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />

@@ -1,4 +1,4 @@
-﻿html,
+html,
 body {
   border: 0;
   margin: 0;
@@ -48,6 +48,7 @@ html {
   height: 100px;
   z-index: -10;
   position: fixed;
+  bottom: 0;
   background-image: url('../images/seaweed.gif');
 }
 .thoughts,
@@ -80,4 +81,12 @@ span.fatality {
   position: fixed;
   color: red;
 }
-/*# sourceMappingURL=app.css.map */
+#castle {
+  background-image: url('../images/castle.png');
+  z-index: -11;
+  position: fixed;
+  width: 307px;
+  height: 264px;
+  right: 30px;
+  bottom: 0;
+}

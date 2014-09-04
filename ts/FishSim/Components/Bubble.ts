@@ -42,6 +42,11 @@ module FishSim.Components
 
 		public tick(elapsed: number): void
 		{
+			if (FishSim.App.paused)
+			{
+				return;
+			}
+
 			// Speed in pixels per second
 			var speed = 200;
 

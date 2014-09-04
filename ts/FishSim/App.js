@@ -86,10 +86,19 @@ var FishSim;
             });
 
             // Add components to the scene here (or alternatively on the fly within your own components)
-            this.addComponent(this.fish = new FishSim.Components.Fish('ts8'));
-            this.addComponent(this.fish = new FishSim.Components.Fish('ts9'));
+            this.addComponent(this.ts8 = new FishSim.Components.Fish('ts8'));
+            this.addComponent(this.ts9 = new FishSim.Components.Fish('ts9'));
+            this.addComponent(new FishSim.Components.Castle());
 
-            this.addComponent(this.seaweed = new FishSim.Components.Seaweed());
+            // Add a bunch of seaweed
+            var seaweedCount = 7;
+            var screenWidth = $(window).width();
+            var space = (screenWidth / seaweedCount + 1);
+            for (var i = 0; i < seaweedCount; i++) {
+                var x = space * (i + 1) - (space / 2) + Math.randomRange(0, space);
+
+                this.addComponent(new FishSim.Components.Seaweed(x));
+            }
 
             this.lastTickTime = (new Date());
 
@@ -103,10 +112,12 @@ var FishSim;
             var elapsed = tickTime.getTime() - this.lastTickTime.getTime();
 
             try  {
-                // Loop through each component in the scene and call their tick handler
-                this.forEachComponent(function (component) {
-                    component.tick(elapsed);
-                });
+                if (!this.paused) {
+                    // Loop through each component in the scene and call their tick handler
+                    this.forEachComponent(function (component) {
+                        component.tick(elapsed);
+                    });
+                }
             } finally {
                 this.lastTickTime = tickTime;
             }
@@ -129,6 +140,10 @@ var FishSim;
         };
 
         App.keyup = function (event) {
+            if (event.keyCode == 80) {
+                this.paused = !this.paused;
+            }
+
             this.forEachComponent(function (component) {
                 if (component.keyup) {
                     component.keyup(event);
@@ -140,6 +155,8 @@ var FishSim;
         App.loopingThruComponentsCount = 0;
 
         App.fps = 25;
+
+        App.paused = false;
         return App;
     })();
     FishSim.App = App;

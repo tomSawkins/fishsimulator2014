@@ -28,6 +28,10 @@ var FishSim;
             };
 
             Bubble.prototype.tick = function (elapsed) {
+                if (FishSim.App.paused) {
+                    return;
+                }
+
                 // Speed in pixels per second
                 var speed = 200;
 

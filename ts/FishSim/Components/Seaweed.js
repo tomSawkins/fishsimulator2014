@@ -4,7 +4,7 @@ var FishSim;
 (function (FishSim) {
     (function (Components) {
         var Seaweed = (function () {
-            function Seaweed() {
+            function Seaweed(xPosition) {
                 this.updateLoop = 250;
                 // Generate a new ID
                 Seaweed.seaweedCount++;
@@ -15,18 +15,16 @@ var FishSim;
                 $('body').append(content);
                 this.element = $('#' + this.id);
 
-                this.setPosition();
+                // Assign a random opacity & position
+                this.element.css({ opacity: 0.5 + (Math.randomRange(1, 5) * 0.1) });
+                this.setPosition(xPosition);
             }
-            Seaweed.prototype.setPosition = function () {
-                var screenWidth = $(window).width();
-                var screenHeight = $(window).height();
-                var randomXPos = Math.randomRange(10, screenWidth - 10);
-
-                this.element.css({ left: randomXPos + 'px', top: (screenHeight - 100) + 'px' });
+            Seaweed.prototype.setPosition = function (xPosition) {
+                this.element.css({ left: xPosition + 'px' });
             };
 
             Seaweed.prototype.makeBubble = function () {
-                var bubble = new Components.Bubble({
+                var bubble = new FishSim.Components.Bubble({
                     x: this.element.position().left,
                     y: this.element.position().top
                 }, true);
