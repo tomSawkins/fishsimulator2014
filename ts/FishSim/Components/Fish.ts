@@ -159,15 +159,16 @@ module FishSim.Components
 
             var rotationAmount = 0;
             if (options.tile.y < this.tilePosition.y) {
+                // Move up
                 rotationAmount = Math.randomRange(-15, 0);
             }
             else if (options.tile.y > this.tilePosition.y) {
+                // Move down
                 rotationAmount = Math.randomRange(0, 15);
             }
 
             var scaleXAmount = 1;
             var changeScale = true;
-            var properties = {};
 
             if (options.tile.x < this.tilePosition.x) {
                 // face left
@@ -181,21 +182,14 @@ module FishSim.Components
                 // Don't change facing
                 changeScale = false;
             }
+            var properties:any = {
+                left: screen.x + 'px',
+                top: screen.y + 'px',
+                rotate: rotationAmount + 'deg'
+            };
 
             if (changeScale) {
-                properties = {
-                    left: screen.x + 'px',
-                    top: screen.y + 'px',
-                    rotate: rotationAmount + 'deg',
-                    scaleX: scaleXAmount
-                }
-            }
-            else {
-                properties = {
-                    left: screen.x + 'px',
-                    top: screen.y + 'px',
-                    rotate: rotationAmount + 'deg'
-                }
+                properties.scaleX = scaleXAmount;
             }
 
 			this.tilePosition = Utils.clone(options.tile);
