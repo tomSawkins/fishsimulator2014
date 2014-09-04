@@ -160,11 +160,11 @@ module FishSim.Components
             var rotationAmount = 0;
             if (options.tile.y < this.tilePosition.y) {
                 // Move up
-                rotationAmount = Math.randomRange(-15, 0);
+                rotationAmount = Math.randomRange(-20, -5);
             }
             else if (options.tile.y > this.tilePosition.y) {
                 // Move down
-                rotationAmount = Math.randomRange(0, 15);
+                rotationAmount = Math.randomRange(5, 20);
             }
 
             var scaleXAmount = 1;
