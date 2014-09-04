@@ -36,6 +36,13 @@ html {
   position: fixed;
   background-image: url('../images/bubble.png');
 }
+.bubble-small {
+  width: 24px;
+  height: 24px;
+  z-index: -9;
+  position: fixed;
+  background-image: url('../images/bubble-small.png');
+}
 .seaweed {
   width: 100px;
   height: 100px;

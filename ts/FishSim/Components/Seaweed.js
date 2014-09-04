@@ -25,7 +25,20 @@ var FishSim;
                 this.element.css({ left: randomXPos + 'px', top: (screenHeight - 100) + 'px' });
             };
 
+            Seaweed.prototype.makeBubble = function () {
+                var bubble = new Components.Bubble({
+                    x: this.element.position().left,
+                    y: this.element.position().top
+                }, true);
+
+                FishSim.App.addComponent(bubble);
+            };
+
             Seaweed.prototype.tick = function (elapsed) {
+                // Chance a bubble to occur roughly every x milliseconds
+                if (Math.chance(elapsed, 15000)) {
+                    this.makeBubble();
+                }
             };
 
             Seaweed.prototype.cleanUp = function () {

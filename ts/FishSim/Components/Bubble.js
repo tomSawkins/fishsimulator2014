@@ -4,7 +4,8 @@ var FishSim;
 (function (FishSim) {
     (function (Components) {
         var Bubble = (function () {
-            function Bubble(position) {
+            function Bubble(position, scaleBubble) {
+                if (typeof scaleBubble === "undefined") { scaleBubble = false; }
                 // Generate a new ID for this bubble
                 Bubble.bubbleCount++;
                 this.id = 'bubble' + Bubble.bubbleCount;
@@ -12,8 +13,10 @@ var FishSim;
                 // Dereference position
                 position = FishSim.Utils.clone(position);
 
+                this.bubbleType = (scaleBubble) ? "bubble-small" : "bubble";
+
                 // Create the bubble element and add to the scene
-                var content = '<div id="{id}" class="bubble"></div>'.format(this);
+                var content = '<div id="{id}" class="{bubbleType}"></div>'.format(this);
                 $('body').append(content);
                 this.element = $('#' + this.id);
 
