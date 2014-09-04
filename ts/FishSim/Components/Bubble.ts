@@ -7,7 +7,7 @@ module FishSim.Components
 	{
 		private static bubbleCount = 0;
 
-		constructor(position: IVector)
+		constructor(position: IVector, scaleBubble:boolean = false)
 		{
 			// Generate a new ID for this bubble
 			Bubble.bubbleCount++;
@@ -16,8 +16,10 @@ module FishSim.Components
 			// Dereference position
 			position = Utils.clone(position);
 
+			this.bubbleType = (scaleBubble) ? "bubble-small" : "bubble";
+
 			// Create the bubble element and add to the scene
-			var content = '<div id="{id}" class="bubble"></div>'.format(this);
+			var content = '<div id="{id}" class="{bubbleType}"></div>'.format(this);
 			$('body').append(content);
 			this.element = $('#' + this.id);
 
@@ -29,6 +31,8 @@ module FishSim.Components
 		private position: IVector;
 
 		public id: string;
+
+		public bubbleType: string;
 
 		private setPosition(position: IVector)
 		{

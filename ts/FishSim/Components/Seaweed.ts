@@ -7,8 +7,12 @@ module FishSim.Components
 	{
 
 		private static seaweedCount = 0;
-		private updateLoop: number = 250;
 
+		private updateLoop: number = 250;
+		private element: JQuery;
+		private position: IVector;
+
+		public id: string;
 
 		constructor()
 		{
@@ -24,12 +28,6 @@ module FishSim.Components
 			this.setPosition();
 		}
 
-		private element: JQuery;
-
-		private position: IVector;
-
-		public id: string;
-
 		private setPosition()
 		{
 			var screenWidth:number = $(window).width()
@@ -39,9 +37,23 @@ module FishSim.Components
 			this.element.css({ left: randomXPos + 'px', top: (screenHeight - 100) + 'px' });
 		}
 
+		private makeBubble(): void
+		{
+			var bubble = new Bubble({
+				x: this.element.position().left,
+				y: this.element.position().top
+			}, true);
+
+			App.addComponent(bubble);
+		}
+
 		public tick(elapsed: number): void
 		{
-			
+			// Chance a bubble to occur roughly every x milliseconds
+			if (Math.chance(elapsed, 15000))
+			{
+				this.makeBubble();
+			}
 		}
 
 		public cleanUp(): void
