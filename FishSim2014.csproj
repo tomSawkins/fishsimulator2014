@@ -23,6 +23,7 @@
     <Content Include="css\app.min.css">
       <DependentUpon>app.less</DependentUpon>
     </Content>
+    <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
     <Content Include="images\seaweed.gif" />
     <Content Include="images\ts8.png" />
@@ -48,6 +49,9 @@
   <ItemGroup>
     <Content Include="css\app.less" />
     <Content Include="fonts\arcadeclassic.ttf" />
+    <Content Include="css\app.css.map">
+      <DependentUpon>app.css</DependentUpon>
+    </Content>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

@@ -126,10 +126,10 @@ var FishSim;
                 var rotationAmount = 0;
                 if (options.tile.y < this.tilePosition.y) {
                     // Move up
-                    rotationAmount = Math.randomRange(-20, -5);
+                    rotationAmount = Math.randomRange(5, 20);
                 } else if (options.tile.y > this.tilePosition.y) {
                     // Move down
-                    rotationAmount = Math.randomRange(5, 20);
+                    rotationAmount = Math.randomRange(-20, -5);
                 }
 
                 var scaleXAmount = 1;

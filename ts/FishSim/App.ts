@@ -105,8 +105,8 @@ module FishSim
 			body.keyup((e) => this.keyup(e));
 
 			// Add components to the scene here (or alternatively on the fly within your own components)
-			this.addComponent(this.fish = new FishSim.Components.Fish('ts8'));
-			this.addComponent(this.fish = new FishSim.Components.Fish('ts9'));
+            this.addComponent(this.fish = new FishSim.Components.Fish('ts8'));
+            this.addComponent(this.fish = new FishSim.Components.Fish('ts9'));
 
 			this.addComponent(this.seaweed = new FishSim.Components.Seaweed());
 
