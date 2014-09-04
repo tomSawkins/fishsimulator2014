@@ -13,3 +13,6 @@ Shibe
 > "The best animal simulator of the year. Fishtastic!"
 
 Hyper
+
+
+Want to contribute? Check out [Dat Wiki](https://github.com/tomSawkins/fishsimulator2014/wiki)
