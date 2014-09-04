@@ -112,11 +112,11 @@ module FishSim
 
 			this.lastTickTime = <IDateJS>(new Date());
 
-			//setInterval(() =>
-			//{
-			//	this.tick();
-			//},
-			//1000 / this.fps);
+			setInterval(() =>
+			{
+				this.tick();
+			},
+			1000 / this.fps);
 		}
 
 

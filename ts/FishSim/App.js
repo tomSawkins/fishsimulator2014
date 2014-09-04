@@ -92,11 +92,10 @@ var FishSim;
             this.addComponent(this.seaweed = new FishSim.Components.Seaweed());
 
             this.lastTickTime = (new Date());
-            //setInterval(() =>
-            //{
-            //	this.tick();
-            //},
-            //1000 / this.fps);
+
+            setInterval(function () {
+                _this.tick();
+            }, 1000 / this.fps);
         };
 
         App.tick = function () {
