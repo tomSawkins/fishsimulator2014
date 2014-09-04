@@ -23,10 +23,11 @@
     <Content Include="css\app.min.css">
       <DependentUpon>app.less</DependentUpon>
     </Content>
-    <Content Include="fishsim.css" />
-    <Content Include="fishsim.js" />
+    <Content Include="images\bubble.png" />
+    <Content Include="images\seaweed.gif" />
+    <Content Include="images\ts8.png" />
+    <Content Include="images\ts9.png" />
     <Content Include="index.htm" />
-    <Content Include="index.html" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
     <TypeScriptCompile Include="ts\FishSim\Extensions.ts" />
@@ -54,9 +55,7 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
