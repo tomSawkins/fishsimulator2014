@@ -123,15 +123,41 @@ var FishSim;
                 screen.x = Math.floor(screen.x + (this.tileSize.x / 2) - (this.element.width() / 2));
                 screen.y = Math.floor(screen.y + (this.tileSize.y / 2) - (this.element.height() / 2));
 
-                var properties = {
-                    left: screen.x + 'px',
-                    top: screen.y + 'px'
-                };
+                var rotationAmount = 0;
+                if (options.tile.y < this.tilePosition.y) {
+                    rotationAmount = Math.randomRange(-15, 0);
+                } else if (options.tile.y > this.tilePosition.y) {
+                    rotationAmount = Math.randomRange(0, 15);
+                }
+
+                var scaleXAmount = 1;
+                var changeScale = true;
+                var properties = {};
 
                 if (options.tile.x < this.tilePosition.x) {
-                    this.element.addClass('faceLeft');
+                    // face left
+                    scaleXAmount = -1;
                 } else if (options.tile.x > this.tilePosition.x) {
-                    this.element.removeClass('faceLeft');
+                    // face right
+                    scaleXAmount = 1;
+                } else {
+                    // Don't change facing
+                    changeScale = false;
+                }
+
+                if (changeScale) {
+                    properties = {
+                        left: screen.x + 'px',
+                        top: screen.y + 'px',
+                        rotate: rotationAmount + 'deg',
+                        scaleX: scaleXAmount
+                    };
+                } else {
+                    properties = {
+                        left: screen.x + 'px',
+                        top: screen.y + 'px',
+                        rotate: rotationAmount + 'deg'
+                    };
                 }
 
                 this.tilePosition = FishSim.Utils.clone(options.tile);
@@ -163,7 +189,7 @@ var FishSim;
             };
 
             Fish.prototype.makeBubble = function () {
-                var bubble = new FishSim.Components.Bubble({
+                var bubble = new Components.Bubble({
                     x: this.element.position().left,
                     y: this.element.position().top
                 });

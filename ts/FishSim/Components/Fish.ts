@@ -157,19 +157,46 @@ module FishSim.Components
 			screen.x = Math.floor(screen.x + (this.tileSize.x / 2) - (this.element.width() / 2));
 			screen.y = Math.floor(screen.y + (this.tileSize.y / 2) - (this.element.height() / 2));
 
-			var properties = {
-				left: screen.x + 'px',
-				top: screen.y + 'px'
-			};
+            var rotationAmount = 0;
+            if (options.tile.y < this.tilePosition.y) {
+                rotationAmount = Math.randomRange(-15, 0);
+            }
+            else if (options.tile.y > this.tilePosition.y) {
+                rotationAmount = Math.randomRange(0, 15);
+            }
 
-			if (options.tile.x < this.tilePosition.x)
-			{
-				this.element.addClass('faceLeft');
-			}
-			else if (options.tile.x > this.tilePosition.x)
-			{
-				this.element.removeClass('faceLeft');
-			}
+            var scaleXAmount = 1;
+            var changeScale = true;
+            var properties = {};
+
+            if (options.tile.x < this.tilePosition.x) {
+                // face left
+                scaleXAmount = -1;
+            }
+            else if (options.tile.x > this.tilePosition.x) {
+                // face right
+                scaleXAmount = 1;
+            }
+            else {
+                // Don't change facing
+                changeScale = false;
+            }
+
+            if (changeScale) {
+                properties = {
+                    left: screen.x + 'px',
+                    top: screen.y + 'px',
+                    rotate: rotationAmount + 'deg',
+                    scaleX: scaleXAmount
+                }
+            }
+            else {
+                properties = {
+                    left: screen.x + 'px',
+                    top: screen.y + 'px',
+                    rotate: rotationAmount + 'deg'
+                }
+            }
 
 			this.tilePosition = Utils.clone(options.tile);
 

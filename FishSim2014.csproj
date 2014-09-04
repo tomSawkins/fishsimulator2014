@@ -33,6 +33,7 @@
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
+    <Content Include="scripts\QTransform.js" />
     <Content Include="ts\FishSim\Libs\datejs.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />
