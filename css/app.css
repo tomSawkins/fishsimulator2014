@@ -1,4 +1,4 @@
-html,
+﻿html,
 body {
   border: 0;
   margin: 0;
@@ -89,4 +89,13 @@ span.fatality {
   height: 264px;
   right: 30px;
   bottom: 0;
+}
+#fish-flag {
+  background-image: url('../images/fish-flag.gif');
+  z-index: 0;
+  position: fixed;
+  width: 100px;
+  height: 100px;
+  right: 170px;
+  bottom: 230px;
 }

@@ -10,7 +10,6 @@ module FishSim.Components
 
 		private updateLoop: number = 250;
 		private element: JQuery;
-		private position: IVector;
 
 		public id: string;
 

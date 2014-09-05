@@ -110,6 +110,7 @@ module FishSim
 			this.addComponent(this.ts8 = new FishSim.Components.Fish('ts8'));
 			this.addComponent(this.ts9 = new FishSim.Components.Fish('ts9'));
 			this.addComponent(new FishSim.Components.Castle());
+			this.addComponent(new FishSim.Components.FishFlag());
 
 			// Add a bunch of seaweed
 			var seaweedCount = 7;

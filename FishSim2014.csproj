@@ -38,9 +38,10 @@
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
     <Content Include="scripts\QTransform.js" />
     <TypeScriptCompile Include="ts\FishSim\Components\Castle.ts" />
-    <Content Include="ts\FishSim\Components\Seaweed.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\FishFlag.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\Seaweed.ts" />
     <Content Include="ts\FishSim\Libs\datejs.d.ts" />
-    <TypeScriptCompile Include="ts\FishSim\Libs\jquery-blink.d.ts" />
+    <Content Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />
     <Content Include="ts\FishSim\Libs\linq.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Utils\Utils.ts" />

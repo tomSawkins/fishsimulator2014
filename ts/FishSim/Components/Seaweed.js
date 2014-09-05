@@ -24,7 +24,7 @@ var FishSim;
             };
 
             Seaweed.prototype.makeBubble = function () {
-                var bubble = new FishSim.Components.Bubble({
+                var bubble = new Components.Bubble({
                     x: this.element.position().left,
                     y: this.element.position().top
                 }, true);
