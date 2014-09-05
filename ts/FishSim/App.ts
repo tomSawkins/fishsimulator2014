@@ -1,4 +1,6 @@
-﻿/// <reference path="Libs/jquery-blink.d.ts" />
+﻿/// <reference path="ITime.ts" />
+/// <reference path="Components/Plumber.ts" />
+/// <reference path="Libs/jquery-blink.d.ts" />
 /// <reference path="Libs/datejs.d.ts" />
 /// <reference path="Libs/jquery.d.ts" />
 /// <reference path="Libs/linq.d.ts" />
@@ -93,6 +95,8 @@ module FishSim
 
 		public static paused: boolean = false;
 
+		private static startTime: number;
+
 		public static run(): void
 		{
 			$('.title').blink();
@@ -123,7 +127,8 @@ module FishSim
 				this.addComponent(new FishSim.Components.Seaweed(x));
 			}
 
-			this.lastTickTime = <IDateJS>(new Date());
+			this.startTime = (new Date()).getTime();
+			this.lastTickTime = this.startTime;
 
 			setInterval(() =>
 			{
@@ -133,12 +138,16 @@ module FishSim
 		}
 
 
-		private static lastTickTime: IDateJS;
+		private static lastTickTime: number;
 
 		private static tick(): void
 		{
-			var tickTime = <IDateJS>(new Date());
-			var elapsed = tickTime.getTime() - this.lastTickTime.getTime();
+			var tickTime = (new Date()).getTime();
+
+			var time: ITime = {
+				elapsed: tickTime - this.lastTickTime,
+				total: tickTime - this.startTime
+			};
 
 			try
 			{
@@ -147,7 +156,7 @@ module FishSim
 					// Loop through each component in the scene and call their tick handler
 					this.forEachComponent((component: IComponent) =>
 					{
-						component.tick(elapsed);
+						component.tick(time);
 					});
 				}
 			}
@@ -181,9 +190,16 @@ module FishSim
 
 		private static keyup(event: JQueryKeyEventObject)
 		{
-			if (event.keyCode == 80)
+			if (event.keyCode == 80) // P
 			{
+				// Pause / Resume the sim
 				this.paused = !this.paused;
+			}
+			else if (event.keyCode == 77) // M
+			{
+				// It's a me...
+				var y = Math.randomRange(30, $(window).height() - 100);
+				this.components.push(new FishSim.Components.Plumber(y));
 			}
 
 			this.forEachComponent((component: IComponent) =>

@@ -6,7 +6,7 @@
 		id: string;
 
 		// Fired every frame. elapsed is the number of Milliseconds that have passed since the last tick
-		tick(elapsed: number): void;
+		tick(time: ITime): void;
 
 		// Used by App class. Do not use directly
 		flaggedForRemoval?: boolean;

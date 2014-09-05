@@ -1,4 +1,5 @@
-﻿/// <reference path="IVector.ts" />
+﻿/// <reference path="../ITime.ts" />
+/// <reference path="IVector.ts" />
 /// <reference path="../Extensions.ts" />
 /// <reference path="../Libs/jquery.d.ts" />
 /// <reference path="IComponent.ts" />
@@ -16,7 +17,7 @@ var FishSim;
                 $('body').append(content);
                 this.element = $('#' + this.id);
             }
-            FishFlag.prototype.tick = function (elapsed) {
+            FishFlag.prototype.tick = function (time) {
             };
 
             FishFlag.prototype.cleanUp = function () {

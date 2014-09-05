@@ -27,7 +27,7 @@ var FishSim;
                 this.position = position;
             };
 
-            Bubble.prototype.tick = function (elapsed) {
+            Bubble.prototype.tick = function (time) {
                 if (FishSim.App.paused) {
                     return;
                 }
@@ -36,7 +36,7 @@ var FishSim;
                 var speed = 200;
 
                 // Work out the distance to move based on speed and time passed
-                var distanceToMove = speed * elapsed / 1000;
+                var distanceToMove = speed * time.elapsed / 1000;
 
                 // Work out new position
                 var newPosition = {

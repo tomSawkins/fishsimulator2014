@@ -91,17 +91,17 @@ var FishSim;
                 };
             };
 
-            Fish.prototype.tick = function (elapsed) {
+            Fish.prototype.tick = function (time) {
                 if (this.state == 0 /* Idle */) {
                     // Chance a movement animation roughly every x milliseconds
-                    if (Math.chance(elapsed, 5000)) {
+                    if (Math.chance(time.elapsed, 5000)) {
                         this.moveRandomly();
                     }
                 }
 
                 if (this.state == 0 /* Idle */ || this.state == 1 /* Moving */) {
                     // Chance a bubble to occur roughly every x milliseconds
-                    if (Math.chance(elapsed, 3000)) {
+                    if (Math.chance(time.elapsed, 3000)) {
                         this.makeBubble();
                     }
                 }

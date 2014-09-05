@@ -6,7 +6,7 @@ var FishSim;
         var DeathAnimation = (function () {
             function DeathAnimation() {
             }
-            DeathAnimation.prototype.tick = function (elapsed) {
+            DeathAnimation.prototype.tick = function (time) {
             };
 
             DeathAnimation.prototype.cleanUp = function () {

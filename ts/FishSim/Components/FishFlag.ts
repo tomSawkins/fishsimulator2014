@@ -1,4 +1,5 @@
-﻿/// <reference path="IVector.ts" />
+﻿/// <reference path="../ITime.ts" />
+/// <reference path="IVector.ts" />
 /// <reference path="../Extensions.ts" />
 /// <reference path="../Libs/jquery.d.ts" />
 /// <reference path="IComponent.ts" />
@@ -26,7 +27,7 @@ module FishSim.Components
 
 		}
 
-		public tick(elapsed: number): void
+		public tick(time: ITime): void
 		{
 		}
 

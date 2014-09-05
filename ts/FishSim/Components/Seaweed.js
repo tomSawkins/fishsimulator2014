@@ -32,9 +32,9 @@ var FishSim;
                 FishSim.App.addComponent(bubble);
             };
 
-            Seaweed.prototype.tick = function (elapsed) {
+            Seaweed.prototype.tick = function (time) {
                 // Chance a bubble to occur roughly every x milliseconds
-                if (Math.chance(elapsed, 15000)) {
+                if (Math.chance(time.elapsed, 15000)) {
                     this.makeBubble();
                 }
             };

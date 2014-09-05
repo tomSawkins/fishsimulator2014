@@ -44,10 +44,10 @@ module FishSim.Components
 			App.addComponent(bubble);
 		}
 
-		public tick(elapsed: number): void
+		public tick(time: ITime): void
 		{
 			// Chance a bubble to occur roughly every x milliseconds
-			if (Math.chance(elapsed, 15000))
+			if (Math.chance(time.elapsed, 15000))
 			{
 				this.makeBubble();
 			}

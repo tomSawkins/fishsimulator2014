@@ -117,3 +117,47 @@ span.fatality {
 	right: 170px;
 	bottom: 230px;
 }
+
+.plumber {
+	z-index: -9;
+	width: 64px;
+	height: 64px;
+	position: fixed;
+
+	> div {
+		position: relative;
+		width: 64px;
+		height: 64px;
+
+		> div {
+			background-image: url('../images/mario-swimming.png');
+			position: absolute;
+			width: 64px;
+			height: 64px;
+
+			&.swim0 {
+				left: 0px;
+			}
+
+			&.swim1 {
+				left: 64px;
+			}
+
+			&.swim2 {
+				left: 128px;
+			}
+
+			&.swim3 {
+				left: 192px;
+			}
+
+			&.swim4 {
+				left: 256px;
+			}
+
+			&.swim5 {
+				left: 320px;
+			}
+		}
+	}
+}

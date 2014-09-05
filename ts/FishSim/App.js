@@ -1,4 +1,6 @@
-﻿/// <reference path="Libs/jquery-blink.d.ts" />
+﻿/// <reference path="ITime.ts" />
+/// <reference path="Components/Plumber.ts" />
+/// <reference path="Libs/jquery-blink.d.ts" />
 /// <reference path="Libs/datejs.d.ts" />
 /// <reference path="Libs/jquery.d.ts" />
 /// <reference path="Libs/linq.d.ts" />
@@ -101,7 +103,8 @@ var FishSim;
                 this.addComponent(new FishSim.Components.Seaweed(x));
             }
 
-            this.lastTickTime = (new Date());
+            this.startTime = (new Date()).getTime();
+            this.lastTickTime = this.startTime;
 
             setInterval(function () {
                 _this.tick();
@@ -109,14 +112,18 @@ var FishSim;
         };
 
         App.tick = function () {
-            var tickTime = (new Date());
-            var elapsed = tickTime.getTime() - this.lastTickTime.getTime();
+            var tickTime = (new Date()).getTime();
+
+            var time = {
+                elapsed: tickTime - this.lastTickTime,
+                total: tickTime - this.startTime
+            };
 
             try  {
                 if (!this.paused) {
                     // Loop through each component in the scene and call their tick handler
                     this.forEachComponent(function (component) {
-                        component.tick(elapsed);
+                        component.tick(time);
                     });
                 }
             } finally {
@@ -142,7 +149,12 @@ var FishSim;
 
         App.keyup = function (event) {
             if (event.keyCode == 80) {
+                // Pause / Resume the sim
                 this.paused = !this.paused;
+            } else if (event.keyCode == 77) {
+                // It's a me...
+                var y = Math.randomRange(30, $(window).height() - 100);
+                this.components.push(new FishSim.Components.Plumber(y));
             }
 
             this.forEachComponent(function (component) {

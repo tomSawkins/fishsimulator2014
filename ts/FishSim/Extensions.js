@@ -1,4 +1,4 @@
-String.prototype.format = function (hash) {
+﻿String.prototype.format = function (hash) {
     var original = this;
 
     var result = original.replace(/\{.*?\}/gi, function (key) {

@@ -22,7 +22,7 @@ module FishSim.Components
 
 		public id: string;
 
-		public tick(elapsed: number): void
+		public tick(time: ITime): void
 		{
 		}
 

@@ -119,12 +119,12 @@ module FishSim.Components
 			};
 		}
 
-		public tick(elapsed: number): void
+		public tick(time: ITime): void
 		{
 			if (this.state == FishState.Idle)
 			{
 				// Chance a movement animation roughly every x milliseconds
-				if (Math.chance(elapsed, 5000))
+				if (Math.chance(time.elapsed, 5000))
 				{
 					this.moveRandomly();
 				}
@@ -133,7 +133,7 @@ module FishSim.Components
 			if (this.state == FishState.Idle || this.state == FishState.Moving)
 			{
 				// Chance a bubble to occur roughly every x milliseconds
-				if (Math.chance(elapsed, 3000))
+				if (Math.chance(time.elapsed, 3000))
 				{
 					this.makeBubble();
 				}
@@ -166,33 +166,33 @@ module FishSim.Components
 				// Move down
 				rotationAmount = Math.randomRange(5, 10);
 			}
-            var scaleXAmount = this.element.css('scaleX') || 1;
+			var scaleXAmount = this.element.css('scaleX') || 1;
 			if (options.tile.x < this.tilePosition.x)
 			{
-                // face left
-                scaleXAmount = -1;
+				// face left
+				scaleXAmount = -1;
 			}
 			else if (options.tile.x > this.tilePosition.x)
 			{
 				// face right
-                scaleXAmount = 1;
-            }
+				scaleXAmount = 1;
+			}
 
-            var preAnimateProperties = {
-                scaleX: scaleXAmount
-            };
+			var preAnimateProperties = {
+				scaleX: scaleXAmount
+			};
 
-            var properties = {
-                left: screen.x + 'px',
-                top: screen.y + 'px',
-                rotate: rotationAmount + 'deg',
-                scaleX: scaleXAmount
+			var properties = {
+				left: screen.x + 'px',
+				top: screen.y + 'px',
+				rotate: rotationAmount + 'deg',
+				scaleX: scaleXAmount
 			};
 
 			this.tilePosition = Utils.clone(options.tile);
 
-            // To stop the flip from animating, apply the scale transform before the animation
-            this.element.css(preAnimateProperties);
+			// To stop the flip from animating, apply the scale transform before the animation
+			this.element.css(preAnimateProperties);
 
 			if (options.animate)
 			{
