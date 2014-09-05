@@ -137,7 +137,6 @@ module FishSim
 			1000 / this.fps);
 		}
 
-
 		private static lastTickTime: number;
 
 		private static tick(): void
@@ -153,6 +152,12 @@ module FishSim
 			{
 				if (!this.paused)
 				{
+					// Once an hour or so...
+					if (Math.chance(time.elapsed, 1000 * 60 * 60))
+					{
+						this.addPlumber();
+					}
+
 					// Loop through each component in the scene and call their tick handler
 					this.forEachComponent((component: IComponent) =>
 					{
@@ -198,8 +203,7 @@ module FishSim
 			else if (event.keyCode == 77) // M
 			{
 				// It's a me...
-				var y = Math.randomRange(30, $(window).height() - 100);
-				this.components.push(new FishSim.Components.Plumber(y));
+				this.addPlumber();
 			}
 
 			this.forEachComponent((component: IComponent) =>
@@ -209,6 +213,12 @@ module FishSim
 					component.keyup(event);
 				}
 			});
+		}
+
+		private static addPlumber(): void
+		{
+			var y = Math.randomRange(100, $(window).height() - 150);
+			this.components.push(new FishSim.Components.Plumber(y));
 		}
 	}
 

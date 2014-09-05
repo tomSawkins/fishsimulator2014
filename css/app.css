@@ -1,4 +1,4 @@
-﻿html,
+html,
 body {
   border: 0;
   margin: 0;
@@ -92,10 +92,35 @@ span.fatality {
 }
 #fish-flag {
   background-image: url('../images/fish-flag.gif');
-  z-index: 0;
+  z-index: -12;
   position: fixed;
   width: 100px;
   height: 100px;
   right: 170px;
   bottom: 230px;
+}
+.plumber {
+  z-index: -9;
+  width: 64px;
+  height: 64px;
+  position: fixed;
+  background-image: url('../images/mario-swimming.png');
+}
+.plumber.swim0 {
+  background-position-x: 0px;
+}
+.plumber.swim1 {
+  background-position-x: 64px;
+}
+.plumber.swim2 {
+  background-position-x: 128px;
+}
+.plumber.swim3 {
+  background-position-x: 192px;
+}
+.plumber.swim4 {
+  background-position-x: 256px;
+}
+.plumber.swim5 {
+  background-position-x: 320px;
 }

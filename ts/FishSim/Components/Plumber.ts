@@ -12,6 +12,8 @@ module FishSim.Components
 			// Generate a new ID for this bubble
 			this.id = 'plumber' + Plumber.plumberCount++;
 
+			this.originY = y;
+
 			// Dereference position
 			var position: IVector = {
 				x: -16,
@@ -19,17 +21,16 @@ module FishSim.Components
 			};
 
 			// Create the element and add to the scene
-			var content = '<div id="{id}" class="plumber"><div><div></div></div></div>'.format(this);
+			var content = '<div id="{id}" class="plumber"></div>'.format(this);
 			$('body').append(content);
 			this.element = $('#' + this.id);
-			this.imageElement = this.element.find('div').find('div');
 
 			this.setPosition(position);
 		}
 
 		private element: JQuery;
 
-		private imageElement: JQuery;
+		private originY: number;
 
 		private position: IVector;
 
@@ -56,7 +57,7 @@ module FishSim.Components
 			var frameCount = 3;
 
 			// Number of frames to animate per second
-			var fps = .5;
+			var fps = 6;
 
 			// Which frame should we be displaying right now?
 			var frameIndex = Math.floor((time.total / (1000 / fps)) % frameCount);
@@ -66,24 +67,29 @@ module FishSim.Components
 			{
 				if (this.currentFrameIndex > -1)
 				{
-					this.imageElement.removeClass('swim' + this.currentFrameIndex);
+					this.element.removeClass('swim' + this.currentFrameIndex);
 				}
 
-				this.imageElement.addClass('swim' + frameIndex);
+				this.element.addClass('swim' + frameIndex);
 
 				this.currentFrameIndex = frameIndex;
 			}
 
 			// Speed in pixels per second
-			var speed = 100;
+			var speed = 150;
 
 			// Work out the distance to move based on speed and time passed
 			var distanceToMove = speed * time.elapsed / 1000;
 
+			// Calculate a y offset so our guy swims in an arc
+			var arcWidth = $(window).width() / 6;
+			var radians = Math.PI * (this.position.x % arcWidth) / arcWidth;
+			var arcHeight = Math.sin(radians) * 100;
+
 			// Work out new position
 			var newPosition = {
 				x: this.position.x + distanceToMove,
-				y: this.position.y
+				y: this.originY - arcHeight
 			};
 
 			//newPosition.x += Math.sin(newPosition.y / 10) * 3;

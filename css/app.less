@@ -110,7 +110,7 @@ span.fatality {
 
 #fish-flag {
 	background-image: url('../images/fish-flag.gif');
-	z-index: 0;
+	z-index: -12;
 	position: fixed;
 	width: 100px;
 	height: 100px;
@@ -124,40 +124,29 @@ span.fatality {
 	height: 64px;
 	position: fixed;
 
-	> div {
-		position: relative;
-		width: 64px;
-		height: 64px;
+	background-image: url('../images/mario-swimming.png');
 
-		> div {
-			background-image: url('../images/mario-swimming.png');
-			position: absolute;
-			width: 64px;
-			height: 64px;
+	&.swim0 {
+		background-position-x: 0px;
+	}
 
-			&.swim0 {
-				left: 0px;
-			}
+	&.swim1 {
+		background-position-x: 64px;
+	}
 
-			&.swim1 {
-				left: 64px;
-			}
+	&.swim2 {
+		background-position-x: 128px;
+	}
 
-			&.swim2 {
-				left: 128px;
-			}
+	&.swim3 {
+		background-position-x: 192px;
+	}
 
-			&.swim3 {
-				left: 192px;
-			}
+	&.swim4 {
+		background-position-x: 256px;
+	}
 
-			&.swim4 {
-				left: 256px;
-			}
-
-			&.swim5 {
-				left: 320px;
-			}
-		}
+	&.swim5 {
+		background-position-x: 320px;
 	}
 }
