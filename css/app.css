@@ -104,7 +104,12 @@ span.fatality {
   width: 64px;
   height: 64px;
   position: fixed;
+}
+.plumber.mario {
   background-image: url('../images/mario-swimming.png');
+}
+.plumber.luigi {
+  background-image: url('../images/luigi-swimming.png');
 }
 .plumber.swim0 {
   background-position: 0 0;

@@ -3,11 +3,17 @@
 
 module FishSim.Components
 {
+	export enum PlumberCharacter
+	{
+		Mario,
+		Luigi
+	}
+
 	export class Plumber implements IComponent
 	{
 		private static plumberCount = 0;
 
-		constructor(y: number)
+		constructor(character: PlumberCharacter, y: number)
 		{
 			// Generate a new ID for this bubble
 			this.id = 'plumber' + Plumber.plumberCount++;
@@ -24,6 +30,15 @@ module FishSim.Components
 			var content = '<div id="{id}" class="plumber"></div>'.format(this);
 			$('body').append(content);
 			this.element = $('#' + this.id);
+
+			if (character == PlumberCharacter.Mario)
+			{
+				this.element.addClass('mario');
+			}
+			else
+			{
+				this.element.addClass('luigi');
+			}
 
 			this.setPosition(position);
 		}
@@ -57,7 +72,7 @@ module FishSim.Components
 			var frameCount = 3;
 
 			// Number of frames to animate per second
-			var fps = 6;
+			var fps = 5;
 
 			// Which frame should we be displaying right now?
 			var frameIndex = Math.floor((time.total / (1000 / fps)) % frameCount);

@@ -158,7 +158,10 @@ var FishSim;
                 this.paused = !this.paused;
             } else if (event.keyCode == 77) {
                 // It's a me...
-                this.addPlumber();
+                this.addPlumber(0 /* Mario */);
+            } else if (event.keyCode == 76) {
+                // It's a me...
+                this.addPlumber(1 /* Luigi */);
             }
 
             this.forEachComponent(function (component) {
@@ -168,9 +171,14 @@ var FishSim;
             });
         };
 
-        App.addPlumber = function () {
+        App.addPlumber = function (character) {
             var y = Math.randomRange(100, $(window).height() - 150);
-            this.components.push(new FishSim.Components.Plumber(y));
+
+            if (character === undefined) {
+                character = Math.randomRange(0, 1);
+            }
+
+            this.components.push(new FishSim.Components.Plumber(character, y));
         };
         App.components = [];
 

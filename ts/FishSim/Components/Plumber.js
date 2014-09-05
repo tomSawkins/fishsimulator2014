@@ -3,8 +3,14 @@
 var FishSim;
 (function (FishSim) {
     (function (Components) {
+        (function (PlumberCharacter) {
+            PlumberCharacter[PlumberCharacter["Mario"] = 0] = "Mario";
+            PlumberCharacter[PlumberCharacter["Luigi"] = 1] = "Luigi";
+        })(Components.PlumberCharacter || (Components.PlumberCharacter = {}));
+        var PlumberCharacter = Components.PlumberCharacter;
+
         var Plumber = (function () {
-            function Plumber(y) {
+            function Plumber(character, y) {
                 this.currentFrameIndex = -1;
                 // Generate a new ID for this bubble
                 this.id = 'plumber' + Plumber.plumberCount++;
@@ -22,6 +28,12 @@ var FishSim;
                 $('body').append(content);
                 this.element = $('#' + this.id);
 
+                if (character == 0 /* Mario */) {
+                    this.element.addClass('mario');
+                } else {
+                    this.element.addClass('luigi');
+                }
+
                 this.setPosition(position);
             }
             Plumber.prototype.setPosition = function (position) {
@@ -38,7 +50,7 @@ var FishSim;
                 var frameCount = 3;
 
                 // Number of frames to animate per second
-                var fps = 6;
+                var fps = 5;
 
                 // Which frame should we be displaying right now?
                 var frameIndex = Math.floor((time.total / (1000 / fps)) % frameCount);

@@ -203,7 +203,12 @@ module FishSim
 			else if (event.keyCode == 77) // M
 			{
 				// It's a me...
-				this.addPlumber();
+				this.addPlumber(Components.PlumberCharacter.Mario);
+			}
+			else if (event.keyCode == 76) // L
+			{
+				// It's a me...
+				this.addPlumber(Components.PlumberCharacter.Luigi);
 			}
 
 			this.forEachComponent((component: IComponent) =>
@@ -215,10 +220,16 @@ module FishSim
 			});
 		}
 
-		private static addPlumber(): void
+		private static addPlumber(character?: FishSim.Components.PlumberCharacter): void
 		{
 			var y = Math.randomRange(100, $(window).height() - 150);
-			this.components.push(new FishSim.Components.Plumber(y));
+
+			if (character === undefined)
+			{
+				character = Math.randomRange(0, 1);
+			}
+
+			this.components.push(new FishSim.Components.Plumber(character, y));
 		}
 	}
 
