@@ -123,61 +123,38 @@ var FishSim;
                 screen.x = Math.floor(screen.x + (this.tileSize.x / 2) - (this.element.width() / 2));
                 screen.y = Math.floor(screen.y + (this.tileSize.y / 2) - (this.element.height() / 2));
 
-                /*
-                Animated flip looked cool but kinda gave it a 3d feel
-                breaking the retro 2d 8bit game style we're going for...
-                
-                The slight rotation was a nice touch though, TODO: add rotation back in
-                
                 var rotationAmount = 0;
                 if (options.tile.y < this.tilePosition.y) {
-                // Move up
-                rotationAmount = Math.randomRange(5, 20);
+                    // Move up
+                    rotationAmount = Math.randomRange(-10, -5);
+                } else if (options.tile.y > this.tilePosition.y) {
+                    // Move down
+                    rotationAmount = Math.randomRange(5, 10);
                 }
-                else if (options.tile.y > this.tilePosition.y) {
-                // Move down
-                rotationAmount = Math.randomRange(-20, -5);
-                }
-                
-                var scaleXAmount = 1;
-                var changeScale = true;
-                
-                if (options.tile.x < this.tilePosition.x) {
-                // face left
-                scaleXAmount = -1;
-                }
-                else if (options.tile.x > this.tilePosition.x) {
-                // face right
-                scaleXAmount = 1;
-                }
-                else {
-                // Don't change facing
-                changeScale = false;
-                }
-                var properties:any = {
-                left: screen.x + 'px',
-                top: screen.y + 'px',
-                rotate: rotationAmount + 'deg'
-                };
-                
-                if (changeScale) {
-                properties.scaleX = scaleXAmount;
-                }
-                */
+                var scaleXAmount = this.element.css('scaleX') || 1;
                 if (options.tile.x < this.tilePosition.x) {
                     // face left
-                    this.element.addClass('faceLeft');
+                    scaleXAmount = -1;
                 } else if (options.tile.x > this.tilePosition.x) {
                     // face right
-                    this.element.removeClass('faceLeft');
+                    scaleXAmount = 1;
                 }
+
+                var preAnimateProperties = {
+                    scaleX: scaleXAmount
+                };
 
                 var properties = {
                     left: screen.x + 'px',
-                    top: screen.y + 'px'
+                    top: screen.y + 'px',
+                    rotate: rotationAmount + 'deg',
+                    scaleX: scaleXAmount
                 };
 
                 this.tilePosition = FishSim.Utils.clone(options.tile);
+
+                // To stop the flip from animating, apply the scale transform before the animation
+                this.element.css(preAnimateProperties);
 
                 if (options.animate) {
                     this.element.animate(properties, options.duration || 1000, function () {
@@ -206,7 +183,7 @@ var FishSim;
             };
 
             Fish.prototype.makeBubble = function () {
-                var bubble = new FishSim.Components.Bubble({
+                var bubble = new Components.Bubble({
                     x: this.element.position().left,
                     y: this.element.position().top
                 });
