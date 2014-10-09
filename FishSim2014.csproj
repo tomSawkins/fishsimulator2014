@@ -36,7 +36,9 @@
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
-    <Content Include="scripts\QTransform.js" />
+    <Content Include="js\libs\jquery-2.0.3.js" />
+    <Content Include="js\libs\jquery-blink.js" />
+    <Content Include="js\libs\QTransform.js" />
     <TypeScriptCompile Include="ts\FishSim\Components\Castle.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\FishFlag.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Seaweed.ts" />
@@ -65,7 +67,9 @@
       <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="js\app\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -98,6 +102,7 @@
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
     <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutDir>js/app</TypeScriptOutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptTarget>ES5</TypeScriptTarget>
