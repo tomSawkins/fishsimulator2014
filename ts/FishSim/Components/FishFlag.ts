@@ -1,4 +1,4 @@
-﻿/// <reference path="../ITime.ts" />
+﻿/// <reference path="../ITime.d.ts" />
 /// <reference path="IVector.ts" />
 /// <reference path="../Extensions.ts" />
 /// <reference path="../Libs/jquery.d.ts" />

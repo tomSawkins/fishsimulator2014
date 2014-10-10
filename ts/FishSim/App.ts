@@ -1,4 +1,4 @@
-﻿/// <reference path="ITime.ts" />
+﻿/// <reference path="ITime.d.ts" />
 /// <reference path="Components/Plumber.ts" />
 /// <reference path="Libs/jquery-blink.d.ts" />
 /// <reference path="Libs/datejs.d.ts" />
