@@ -43,7 +43,7 @@
     <TypeScriptCompile Include="ts\FishSim\Components\FishFlag.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Seaweed.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Plumber.ts" />
-    <Content Include="ts\FishSim\ITime.ts" />
+    <Content Include="ts\FishSim\ITime.d.ts" />
     <Content Include="ts\FishSim\Libs\datejs.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery.d.ts" />
