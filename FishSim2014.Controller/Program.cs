@@ -45,12 +45,21 @@ namespace FishSim2014.Controller
             bool exitFlag = false;
             while (!exitFlag)
             {
-                Log.Information("Press 'm' for a new mario man, or 'x' to exit");
+                Log.Information("Press 'm' for a new mario man, 'l' for a loop, or 'x' to exit");
                 key = Console.ReadKey();
                 Console.WriteLine();
 
                 if (key.KeyChar == 'm')
                     hubProxy.Invoke("MarioMan").Wait();
+                else if (key.KeyChar == 'l')
+                {
+                    for (int i = 0; i < 60; i++)
+                    {
+                        Log.Information("Mario Man! #{i}", i);
+                        hubProxy.Invoke("MarioMan").Wait();
+                        System.Threading.Thread.Sleep(900);
+                    }
+                }
                 else if (key.KeyChar == 'x')
                     exitFlag = true;
             }
