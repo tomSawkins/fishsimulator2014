@@ -143,7 +143,6 @@ module FishSim
 
 			var cachedBuildTime = null;
 
-			var s: ConnectionSettings;
 			$.connection.hub.start().done(() =>
 			{
 				fishHub.server.getConfig().done((config) =>
