@@ -12,6 +12,10 @@ namespace FishSim2014.Hubs
 		public string GetBuildTime()
 		{
 			DateTime modifiedTime = File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location);
+			DateTime x = new DateTime();
+			string w = x.AddDays(5).ToShortDateString();
+			if (w == null)
+				throw new InvalidOperationException("argh");
 
 			return modifiedTime.ToString("O") + "(" + Assembly.GetExecutingAssembly().Location + ")";
 		}
