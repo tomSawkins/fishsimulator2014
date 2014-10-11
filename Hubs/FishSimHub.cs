@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Reflection;
 using FishSim2014.Interfaces;
 using FishSim2014.Models;
 using Microsoft.AspNet.SignalR;
@@ -10,12 +11,7 @@ namespace FishSim2014.Hubs
 	{
 		public string GetBuildTime()
 		{
-			if (!File.Exists("Web.config"))
-			{
-				throw new InvalidOperationException("Unable to determine BuildTime");
-			}
-
-			DateTime modifiedTime = File.GetLastWriteTimeUtc("Web.config");
+			DateTime modifiedTime = File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location);
 
 			return modifiedTime.ToString("O");
 		}
