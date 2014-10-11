@@ -158,8 +158,10 @@ module FishSim
 
 			$.connection.hub.reconnected(() =>
 			{
-				fishHub.server.getBuildTime().done((buildTime) =>
-				{
+				fishHub.server.getBuildTime().done((buildTime) => {
+					console.log("reconnected buildTime: " + buildTime);
+					console.log("cachedBuildTime: " + cachedBuildTime);
+
 					if (cachedBuildTime == null)
 						cachedBuildTime = buildTime;
 					else if (buildTime != cachedBuildTime)
