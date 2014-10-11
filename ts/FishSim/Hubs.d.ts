@@ -39,6 +39,13 @@ interface FishSimHub {
 interface FishSimHubServer {
 
     /** 
+      * Sends a "getBuildTime" message to the FishSimHub hub.
+      * Contract Documentation: ---
+      * @return {JQueryPromise of string}
+      */
+    getBuildTime() : JQueryPromise<string>
+
+    /** 
       * Sends a "getConfig" message to the FishSimHub hub.
       * Contract Documentation: ---
       * @return {JQueryPromise of ClientConfig}
@@ -62,6 +69,7 @@ interface FishSimHubServer {
   * Data contract for FishSim2014.Models.ClientConfig
   */
 interface ClientConfig {
+    BuildTime : string;
     Environments : ClientEnvironment[];
 }
 
