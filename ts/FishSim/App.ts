@@ -145,8 +145,8 @@ module FishSim
 
 			$.connection.hub.start().done(() =>
 			{
-				fishHub.server.getConfig().done((config) =>
-				{
+				fishHub.server.getConfig().done((config) => {
+					console.log("SignalR Hub Starting -> Build Time: " + config.BuildTime);
 					cachedBuildTime = config.BuildTime;
 
 					Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) =>
