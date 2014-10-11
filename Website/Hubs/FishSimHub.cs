@@ -4,7 +4,7 @@ using Microsoft.AspNet.SignalR;
 
 namespace FishSim2014.Hubs
 {
-    public class FishSimHub : Hub<IFishSimHubClient>
+    public class FishSimHub : Hub<IFishSimHubClient>, IFishSimHubServer
     {
         private readonly AppInfo appInfo;
 
@@ -34,6 +34,11 @@ namespace FishSim2014.Hubs
             config.StartupTime = GetStartupTime();
 
             return config;
+        }
+
+        public void MarioMan()
+        {
+            this.Clients.All.MarioMan();
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IFishSimHubClient
     {
-        void UpdateLocation(string id, string location);
+        void MarioMan();
     }
 }

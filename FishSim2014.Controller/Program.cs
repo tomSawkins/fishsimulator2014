@@ -9,29 +9,38 @@ namespace FishSim2014.Controller
 {
     class Program
     {
+        private static IHubProxy hubProxy;
+
         static void Main(string[] args)
         {
             MainAsync().Wait();
+
+            GetStartupTimeAsync().Wait();
+
+            hubProxy.Invoke("MarioMan");
+
+            Console.ReadLine();
+        }
+
+        static async Task<string> GetStartupTimeAsync()
+        {
+            string result = await hubProxy.Invoke<string>("GetStartupTime");
+            
+            return result;
         }
 
         static async Task MainAsync()
         {
             try
             {
-
                 var hubConnection = new HubConnection("http://fishsim2014.azurewebsites.net/")
                 {
                     TraceLevel = TraceLevels.All,
                     TraceWriter = Console.Out
                 };
                 
-                IHubProxy hubProxy = hubConnection.CreateHubProxy("FishSimHub");
-/*
-                hubProxy.On("addMessage", data =>
-                {
-                    Console.WriteLine("Incoming data: {0} {1}", data.name, data.message);
-                });
-*/
+                hubProxy = hubConnection.CreateHubProxy("FishSimHub");
+
                 await hubConnection.Start();
             }
             catch (Exception ex)
