@@ -13,17 +13,15 @@ namespace FishSim2014.Hubs
 		{
 			DateTime modifiedTime = File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location);
 
-			DateTimeOffset o = new DateTimeOffset();
-
-			return modifiedTime.ToString("O");
+			return modifiedTime.ToString("O") + "(" + Assembly.GetExecutingAssembly().Location + ")";
 		}
 
 		public ClientConfig GetConfig()
 		{
 			var config = new ClientConfig();
 
-			config.Environments.Add(new ClientEnvironment {Name = "ts8"});
-			config.Environments.Add(new ClientEnvironment {Name = "ts9"});
+			config.Environments.Add(new ClientEnvironment { Name = "ts8" });
+			config.Environments.Add(new ClientEnvironment { Name = "ts9" });
 
 			config.BuildTime = GetBuildTime();
 
