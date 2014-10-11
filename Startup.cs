@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
+using FishSim2014;
+using FishSim2014.Hubs;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(FishSim2014.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
 
 namespace FishSim2014
 {
@@ -13,6 +14,8 @@ namespace FishSim2014
 		{
 			// For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=316888
 			app.MapSignalR();
+
+			AppPoolStart.StartupTime = DateTimeOffset.UtcNow.ToString("O");
 		}
 	}
 }

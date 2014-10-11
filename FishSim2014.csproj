@@ -97,6 +97,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppPoolStart.cs" />
     <Compile Include="Models\ClientConfig.cs" />
     <Compile Include="Models\ClientEnvironment.cs" />
     <Compile Include="Hubs\FishSimHub.cs" />
