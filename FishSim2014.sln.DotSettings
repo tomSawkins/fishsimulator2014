@@ -1,0 +1,7 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=75E620CEBD5AB347A8176CB99A1D6611/AbsolutePath/@EntryValue">C:\Jobs\fishsimulator2014\FishSim2013.DotSettings</s:String>
+	<s:String x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=75E620CEBD5AB347A8176CB99A1D6611/RelativePath/@EntryValue">..\FishSim2013.DotSettings</s:String>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/FileInjectedLayer/=75E620CEBD5AB347A8176CB99A1D6611/@KeyIndexDefined">True</s:Boolean>
+	<s:Boolean x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File75E620CEBD5AB347A8176CB99A1D6611/@KeyIndexDefined">True</s:Boolean>
+	<s:String x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File75E620CEBD5AB347A8176CB99A1D6611/DisplayName/@EntryValue">FishSim2014</s:String>
+	<s:Double x:Key="/Default/Environment/InjectedLayers/InjectedLayerCustomization/=File75E620CEBD5AB347A8176CB99A1D6611/RelativePriority/@EntryValue">1</s:Double></wpf:ResourceDictionary>
