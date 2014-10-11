@@ -115,4 +115,7 @@ Backup*/
 UpgradeLog*.XML
 
 # Ignore output generated from ts files
-#js/app/
+Website/ts/FishSim/*.js
+Website/ts/FishSim/*.js.map
+Website/ts/FishSim/*/*.js
+Website/ts/FishSim/*/*.js.map
