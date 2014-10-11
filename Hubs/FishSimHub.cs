@@ -13,6 +13,8 @@ namespace FishSim2014.Hubs
 		{
 			DateTime modifiedTime = File.GetLastWriteTimeUtc(Assembly.GetExecutingAssembly().Location);
 
+			DateTimeOffset o = new DateTimeOffset();
+
 			return modifiedTime.ToString("O");
 		}
 
