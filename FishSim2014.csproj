@@ -26,6 +26,10 @@
     <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
     <Content Include="images\castle.png" />
+    <Content Include="images\fish-flag.gif" />
+    <Content Include="images\luigi-swimming.png" />
+    <Content Include="images\mario-swimming.png" />
+    <Content Include="images\nes cover.png" />
     <Content Include="images\seaweed.gif" />
     <Content Include="images\ts8.png" />
     <Content Include="images\ts9.png" />
