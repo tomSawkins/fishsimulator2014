@@ -2,11 +2,13 @@
 /// <reference path="Components/Plumber.ts" />
 /// <reference path="Libs/jquery-blink.d.ts" />
 /// <reference path="Libs/datejs.d.ts" />
-/// <reference path="Libs/jquery.d.ts" />
-/// <reference path="Libs/linq.d.ts" />
+/// <reference path="../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="Components/IComponent.ts" />
+/// <reference path="../../scripts/typings/linq/linq.d.ts" />
 /// <reference path="Components/IVector.ts" />
 /// <reference path="Components/Seaweed.ts" />
+/// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
+/// <reference path="Hubs.d.ts" />
 
 module FishSim
 {
@@ -111,8 +113,6 @@ module FishSim
 			body.keyup((e) => this.keyup(e));
 
 			// Add components to the scene here (or alternatively on the fly within your own components)
-			this.addComponent(this.ts8 = new FishSim.Components.Fish('ts8'));
-			this.addComponent(this.ts9 = new FishSim.Components.Fish('ts9'));
 			this.addComponent(new FishSim.Components.Castle());
 			this.addComponent(new FishSim.Components.FishFlag());
 
@@ -134,7 +134,21 @@ module FishSim
 			{
 				this.tick();
 			},
-			1000 / this.fps);
+				1000 / this.fps);
+
+
+			var fishHub = $.connection.fishSimHub;
+
+//			$.connection.hub.logging = true;
+
+			$.connection.hub.start().done(() => {
+				fishHub.server.getConfig().done((config) =>
+				{
+					Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) => {						
+						this.addComponent(new FishSim.Components.Fish(p.Name));
+					});
+				});
+			});
 		}
 
 		private static lastTickTime: number;

@@ -1,4 +1,4 @@
-/// <reference path="jquery.d.ts" />
+/// <reference path="../../../scripts/typings/jquery/jquery.d.ts" />
 
 interface JQuery
 {
