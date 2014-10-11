@@ -1,30 +1,39 @@
-﻿using System;
-using System.IO;
-using System.Reflection;
-using FishSim2014.Interfaces;
+﻿using FishSim2014.Interfaces;
 using FishSim2014.Models;
 using Microsoft.AspNet.SignalR;
-using Microsoft.AspNet.SignalR.Hubs;
 
 namespace FishSim2014.Hubs
 {
-	public class FishSimHub : Hub<IFishSim>
-	{
-		public string GetBuildTime()
-		{
-			return AppPoolStart.StartupTime;
-		}
+    public class FishSimHub : Hub<IFishSim>
+    {
+        private readonly AppInfo appInfo;
 
-		public ClientConfig GetConfig()
-		{
-			var config = new ClientConfig();
+        public FishSimHub(AppInfo appInfo)
+        {
+            this.appInfo = appInfo;
+        }
 
-			config.Environments.Add(new ClientEnvironment { Name = "ts8" });
-			config.Environments.Add(new ClientEnvironment { Name = "ts9" });
+        /// <summary>
+        ///     Returns the Startup time of the ASP.NET Application
+        ///     This is used by the front-end application to determine whether
+        ///     to reload the application after a SignalR disconnection / reconnection.
+        /// </summary>
+        /// <returns>ISO formatted DateTime</returns>
+        public string GetStartupTime()
+        {
+            return appInfo.StartupTime.ToString("O");
+        }
 
-			config.BuildTime = GetBuildTime();
+        public ClientConfig GetConfig()
+        {
+            var config = new ClientConfig();
 
-			return config;
-		}
-	}
+            config.Environments.Add(new ClientEnvironment { Name = "ts8" });
+            config.Environments.Add(new ClientEnvironment { Name = "ts9" });
+
+            config.StartupTime = GetStartupTime();
+
+            return config;
+        }
+    }
 }

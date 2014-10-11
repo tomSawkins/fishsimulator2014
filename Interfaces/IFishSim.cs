@@ -2,6 +2,6 @@
 {
 	public interface IFishSim
 	{
-		void DisplayMessage(string message);
+		void UpdateLocation(string id, string location);
 	}
 }
