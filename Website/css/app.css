@@ -1,0 +1,136 @@
+﻿html,
+body {
+    background-color: #272796;
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+
+.fish {
+    height: 95px;
+    position: fixed;
+    width: 137px;
+    z-index: -10;
+}
+
+#ts8 { background-image: url('../images/ts8.png'); }
+
+#ts9 { background-image: url('../images/ts9.png'); }
+
+.faceLeft {
+    -moz-transform: scaleX(-1);
+    -ms-filter: "FlipH";
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    filter: FlipH;
+    transform: scaleX(-1);
+}
+
+.bubble {
+    background-image: url('../images/bubble.png');
+    height: 48px;
+    position: fixed;
+    width: 48px;
+    z-index: -9;
+}
+
+.bubble-small {
+    background-image: url('../images/bubble-small.png');
+    height: 24px;
+    position: fixed;
+    width: 24px;
+    z-index: -9;
+}
+
+.seaweed {
+    background-image: url('../images/seaweed.gif');
+    bottom: 0;
+    height: 100px;
+    position: fixed;
+    width: 100px;
+    z-index: -10;
+}
+
+.thoughts,
+.title {
+    color: white;
+    float: right;
+    font-family: arcadeclassic;
+    font-size: 28pt;
+    z-index: 10000;
+}
+
+.thoughts {
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+@font-face {
+    font-family: arcadeclassic;
+    src: url(../fonts/arcadeclassic.ttf);
+}
+
+@font-face {
+    font-family: mk1;
+    src: url(../fonts/mk1.ttf);
+}
+
+span.fatality {
+    color: red;
+    font-family: mk1;
+    font-size: 60pt;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+}
+
+#castle {
+    background-image: url('../images/castle.png');
+    bottom: 0;
+    height: 264px;
+    position: fixed;
+    right: 30px;
+    width: 307px;
+    z-index: -11;
+}
+
+#fish-flag {
+    background-image: url('../images/fish-flag.gif');
+    bottom: 230px;
+    height: 100px;
+    position: fixed;
+    right: 170px;
+    width: 100px;
+    z-index: -12;
+}
+
+.plumber {
+    height: 64px;
+    position: fixed;
+    width: 64px;
+    z-index: -9;
+}
+
+.plumber.mario { background-image: url('../images/mario-swimming.png'); }
+
+.plumber.luigi { background-image: url('../images/luigi-swimming.png'); }
+
+.plumber.swim0 { background-position: 0 0; }
+
+.plumber.swim1 { background-position: 64px 0; }
+
+.plumber.swim2 { background-position: 128px 0; }
+
+.plumber.swim3 { background-position: 192px 0; }
+
+.plumber.swim4 { background-position: 256px 0; }
+
+.plumber.swim5 { background-position: 320px 0; }
+/*# sourceMappingURL=app.css.map */
