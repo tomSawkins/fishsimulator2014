@@ -141,13 +141,26 @@ module FishSim
 
 //			$.connection.hub.logging = true;
 
+			var cachedBuildTime = null;
+
 			$.connection.hub.start().done(() => {
-				fishHub.server.getConfig().done((config) =>
-				{
+				fishHub.server.getConfig().done((config) => {
+					cachedBuildTime = config.BuildTime;
+
 					Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) => {						
 						this.addComponent(new FishSim.Components.Fish(p.Name));
 					});
 				});
+			});
+
+			$.connection.hub.reconnected(() =>
+			{
+				if (cachedBuildTime != null) {
+					fishHub.server.getBuildTime().done((buildTime) => {
+						if (buildTime != cachedBuildTime)
+							window.location.reload(true);
+					});
+				}
 			});
 		}
 

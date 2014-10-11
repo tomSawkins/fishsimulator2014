@@ -9,6 +9,7 @@ namespace FishSim2014.Models
 			Environments = new List<ClientEnvironment>();
 		}
 
+		public string BuildTime { get; set; }
 		public List<ClientEnvironment> Environments { get; set; }
 	}
 }
