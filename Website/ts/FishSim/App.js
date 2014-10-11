@@ -115,6 +115,10 @@ var FishSim;
 
             $.connection.hub.logging = true;
 
+            fishHub.client.marioMan = function () {
+                _this.addPlumber();
+            };
+
             $.connection.hub.start().done(function () {
                 fishHub.server.getConfig().done(function (config) {
                     console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);

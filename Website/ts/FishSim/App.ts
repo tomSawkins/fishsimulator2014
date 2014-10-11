@@ -69,9 +69,6 @@ module FishSim {
                 .FirstOrDefault(null, c => c.id == id);
         }
 
-        public static ts8: FishSim.Components.Fish;
-        public static ts9: FishSim.Components.Fish;
-
         public static fps: number = 25;
 
         public static paused: boolean = false;
@@ -108,8 +105,8 @@ module FishSim {
             this.lastTickTime = this.startTime;
 
             setInterval(() => {
-                    this.tick();
-                },
+                this.tick();
+            },
                 1000 / this.fps);
 
             var cachedStartupTime = null;
@@ -117,6 +114,10 @@ module FishSim {
             var fishHub = $.connection.fishSimHub;
 
             $.connection.hub.logging = true;
+
+            fishHub.client.marioMan = () => {
+                this.addPlumber();
+            };
 
             $.connection.hub.start().done(() => {
                 fishHub.server.getConfig().done((config) => {

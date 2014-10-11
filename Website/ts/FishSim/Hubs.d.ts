@@ -33,7 +33,7 @@ interface FishSimHub {
     /**
       * The functions on this property should be replaced if you want to receive messages from the FishSimHub hub.
       */
-    client : any;
+    client : FishSimHubClient;
 }
 
 interface FishSimHubServer {
@@ -51,6 +51,24 @@ interface FishSimHubServer {
       * @return {JQueryPromise of ClientConfig}
       */
     getConfig() : JQueryPromise<ClientConfig>
+
+    /** 
+      * Sends a "marioMan" message to the FishSimHub hub.
+      * Contract Documentation: ---
+      * @return {JQueryPromise of void}
+      */
+    marioMan() : JQueryPromise<void>
+}
+
+interface FishSimHubClient
+{
+
+    /**
+      * Set this function with a "function(){}" to receive the "marioMan" message from the FishSimHub hub.
+      * Contract Documentation: ---
+      * @return {void}
+      */
+    marioMan : () => void;
 }
 
 //#endregion FishSimHub hub
