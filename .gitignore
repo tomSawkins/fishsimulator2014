@@ -115,4 +115,4 @@ Backup*/
 UpgradeLog*.XML
 
 # Ignore output generated from ts files
-js/app/
+#js/app/
