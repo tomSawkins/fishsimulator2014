@@ -17,12 +17,17 @@
     <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="css\app.css">
       <DependentUpon>app.less</DependentUpon>
     </Content>
     <Content Include="css\app.min.css">
       <DependentUpon>app.less</DependentUpon>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
     <Content Include="images\castle.png" />
@@ -33,6 +38,7 @@
     <Content Include="images\seaweed.gif" />
     <Content Include="images\ts8.png" />
     <Content Include="images\ts9.png" />
+    <Content Include="controller.htm" />
     <Content Include="index.htm" />
     <TypeScriptCompile Include="Scripts\typings\datejs\datejs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\datejs\sugarpak.d.ts" />
@@ -40,11 +46,19 @@
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Controller.ts" />
     <TypeScriptCompile Include="ts\FishSim\Extensions.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-blink.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\linq-vsdoc.js" />
     <Content Include="Scripts\linq.js" />
     <Content Include="Scripts\linq.min.js" />
