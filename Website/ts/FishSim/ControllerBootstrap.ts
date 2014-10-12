@@ -2,19 +2,16 @@
 /// <reference path="controllerapp.ts" />
 /// <reference path="../../scripts/typings/requirejs/require.d.ts" />
 /// <reference path="../../scripts/typings/knockout/knockout.d.ts" />
-/// <reference path="viewmodels/controller.ts" />
-/**
- * Main entry point for RequireJS
- */
 
 require(
 	[
 		'knockout',
-		'jquery',
-		'signalr.hubs',
 		'ControllerApp',
+		'jquery',
+		'bootstrap',
+		'signalr.hubs',
 	],
-	(ko) => {
+	(ko, app) => {
 		'use strict';
 
 		$(document).ready(() =>
@@ -22,12 +19,15 @@ require(
 			// is there a way to "discover" components?
 			ko.components.register('controller', { require: 'viewmodels/controller' });
 			ko.components.register('environments', { require: 'viewmodels/environments' });
+			ko.components.register('environment-button', { require: 'viewmodels/environment-button' });
 			ko.components.register('heading', { require: 'viewmodels/heading' });
 			ko.components.register('mario-button', { require: 'viewmodels/mario-button' });
+			
+			var instance = new app();
 
-			new FishSim.ControllerApp().run();
+			ko.applyBindings(instance);
 
-			ko.applyBindings();
+			instance.run();
 		});
 	}
 );

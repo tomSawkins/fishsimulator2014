@@ -1,2 +1,5 @@
 ﻿<h2 class="media-heading text-center">Environments</h2>
-<div id="environments"></div>
+
+<div id="environments" data-bind="foreach: environments">
+	<environment-button params="name: $data, fishSimHubServer: $parent.fishSimHubServer"></environment-button>
+</div>

@@ -1,68 +1,73 @@
 ﻿/// <reference path="../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="../../scripts/typings/linq/linq.d.ts" />
+/// <reference path="../../scripts/typings/knockout/knockout.d.ts" />
 /// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
 /// <reference path="Hubs.d.ts" />
 
+import ko = require("knockout");
+
 require(["jquery", "linq", "signalr.hubs"]);
 
-module FishSim
+class ControllerApp
 {
-	export class ControllerApp
+	public cachedStartupTime: KnockoutObservable<String> = ko.observable<String>();
+	public environments: KnockoutObservableArray<String> = ko.observableArray<String>();
+
+	public fishSimHubClient: KnockoutObservable<FishSimHubClient> = ko.observable<FishSimHubClient>();
+	public fishSimHubServer: KnockoutObservable<FishSimHubServer> = ko.observable<FishSimHubServer>();
+
+	constructor()
 	{
-		constructor() {
+	}
 
-		}
+	public run(): void
+	{
+		this.fishSimHubClient($.connection.fishSimHub.client);
+		this.fishSimHubServer($.connection.fishSimHub.server);
 
-		public run(): void
+		//$.connection.hub.logging = true;
+		
+		/*
+		this.fishSimHubClient().marioMan = () =>
 		{
-			var cachedStartupTime = null;
+			
+		};
 
-			var fishHub = $.connection.fishSimHub;
+		this.fishSimHubClient().killEnvironment = (p) =>
+		{
+			
+		};
+		*/
 
-			$.connection.hub.logging = true;
-
-			fishHub.client.marioMan = () =>
+		$.connection.hub.start().done(() =>
+		{
+			this.fishSimHubServer().getConfig().done((config) =>
 			{
-				console.log("Mario Man Added");
-			};
+				console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);
 
-			$.connection.hub.start().done(() =>
-			{
-				fishHub.server.getConfig().done((config) =>
+				this.cachedStartupTime(config.StartupTime);
+
+				Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) =>
 				{
-					console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);
-					cachedStartupTime = config.StartupTime;
-
-					Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) => {
-						console.log("Adding environment " + p.Name);
-
-						$("#environments").append('<a id="' + p.Name + '" class="btn btn-default col-lg-6 col-md-6 col-xs-12">' + p.Name + '</a>');
-						$("#" + p.Name).click(() =>
-						{
-							fishHub.server.marioMan();
-						});
-					});
-
-					$('#firezemissiles').click(() =>
-					{
-						fishHub.server.marioMan();
-					});
+					this.environments.push(p.Name);
 				});
 			});
+		});
 
-			$.connection.hub.reconnected(() =>
+		$.connection.hub.reconnected(() =>
+		{
+			this.fishSimHubServer().getStartupTime().done((startupTime) =>
 			{
-				fishHub.server.getStartupTime().done((startupTime) =>
-				{
-					console.log("reconnected startupTime: " + startupTime);
-					console.log("cachedStartupTime: " + cachedStartupTime);
+				console.log("reconnected startupTime: " + startupTime);
+				console.log("cachedStartupTime: " + this.cachedStartupTime());
 
-					if (cachedStartupTime == null)
-						cachedStartupTime = startupTime;
-					else if (startupTime != cachedStartupTime)
-						window.location.reload(true);
-				});
+				if (this.cachedStartupTime() == null)
+					this.cachedStartupTime(startupTime);
+				else if (startupTime != this.cachedStartupTime())
+					window.location.reload(true);
 			});
-		}
+		});
 	}
 }
+
+export = ControllerApp;

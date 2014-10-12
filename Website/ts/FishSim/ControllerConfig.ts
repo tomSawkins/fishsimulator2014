@@ -28,6 +28,9 @@ require.config({
 		"jquery": {
 			exports: '$'
 		},
+		"bootstrap": {
+			deps: ["jquery"]
+		},
 		'knockout': {
 			deps: ["jquery"],
 			exports: 'ko'
