@@ -43,10 +43,14 @@
     <TypeScriptCompile Include="Scripts\typings\datejs\datejs.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\datejs\sugarpak.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
-    <TypeScriptCompile Include="ts\FishSim\Controller.ts" />
+    <TypeScriptCompile Include="ts\FishSim\ControllerApp.ts" />
+    <TypeScriptCompile Include="ts\FishSim\ControllerBootstrap.ts" />
+    <TypeScriptCompile Include="ts\FishSim\ControllerConfig.ts" />
     <TypeScriptCompile Include="ts\FishSim\Extensions.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
@@ -59,7 +63,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap.min.js.map">
+      <DependentUpon>bootstrap.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\linq-vsdoc.js" />
+    <Content Include="Scripts\knockout-3.2.0.debug.js" />
+    <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\linq.js" />
     <Content Include="Scripts\linq.min.js" />
     <Content Include="Scripts\QTransform.js" />
@@ -73,6 +82,9 @@
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.js" />
     <Content Include="Scripts\jquery.signalR-2.1.2.min.js" />
+    <Content Include="Scripts\r.js" />
+    <Content Include="Scripts\require.js" />
+    <Content Include="Scripts\text.js" />
     <Content Include="ts\FishSim\ITime.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="Scripts\typings\linq\linq.d.ts" />
@@ -82,7 +94,15 @@
       <DependentUpon>Hubs.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="ts\FishSim\Utils\Utils.ts" />
+    <Content Include="ts\FishSim\Views\mario-button.html" />
+    <Content Include="ts\FishSim\Views\heading.html" />
+    <Content Include="ts\FishSim\Views\environments.html" />
+    <Content Include="ts\FishSim\Views\controller.html" />
     <Content Include="web.config" />
+    <TypeScriptCompile Include="ts\FishSim\ViewModels\mario-button.ts" />
+    <TypeScriptCompile Include="ts\FishSim\ViewModels\heading.ts" />
+    <TypeScriptCompile Include="ts\FishSim\ViewModels\environments.ts" />
+    <TypeScriptCompile Include="ts\FishSim\ViewModels\controller.ts" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="ts\FishSim\App.ts" />
@@ -99,6 +119,9 @@
     </Content>
     <Content Include="Scripts\jquery-2.1.1.min.js.map">
       <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\linq.min.js.map">
+      <DependentUpon>linq.min.js</DependentUpon>
     </Content>
     <None Include="ts\FishSim\Hubs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -177,6 +200,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
