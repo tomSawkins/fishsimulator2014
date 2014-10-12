@@ -1,2 +1,9 @@
-﻿<a class="btn btn-default col-lg-4 col-md-6 col-xs-12"
-   data-bind="click: killEnvironment, text: name"></a>
+﻿<div class="col-lg-3 col-md-6 col-xs-12">
+    <h3 class="well well-sm text-center text-primary" data-bind="text: 'Environment: ' + name"></h3>
+    <div class="well well-sm col-lg-12 col-md-12 col-xs-12">
+        <a class="btn btn-warning col-lg-6 col-md-6 col-sm-6 col-xs-12"
+           data-bind="click: environmentFailing">Fail</a>
+        <a class="btn btn-success col-lg-6 col-md-6 col-sm-6 col-xs-12"
+           data-bind="click: environmentOkay">Okay</a>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 ﻿<#@ template debug="true" hostspecific="true" language="C#" #>
-<#@ output extension=".d.ts" #>
+<#@ output extension=".ts" #>
 <# /* Update this line to match your version of SignalR */ #>
 <#@ assembly name="$(SolutionDir)\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll" #>
 <#@ assembly name="$(SolutionDir)\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll" #>
@@ -25,28 +25,22 @@
 /// <reference path="../../Scripts/typings/signalr/signalr.d.ts" />
 /// <reference path="../../Scripts/typings/jquery/jquery.d.ts" />
 
-////////////////////
-// available hubs //
-////////////////////
-//#region available hubs
-
-interface SignalR {
+//#region Available Hubs
+interface SignalR
+{
 <#
 foreach (var hub in hubmanager.GetHubs())
 {
 #>
     // The hub implemented by <#=hub.HubType.FullName#>
-    <#= hub.Name.Substring(0, 1).ToLower() + hub.Name.Substring(1) #> : <#= hub.HubType.Name #>;
+    <#= hub.Name.Substring(0, 1).ToLower() + hub.Name.Substring(1) #>: <#= hub.HubType.Name #>;
 <#
 }
 #>
 }
-//#endregion available hubs
+//#endregion Available Hubs
 
-///////////////////////
-// Service Contracts //
-///////////////////////
-//#region service contracts
+//#region Service Contracts
 <#
 foreach (var hub in hubmanager.GetHubs())
 {
@@ -55,47 +49,31 @@ foreach (var hub in hubmanager.GetHubs())
     var clientType = hubType.Assembly.GetType(clientContractName);
 #>
 
-//#region <#= hub.Name#> hub
+//#region <#= hub.Name#> Hub
+interface <#= hubType.Name #>
+{
+    // This property lets you send messages to the <#= hub.Name#> hub.
+    server: <#= hubType.Name #>Server;
 
-interface <#= hubType.Name #> {
-    
-    /**
-      * This property lets you send messages to the <#= hub.Name#> hub.
-      */
-    server : <#= hubType.Name #>Server;
-
-    /**
-      * The functions on this property should be replaced if you want to receive messages from the <#= hub.Name#> hub.
-      */
-    client : <#= clientType != null?(hubType.Name+"Client"):"any"#>;
+    // The functions on this property should be replaced if you want to receive messages from the <#= hub.Name#> hub.
+    client: <#= clientType != null?(hubType.Name+"Client"):"any"#>;
 }
 
 <#
-/* Server type definition */
+// Server type definition
 #>
-interface <#= hubType.Name #>Server {
+interface <#= hubType.Name #>Server
+{
 <#
     foreach (var method in hubmanager.GetHubMethods(hub.Name ))
     {
-        var ps = method.Parameters.Select(x => x.Name+ " : "+GetTypeContractName(x.ParameterType));
+        var ps = method.Parameters.Select(x => x.Name + ": "+GetTypeContractName(x.ParameterType));
         var docs = GetXmlDocForMethod(hubType.GetMethod(method.Name));
 
+        
 #>
 
-    /** 
-      * Sends a "<#= FirstCharLowered(method.Name) #>" message to the <#= hub.Name#> hub.
-      * Contract Documentation: <#= docs.Summary #>
-<#
-    foreach (var p in method.Parameters)
-    {
-#>
-      * @param <#=p.Name#> {<#=GetTypeContractName(p.ParameterType)#>} <#=docs.ParameterSummary(p.Name)#>
-<#
-    }
-#>
-      * @return {JQueryPromise of <#= GetTypeContractName(method.ReturnType)#>}
-      */
-    <#= FirstCharLowered(method.Name) #>(<#=string.Join(", ", ps)#>) : JQueryPromise<<#= GetTypeContractName(method.ReturnType)#>>
+    <#= FirstCharLowered(method.Name) #>(<#=string.Join(", ", ps)#>): JQueryPromise<<#= GetTypeContractName(method.ReturnType)#>>
 <#
     }
 #>
@@ -113,7 +91,7 @@ interface <#= hubType.Name #>Client
 <#
     foreach (var method in clientType.GetMethods())
     {
-        var ps = method.GetParameters().Select(x => x.Name+ " : "+GetTypeContractName(x.ParameterType));
+        var ps = method.GetParameters().Select(x => x.Name+ ": "+GetTypeContractName(x.ParameterType));
         var docs = GetXmlDocForMethod(method);
 
 #>
@@ -131,7 +109,7 @@ interface <#= hubType.Name #>Client
 #>
       * @return {void}
       */
-    <#= FirstCharLowered(method.Name) #> : (<#=string.Join(", ", ps)#>) => void;
+    <#= FirstCharLowered(method.Name) #>: (<#=string.Join(", ", ps)#>) => void;
 <#
     }
 #>
@@ -140,44 +118,61 @@ interface <#= hubType.Name #>Client
 <#
     }
 #>
-//#endregion <#= hub.Name#> hub
+//#endregion <#= hub.Name#> Hub
 
 <#
 }
 #>
-//#endregion service contracts
+//#endregion Service Contracts
 
 
-
-////////////////////
-// Data Contracts //
-////////////////////
-//#region data contracts
+//#region Data Contracts
 <#
-while(viewTypes.Count!=0)
+while (viewTypes.Count != 0)
 {
     var type = viewTypes.Pop();
-#>
 
-
-/**
-  * Data contract for <#= type.FullName#>
-  */
-interface <#= GenericSpecificName(type) #> {
-<#
-    foreach (var property in type.GetProperties(BindingFlags.Instance|BindingFlags.Public|BindingFlags.DeclaredOnly))
+    if (type.IsEnum)
     {
 #>
-    <#= property.Name#> : <#= GetTypeContractName(property.PropertyType)#>;
+declare enum <#= GenericSpecificName(type) #>
+{
 <#
-    }
+        var enumValues = type.GetFields();
+        foreach (var value in enumValues)
+        {
+            if (value.Name.Equals("value__")) continue;
+    #>
+    <#= value.Name #> = <#= value.GetRawConstantValue() #>,
+<#
+        }
 #>
 }
 <#
+    }
+    else
+    {
+#>
+
+
+// Data contract for <#= type.FullName#>
+interface <#= GenericSpecificName(type) #>
+{
+<#
+        foreach (var property in type.GetProperties(BindingFlags.Instance|BindingFlags.Public|BindingFlags.DeclaredOnly))
+        {
+#>
+    <#= property.Name#>: <#= GetTypeContractName(property.PropertyType)#>;
+<#
+        }
+#>
+}
+<#
+    }
 }
 #>
 
-//#endregion data contracts
+//#endregion Data Contracts
 
 <#+
 
@@ -211,11 +206,8 @@ interface <#= GenericSpecificName(type) #> {
             return GetTypeContractName(type.GetGenericArguments()[0])+"[]";
         }
 
-    
-
         switch (type.Name.ToLowerInvariant())
         {
-
             case "datetime":
                 return "string";
             case "int16":
@@ -309,5 +301,4 @@ interface <#= GenericSpecificName(type) #> {
             return "";
         }
     }
-
 #>

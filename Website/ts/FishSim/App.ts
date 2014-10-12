@@ -7,7 +7,7 @@
 /// <reference path="Components/IVector.ts" />
 /// <reference path="Components/Seaweed.ts" />
 /// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
-/// <reference path="Hubs.d.ts" />
+/// <reference path="Hubs.ts" />
 module FishSim
 {
 	export class App
@@ -137,14 +137,21 @@ module FishSim
 
 			//$.connection.hub.logging = true;
 
+            /*
 			fishHub.client.killEnvironment = (env) =>
 			{
 				var envComponent : IComponent = this.getComponentById(env);
 				var fishy: IFish = <IFish>envComponent;
 				fishy.makeBubble();
 			};
+            */
 
-			fishHub.client.marioMan = () =>
+		    fishHub.client.updateEnvironment = (name: string, health: Health) =>
+		    {
+		        console.log("Updated Health for " + name + " to " + health);
+		    };
+
+		    fishHub.client.marioMan = () =>
 			{
 				this.addPlumber();
 			};
@@ -156,7 +163,7 @@ module FishSim
 					console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);
 					cachedStartupTime = config.StartupTime;
 
-					Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) =>
+					Enumerable.From(config.Environments).ForEach((p: Environment) =>
 					{
 						this.addComponent(new FishSim.Components.Fish(p.Name));
 					});

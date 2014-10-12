@@ -20,8 +20,12 @@ export class viewModel
 		this.fishSimHubServer = params.fishSimHubServer;
 	}
 
-	public killEnvironment(): void 
+	public environmentFailing(): void
 	{
-		this.fishSimHubServer().killEnvironment(this.name.toString());
+	    this.fishSimHubServer().updateEnvironment(this.name.toString(), Health.Failing);
 	}
+
+    public environmentOkay(): void {
+        this.fishSimHubServer().updateEnvironment(this.name.toString(), Health.Okay);
+    }
 }

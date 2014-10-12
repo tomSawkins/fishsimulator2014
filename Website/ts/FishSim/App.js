@@ -7,7 +7,7 @@
 /// <reference path="Components/IVector.ts" />
 /// <reference path="Components/Seaweed.ts" />
 /// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
-/// <reference path="Hubs.d.ts" />
+/// <reference path="Hubs.ts" />
 var FishSim;
 (function (FishSim) {
     var App = (function () {
@@ -114,10 +114,16 @@ var FishSim;
             var fishHub = $.connection.fishSimHub;
 
             //$.connection.hub.logging = true;
-            fishHub.client.killEnvironment = function (env) {
-                var envComponent = _this.getComponentById(env);
-                var fishy = envComponent;
-                fishy.makeBubble();
+            /*
+            fishHub.client.killEnvironment = (env) =>
+            {
+            var envComponent : IComponent = this.getComponentById(env);
+            var fishy: IFish = <IFish>envComponent;
+            fishy.makeBubble();
+            };
+            */
+            fishHub.client.updateEnvironment = function (name, health) {
+                console.log("Updated Health for " + name + " to " + health);
             };
 
             fishHub.client.marioMan = function () {

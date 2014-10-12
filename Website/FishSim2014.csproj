@@ -30,6 +30,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
+    <Content Include="images\cantina.mp3" />
     <Content Include="images\castle.png" />
     <Content Include="images\fish-flag.gif" />
     <Content Include="images\luigi-swimming.png" />
@@ -38,7 +39,7 @@
     <Content Include="images\seaweed.gif" />
     <Content Include="images\t12.png" />
     <Content Include="images\ts8.png" />
-    <Content Include="images\ts10.png" />
+    <Content Include="images\t10.png" />
     <Content Include="images\ts9.png" />
     <Content Include="controller.htm" />
     <Content Include="index.htm" />
@@ -48,6 +49,7 @@
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\webaudioapi\waa.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IFish.ts" />
@@ -58,6 +60,7 @@
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
+    <Content Include="Scripts\bin.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-blink.js" />
@@ -74,6 +77,7 @@
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\linq.js" />
     <Content Include="Scripts\linq.min.js" />
+    <Content Include="Scripts\mp3.js" />
     <Content Include="Scripts\QTransform.js" />
     <TypeScriptCompile Include="ts\FishSim\Components\Castle.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\FishFlag.ts" />
@@ -91,7 +95,7 @@
     <Content Include="ts\FishSim\ITime.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="Scripts\typings\linq\linq.d.ts" />
-    <TypeScriptCompile Include="ts\FishSim\Hubs.d.ts">
+    <TypeScriptCompile Include="ts\FishSim\Hubs.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Hubs.tt</DependentUpon>
@@ -130,7 +134,7 @@
     </Content>
     <None Include="ts\FishSim\Hubs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Hubs.d.ts</LastGenOutput>
+      <LastGenOutput>Hubs.ts</LastGenOutput>
     </None>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -148,10 +152,11 @@
     <Compile Include="App_Start\SignalRConfig.cs" />
     <Compile Include="AutofacModules\SignalrModule.cs" />
     <Compile Include="Models\ClientConfig.cs" />
-    <Compile Include="Models\ClientEnvironment.cs" />
+    <Compile Include="Models\Environment.cs" />
     <Compile Include="Hubs\FishSimHub.cs" />
     <Compile Include="Hubs\IFishSimHubClient.cs" />
     <Compile Include="Interfaces\IClock.cs" />
+    <Compile Include="Models\Health.cs" />
     <Compile Include="Services\SystemClock.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
