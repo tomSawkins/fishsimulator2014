@@ -1,6 +1,6 @@
 ﻿/// <amd-dependency path="text!views/mario-button.html"/>
 /// <reference path="../../../scripts/typings/knockout/knockout.d.ts" />
-/// <reference path="../Hubs.d.ts" />
+/// <reference path="../Hubs.ts" />
 
 import ko = require("knockout");
 
