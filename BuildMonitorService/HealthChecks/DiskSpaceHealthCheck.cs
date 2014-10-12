@@ -24,7 +24,7 @@ namespace BuildMonitorService.HealthChecks
                 }
             }
 
-            if (freeDiskSpace <= 512)
+            if (freeDiskSpace <= Configuration.MinimumDiskSpace)
             {
                 return HealthCheckResult.Unhealthy("Not enough disk space: {0}", freeDiskSpace);
             }

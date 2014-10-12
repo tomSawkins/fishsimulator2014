@@ -11,12 +11,11 @@ namespace BuildMonitorService.Services
 {
 	public class PagerDutyService
 	{
-		public async Task Notify(List<string> outages)
+		public void Notify(List<string> outages)
 		{
 			if (outages == null) throw new ArgumentNullException("outages");
 
-			var domain = System.Configuration.ConfigurationManager.AppSettings["pagerduty:domain"];
-			var token = System.Configuration.ConfigurationManager.AppSettings["pagerduty:token"];
+		    var token = Configuration.PagerDutyToken;
 
 			var payload = new
 			{
@@ -30,7 +29,7 @@ namespace BuildMonitorService.Services
 			IRestRequest request = new RestRequest(@"https://events.pagerduty.com/generic/2010-04-15/create_event.json", Method.POST);
 			request.RequestFormat = DataFormat.Json;
 			request.AddBody(payload);
-			var response = await client.PostTaskAsync<dynamic>(request);
+		    var response = client.Post(request);
 				
 			if (response.StatusCode == HttpStatusCode.OK)
 			{

@@ -7,10 +7,17 @@ namespace BuildMonitorService.ScheduledTasks
     {
         public SampleTaskRegistry()
         {
-            Log.Information("SampleTaskRegistry Registering Scheduled Tasks");
+            if (Configuration.SampleTaskEnabled)
+            {
+                Log.Information("Registering SampleTask");
+                Schedule<SampleTask>().ToRunNow().AndEvery(Configuration.SampleTaskSchedule).Minutes();
+            }
 
-            //Schedule<SampleTask>().ToRunNow().AndEvery(5).Seconds();
-			Schedule<HealthCheckTask>().ToRunNow().AndEvery(90).Seconds();
+            if (Configuration.HealthCheckEnabled)
+            {
+                Log.Information("Registering HealthCheckTask");
+                Schedule<HealthCheckTask>().ToRunNow().AndEvery(Configuration.HealthCheckSchedule).Minutes();
+            }
         }
     }
 }

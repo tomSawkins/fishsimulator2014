@@ -17,7 +17,7 @@ namespace BuildMonitorService.AutofacModules
                 {
                     p.Instance.ServiceLevelChanged += OnServiceLevelChanged;
                     p.Instance.StateChanged += OnStateChanged;
-                    p.Instance.ResetTimeout = TimeSpan.FromSeconds(30);
+                    p.Instance.ResetTimeout = TimeSpan.FromSeconds(Configuration.CircuitBreakerResetTimeout);
                 }
                 )
                 .SingleInstance();

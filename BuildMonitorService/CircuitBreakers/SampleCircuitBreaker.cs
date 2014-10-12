@@ -15,8 +15,6 @@ namespace BuildMonitorService.CircuitBreakers
 
 		public string Execute(string request)
 		{
-			Log.Information("Execute '{Request}'", request);
-
 			if (breaker.AllowedToAttemptExecute)
 			{
 				try
@@ -24,15 +22,15 @@ namespace BuildMonitorService.CircuitBreakers
 					string result = breaker.ExecuteWithRetries(() => SampleFunction(request),
 						new RetryOptions
 						{
-							AllowedRetries = 5,
-							RetryInterval = TimeSpan.FromSeconds(1)
+							AllowedRetries = Configuration.CircuitBreakerRetries,
+                            RetryInterval = TimeSpan.FromSeconds(Configuration.CircuitBreakerRetryInterval)
 						});
 					return result;
 				}
 				catch (AggregateException)
 				{
 					breaker.Trip();
-					Log.Error("Request Failed");
+					Log.Error("CircuitBreaker Tripped");
 				}
 			}
 			else
@@ -43,10 +41,8 @@ namespace BuildMonitorService.CircuitBreakers
 			return null;
 		}
 
-		public string SampleFunction(string request)
+	    private string SampleFunction(string request)
 		{
-			Log.Information("Function '{request}'", request);
-
 			if (request == null)
 				throw new InvalidOperationException("Invalid Request");
 
