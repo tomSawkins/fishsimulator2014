@@ -1,10 +1,13 @@
 ﻿/// <reference path="../../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="IComponent.ts" />
-module FishSim.Components {
-    export class Bubble implements IComponent {
+module FishSim.Components
+{
+    export class Bubble implements IComponent
+    {
         private static bubbleCount = 0;
 
-        constructor(position: IVector, scaleBubble: boolean = false) {
+        constructor(position: IVector, scaleBubble: boolean = false)
+        {
             // Generate a new ID for this bubble
             Bubble.bubbleCount++;
             this.id = 'bubble' + Bubble.bubbleCount;
@@ -30,13 +33,16 @@ module FishSim.Components {
 
         public bubbleType: string;
 
-        private setPosition(position: IVector) {
+        private setPosition(position: IVector)
+        {
             this.element.css({ left: position.x + 'px', top: position.y + 'px' });
             this.position = position;
         }
 
-        public tick(time: ITime): void {
-            if (FishSim.App.paused) {
+        public tick(time: ITime): void
+        {
+            if (FishSim.App.paused)
+            {
                 return;
             }
 
@@ -59,12 +65,14 @@ module FishSim.Components {
 
             // If we've gone outside the top edge of the screen then 
             // we can be cleaned up
-            if (this.position.y + this.element.height() < 0) {
+            if (this.position.y + this.element.height() < 0)
+            {
                 App.removeComponent(this);
             }
         }
 
-        public cleanUp(): void {
+        public cleanUp(): void
+        {
             // Remove bubble from dom
             var body = document.getElementById('body');
             var element = document.getElementById(this.id);

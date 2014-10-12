@@ -1,6 +1,8 @@
-﻿declare module FishSim {
+﻿declare module FishSim
+{
     // ReSharper disable once InconsistentNaming
-    interface ITime {
+    interface ITime
+    {
         total: number;
         elapsed: number;
     }

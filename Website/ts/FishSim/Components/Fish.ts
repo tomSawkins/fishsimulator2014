@@ -2,22 +2,26 @@
 /// <reference path="../Extensions.ts" />
 /// <reference path="../../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="IComponent.ts" />
-module FishSim.Components {
-    export enum FishState {
+module FishSim.Components
+{
+    export enum FishState
+    {
         Idle,
         Moving,
         Dying,
         Dead
     }
 
-    export class Fish implements IComponent {
+    export class Fish implements IComponent
+    {
         private static maxTileCounts: IVector = { x: 10, y: 8 };
 
         private screenSize: IVector;
 
         private tileSize: IVector;
 
-        constructor(id) {
+        constructor(id)
+        {
             this.calculateDimensions();
 
             var body = $('body');
@@ -38,7 +42,8 @@ module FishSim.Components {
             this.moveToTile({ tile: this.tilePosition, animate: false });
 
             // Handle window resize event
-            $(window).resize(() => {
+            $(window).resize(() =>
+            {
                 this.calculateDimensions();
             });
         }
@@ -51,17 +56,22 @@ module FishSim.Components {
 
         private tilePosition: IVector;
 
-        private canMoveToTile(tile: IVector): boolean {
+        private canMoveToTile(tile: IVector): boolean
+        {
             if
             (tile.x >= 0 && tile.x < Fish.maxTileCounts.x &&
-                tile.y >= 0 && tile.y < Fish.maxTileCounts.y) {
+                tile.y >= 0 && tile.y < Fish.maxTileCounts.y)
+            {
                 return true;
-            } else {
+            }
+            else
+            {
                 return false;
             }
         }
 
-        private getAvailableTilePositions(): IVector[] {
+        private getAvailableTilePositions(): IVector[]
+        {
             var result = <IVector[]>[];
 
             var min = {
@@ -74,15 +84,19 @@ module FishSim.Components {
                 y: this.tilePosition.y + 1
             };
 
-            for (var x = min.x; x <= max.x; x++) {
-                for (var y = min.y; y <= max.y; y++) {
-                    if (x == this.tilePosition.x && y == this.tilePosition.y) {
+            for (var x = min.x; x <= max.x; x++)
+            {
+                for (var y = min.y; y <= max.y; y++)
+                {
+                    if (x == this.tilePosition.x && y == this.tilePosition.y)
+                    {
                         continue;
                     }
 
                     var position = { x: x, y: y };
 
-                    if (this.canMoveToTile(position)) {
+                    if (this.canMoveToTile(position))
+                    {
                         result.push(position);
                     }
                 }
@@ -91,7 +105,8 @@ module FishSim.Components {
             return result;
         }
 
-        private calculateDimensions(): void {
+        private calculateDimensions(): void
+        {
             this.screenSize = {
                 x: $(window).width(),
                 y: $(window).height()
@@ -103,30 +118,37 @@ module FishSim.Components {
             };
         }
 
-        public tick(time: ITime): void {
-            if (this.state == FishState.Idle) {
+        public tick(time: ITime): void
+        {
+            if (this.state == FishState.Idle)
+            {
                 // Chance a movement animation roughly every x milliseconds
-                if (Math.chance(time.elapsed, 5000)) {
+                if (Math.chance(time.elapsed, 5000))
+                {
                     this.moveRandomly();
                 }
             }
 
-            if (this.state == FishState.Idle || this.state == FishState.Moving) {
+            if (this.state == FishState.Idle || this.state == FishState.Moving)
+            {
                 // Chance a bubble to occur roughly every x milliseconds
-                if (Math.chance(time.elapsed, 3000)) {
+                if (Math.chance(time.elapsed, 3000))
+                {
                     this.makeBubble();
                 }
             }
         }
 
-        private static tileToScreen(tile: IVector): IVector {
+        private static tileToScreen(tile: IVector): IVector
+        {
             return {
                 x: ($(window).width() / Fish.maxTileCounts.x) * tile.x,
                 y: ($(window).height() / Fish.maxTileCounts.y) * tile.y
             };
         }
 
-        private moveToTile(options: { tile: IVector; animate: boolean; duration?: number }): void {
+        private moveToTile(options: { tile: IVector; animate: boolean; duration?: number }): void
+        {
             // Translate from tile to screen
             var screen = Fish.tileToScreen(options.tile);
 
@@ -135,18 +157,24 @@ module FishSim.Components {
             screen.y = Math.floor(screen.y + (this.tileSize.y / 2) - (this.element.height() / 2));
 
             var rotationAmount = 0;
-            if (options.tile.y < this.tilePosition.y) {
+            if (options.tile.y < this.tilePosition.y)
+            {
                 // Move up
                 rotationAmount = Math.randomRange(-10, -5);
-            } else if (options.tile.y > this.tilePosition.y) {
+            }
+            else if (options.tile.y > this.tilePosition.y)
+            {
                 // Move down
                 rotationAmount = Math.randomRange(5, 10);
             }
             var scaleXAmount = this.element.css('scaleX') || 1;
-            if (options.tile.x < this.tilePosition.x) {
+            if (options.tile.x < this.tilePosition.x)
+            {
                 // face left
                 scaleXAmount = -1;
-            } else if (options.tile.x > this.tilePosition.x) {
+            }
+            else if (options.tile.x > this.tilePosition.x)
+            {
                 // face right
                 scaleXAmount = 1;
             }
@@ -167,27 +195,33 @@ module FishSim.Components {
             // To stop the flip from animating, apply the scale transform before the animation
             this.element.css(preAnimateProperties);
 
-            if (options.animate) {
+            if (options.animate)
+            {
                 this.element.animate(
                     properties,
                     options.duration || 1000,
-                    () => {
+                    () =>
+                    {
                         this.state = FishState.Idle;
                     });
-            } else {
+            }
+            else
+            {
                 this.element.css(properties);
 
                 this.state = FishState.Idle;
             }
         }
 
-        private moveRandomly(): void {
+        private moveRandomly(): void
+        {
             this.state = FishState.Moving;
 
             // Pick a random available tile to move to
             var availableTiles = this.getAvailableTilePositions();
 
-            if (availableTiles.length == 0) {
+            if (availableTiles.length == 0)
+            {
                 console.log('no available tiles to move to');
             }
 
@@ -196,7 +230,8 @@ module FishSim.Components {
             this.moveToTile({ tile: tile, animate: true });
         }
 
-        private makeBubble(): void {
+        private makeBubble(): void
+        {
             var bubble = new Bubble({
                 x: this.element.position().left,
                 y: this.element.position().top
@@ -205,35 +240,40 @@ module FishSim.Components {
             App.addComponent(bubble);
         }
 
-        public keyup(e: JQueryKeyEventObject) {
-            if (this.state == FishState.Idle) {
+        public keyup(e: JQueryKeyEventObject)
+        {
+            if (this.state == FishState.Idle)
+            {
                 var newPosition = Utils.clone(this.tilePosition);
 
                 //alert(e.keyCode);
-                switch (e.keyCode) {
-                case 37: // Left
-                    newPosition.x--;
-                    break;
+                switch (e.keyCode)
+                {
+                    case 37: // Left
+                        newPosition.x--;
+                        break;
 
-                case 38: // Up
-                    newPosition.y--;
-                    break;
+                    case 38: // Up
+                        newPosition.y--;
+                        break;
 
-                case 39: // Right
-                    newPosition.x++;
-                    break;
+                    case 39: // Right
+                        newPosition.x++;
+                        break;
 
-                case 40: // Down
-                    newPosition.y++;
-                    break;
+                    case 40: // Down
+                        newPosition.y++;
+                        break;
 
-                case 32: // Space
-                    this.makeBubble();
-                    break;
+                    case 32: // Space
+                        this.makeBubble();
+                        break;
                 }
 
-                if (newPosition.x != this.tilePosition.x || newPosition.y != this.tilePosition.y) {
-                    if (this.canMoveToTile(newPosition)) {
+                if (newPosition.x != this.tilePosition.x || newPosition.y != this.tilePosition.y)
+                {
+                    if (this.canMoveToTile(newPosition))
+                    {
                         this.state = FishState.Moving;
 
                         this.moveToTile({ tile: newPosition, animate: true, duration: 250 });

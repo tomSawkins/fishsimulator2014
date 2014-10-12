@@ -8,10 +8,7 @@
 //#region available hubs
 
 interface SignalR {
-
-    /**
-      * The hub implemented by FishSim2014.Hubs.FishSimHub
-      */
+    // The hub implemented by FishSim2014.Hubs.FishSimHub
     fishSimHub : FishSimHub;
 }
 //#endregion available hubs
