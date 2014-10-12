@@ -24,6 +24,8 @@ require.config({
         "mp3": '../../Scripts/mp3'
 	},
 
+    waitSeconds: 35,
+
 	shim: {
 		"jquery": {
 			exports: '$'
