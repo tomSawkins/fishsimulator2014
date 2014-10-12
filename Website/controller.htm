@@ -2,20 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>Fish Simulator 2014 - Controller</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
+		<title>Fish Simulator 2014 - Controller</title>
 		<link rel="stylesheet" href="Content/bootstrap.css" type="text/css" />
 		<link rel="stylesheet" href="Content/bootstrap-theme.css" type="text/css" />
 	</head>
 
-	<body>
-		<script type="text/javascript" src="Scripts/require.js"></script>
-		<script type="text/javascript" src="ts/FishSim/ControllerConfig.js"></script>
-		
-		<script>
-			require(['ControllerBootstrap']);
-		</script>
-		
-		<controller></controller>
-	</body>
+<body>
+	<script type="text/javascript" src="Scripts/require.js"></script>
+	<script type="text/javascript" src="ts/FishSim/ControllerConfig.js"></script>
+
+	<script>
+		require(['ControllerBootstrap']);
+	</script>
+
+	<controller params="environments: environments, fishSimHubServer: fishSimHubServer"></controller>
+</body>
+
 </html>

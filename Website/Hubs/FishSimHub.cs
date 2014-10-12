@@ -30,6 +30,8 @@ namespace FishSim2014.Hubs
 
             config.Environments.Add(new ClientEnvironment { Name = "ts8" });
             config.Environments.Add(new ClientEnvironment { Name = "ts9" });
+			config.Environments.Add(new ClientEnvironment { Name = "ts10" });
+			config.Environments.Add(new ClientEnvironment { Name = "t12" });
 
             config.StartupTime = GetStartupTime();
 
@@ -40,5 +42,10 @@ namespace FishSim2014.Hubs
         {
             this.Clients.All.MarioMan();
         }
+
+	    public void KillEnvironment(string name)
+	    {
+		    this.Clients.All.KillEnvironment(name);
+	    }
     }
 }

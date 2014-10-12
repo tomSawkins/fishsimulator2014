@@ -12,7 +12,7 @@ module FishSim.Components
         Dead
     }
 
-    export class Fish implements IComponent
+    export class Fish implements IFish
     {
         private static maxTileCounts: IVector = { x: 10, y: 8 };
 
@@ -230,7 +230,7 @@ module FishSim.Components
             this.moveToTile({ tile: tile, animate: true });
         }
 
-        private makeBubble(): void
+        public makeBubble(): void
         {
             var bubble = new Bubble({
                 x: this.element.position().left,
