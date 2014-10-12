@@ -1,5 +1,7 @@
-﻿module FishSim {
-    export interface IComponent {
+﻿module FishSim
+{
+    export interface IComponent
+    {
         // Each component must have an Id. Recommand just using the class name + a unique sequential number
         id: string;
 
