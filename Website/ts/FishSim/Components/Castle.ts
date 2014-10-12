@@ -1,8 +1,11 @@
 ﻿/// <reference path="../../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="IComponent.ts" />
-module FishSim.Components {
-    export class Castle implements IComponent {
-        constructor() {
+module FishSim.Components
+{
+    export class Castle implements IComponent
+    {
+        constructor()
+        {
             // Generate a new ID for this bubble
             this.id = 'castle';
 
@@ -18,10 +21,12 @@ module FishSim.Components {
 
         public id: string;
 
-        public tick(time: ITime): void {
+        public tick(time: ITime): void
+        {
         }
 
-        public cleanUp(): void {
+        public cleanUp(): void
+        {
             // Remove element from dom
             var body = document.getElementById('body');
             var element = document.getElementById(this.id);

@@ -1,5 +1,6 @@
 /// <reference path="../../../scripts/typings/jquery/jquery.d.ts" />
 
-interface JQuery {
+interface JQuery
+{
     blink(options?: any): any;
 }
