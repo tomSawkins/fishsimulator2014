@@ -30,6 +30,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
+    <Content Include="images\cantina.mp3" />
     <Content Include="images\castle.png" />
     <Content Include="images\fish-flag.gif" />
     <Content Include="images\luigi-swimming.png" />
@@ -48,6 +49,7 @@
     <TypeScriptCompile Include="Scripts\typings\knockout\knockout.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\webaudioapi\waa.d.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IFish.ts" />
@@ -58,6 +60,7 @@
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\DeathAnimation.ts" />
+    <Content Include="Scripts\bin.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-blink.js" />
@@ -74,6 +77,7 @@
     <Content Include="Scripts\knockout-3.2.0.js" />
     <Content Include="Scripts\linq.js" />
     <Content Include="Scripts\linq.min.js" />
+    <Content Include="Scripts\mp3.js" />
     <Content Include="Scripts\QTransform.js" />
     <TypeScriptCompile Include="ts\FishSim\Components\Castle.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\FishFlag.ts" />

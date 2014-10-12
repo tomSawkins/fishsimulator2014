@@ -10,8 +10,6 @@ require.config({
 		"linq": '../../Scripts/linq',
 		"bootstrap": '../../Scripts/bootstrap',
 		"signalr.core": '../../Scripts/jquery.SignalR-2.1.2',
-
-		//this might not work
 		"signalr.hubs": '/signalr/hubs?',
 
 		//shortcut paths
@@ -21,7 +19,9 @@ require.config({
 		"viewmodels": 'ViewModels',
 
 		//require plugins
-		"text": '../../Scripts/text'
+        "text": '../../Scripts/text',
+        "bin": '../../Scripts/bin',
+        "mp3": '../../Scripts/mp3'
 	},
 
 	shim: {
