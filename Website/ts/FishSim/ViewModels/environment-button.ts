@@ -22,6 +22,6 @@ export class viewModel
 
 	public killEnvironment(): void 
 	{
-		this.fishSimHubServer().killEnvironment(this.name.toString());
+		//this.fishSimHubServer().killEnvironment(this.name.toString());
 	}
 }
