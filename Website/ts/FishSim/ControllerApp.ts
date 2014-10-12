@@ -9,7 +9,8 @@ import ko = require("knockout");
 
 require(["jquery", "linq", "signalr.hubs"]);
 
-class ControllerApp {
+class ControllerApp
+{
     public cachedStartupTime: KnockoutObservable<String> = ko.observable<String>();
     public environments: KnockoutObservableArray<String> = ko.observableArray<String>();
 
@@ -17,57 +18,65 @@ class ControllerApp {
     public fishSimHubServer: KnockoutObservable<FishSimHubServer> = ko.observable<FishSimHubServer>();
     private mp3Playing: boolean = false;
 
-    constructor() {
+    constructor()
+    {
     }
 
-    public run(): void {
+    public run(): void
+    {
         this.fishSimHubClient($.connection.fishSimHub.client);
         this.fishSimHubServer($.connection.fishSimHub.server);
 
         //$.connection.hub.logging = true;
 
-        this.fishSimHubClient().marioMan = () => {
+        this.fishSimHubClient().marioMan = () =>
+        {
             require(
                 [
-                    'mp3!../../images/cantina.mp3'
+                    'mp3!../../sounds/mario-underwater-theme.mp3'
                 ],
-                (cantina) =>
+                (underwaterTheme) =>
                 {
                     if (!this.mp3Playing)
                     {
-                        var self = this;
-                        self.mp3Playing = true;
+                        this.mp3Playing = true;
 
                         //window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         var context = new AudioContext();
 
                         var source = context.createBufferSource();
-                        source.buffer = cantina;
+                        source.buffer = underwaterTheme;
                         source.connect(context.destination);
                         source.start(0);
 
-                        var timer = setTimeout(() => {
+                        var timer = setTimeout(() => 
+                        {
                             console.log('playback finished');
-                            self.mp3Playing = false;
+                            this.mp3Playing = false;
                         }, source.buffer.duration * 1000);
                     }
                 });
         };
 
-        $.connection.hub.start().done(() => {
-            this.fishSimHubServer().getConfig().done((config) => {
+        $.connection.hub.start().done(() => 
+        {
+            this.fishSimHubServer().getConfig().done((config) =>
+            {
                 console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);
 
                 this.cachedStartupTime(config.StartupTime);
 
-                Enumerable.From(config.Environments).ForEach((p: Environment) => {
+                Enumerable.From(config.Environments).ForEach((p: Environment) => 
+                {
                     this.environments.push(p.Name);
                 });
             });
         });
 
-        $.connection.hub.reconnected(() => {
-            this.fishSimHubServer().getStartupTime().done((startupTime) => {
+        $.connection.hub.reconnected(() => 
+        {
+            this.fishSimHubServer().getStartupTime().done((startupTime) =>
+            {
                 console.log("reconnected startupTime: " + startupTime);
                 console.log("cachedStartupTime: " + this.cachedStartupTime());
 

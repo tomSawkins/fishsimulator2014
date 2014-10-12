@@ -56,6 +56,7 @@
     <TypeScriptCompile Include="ts\FishSim\ControllerApp.ts" />
     <TypeScriptCompile Include="ts\FishSim\ControllerBootstrap.ts" />
     <TypeScriptCompile Include="ts\FishSim\ControllerConfig.ts" />
+    <TypeScriptCompile Include="ts\FishSim\DeathManager.ts" />
     <TypeScriptCompile Include="ts\FishSim\Extensions.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IVector.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Bubble.ts" />
@@ -92,6 +93,8 @@
     <Content Include="Scripts\r.js" />
     <Content Include="Scripts\require.js" />
     <Content Include="Scripts\text.js" />
+    <Content Include="sounds\cantina.mp3" />
+    <Content Include="sounds\mario-underwater-theme.mp3" />
     <Content Include="ts\FishSim\ITime.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="Scripts\typings\linq\linq.d.ts" />
