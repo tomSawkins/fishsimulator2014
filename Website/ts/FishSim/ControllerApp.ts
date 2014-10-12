@@ -2,7 +2,7 @@
 /// <reference path="../../scripts/typings/linq/linq.d.ts" />
 /// <reference path="../../scripts/typings/knockout/knockout.d.ts" />
 /// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
-/// <reference path="Hubs.d.ts" />
+/// <reference path="Hubs.ts" />
 
 import ko = require("knockout");
 
@@ -47,7 +47,7 @@ class ControllerApp
 
 				this.cachedStartupTime(config.StartupTime);
 
-				Enumerable.From(config.Environments).ForEach((p: ClientEnvironment) =>
+				Enumerable.From(config.Environments).ForEach((p: Environment) =>
 				{
 					this.environments.push(p.Name);
 				});
@@ -66,7 +66,7 @@ class ControllerApp
 				else if (startupTime != this.cachedStartupTime())
 					window.location.reload(true);
 			});
-		});
+        });
 	}
 }
 

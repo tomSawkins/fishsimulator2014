@@ -6,10 +6,11 @@ namespace FishSim2014.Models
     {
         public ClientConfig()
         {
-            Environments = new List<ClientEnvironment>();
+            Environments = new List<Environment>();
         }
 
         public string StartupTime { get; set; }
-        public List<ClientEnvironment> Environments { get; set; }
+
+        public List<Environment> Environments { get; set; }
     }
 }

@@ -91,7 +91,7 @@
     <Content Include="ts\FishSim\ITime.d.ts" />
     <Content Include="ts\FishSim\Libs\jquery-blink.d.ts" />
     <Content Include="Scripts\typings\linq\linq.d.ts" />
-    <TypeScriptCompile Include="ts\FishSim\Hubs.d.ts">
+    <TypeScriptCompile Include="ts\FishSim\Hubs.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Hubs.tt</DependentUpon>
@@ -130,7 +130,7 @@
     </Content>
     <None Include="ts\FishSim\Hubs.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Hubs.d.ts</LastGenOutput>
+      <LastGenOutput>Hubs.ts</LastGenOutput>
     </None>
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
@@ -148,10 +148,11 @@
     <Compile Include="App_Start\SignalRConfig.cs" />
     <Compile Include="AutofacModules\SignalrModule.cs" />
     <Compile Include="Models\ClientConfig.cs" />
-    <Compile Include="Models\ClientEnvironment.cs" />
+    <Compile Include="Models\Environment.cs" />
     <Compile Include="Hubs\FishSimHub.cs" />
     <Compile Include="Hubs\IFishSimHubClient.cs" />
     <Compile Include="Interfaces\IClock.cs" />
+    <Compile Include="Models\Health.cs" />
     <Compile Include="Services\SystemClock.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

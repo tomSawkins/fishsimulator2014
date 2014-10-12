@@ -28,10 +28,10 @@ namespace FishSim2014.Hubs
         {
             var config = new ClientConfig();
 
-            config.Environments.Add(new ClientEnvironment { Name = "ts8" });
-            config.Environments.Add(new ClientEnvironment { Name = "ts9" });
-			config.Environments.Add(new ClientEnvironment { Name = "ts10" });
-			config.Environments.Add(new ClientEnvironment { Name = "t12" });
+            config.Environments.Add(new Environment { Name = "ts8", Health = Health.Unknown });
+            config.Environments.Add(new Environment { Name = "ts9", Health = Health.Unknown });
+            config.Environments.Add(new Environment { Name = "ts10", Health = Health.Unknown });
+            config.Environments.Add(new Environment { Name = "t12", Health = Health.Unknown });
 
             config.StartupTime = GetStartupTime();
 
@@ -43,9 +43,9 @@ namespace FishSim2014.Hubs
             this.Clients.All.MarioMan();
         }
 
-	    public void KillEnvironment(string name)
-	    {
-		    this.Clients.All.KillEnvironment(name);
-	    }
+        public void UpdateEnvironment(string name, Health health)
+        {
+            this.Clients.All.UpdateEnvironment(name, health);
+        }
     }
 }
