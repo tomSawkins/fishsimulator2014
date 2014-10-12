@@ -1,15 +1,19 @@
 ﻿/// <reference path="../../../scripts/typings/jquery/jquery.d.ts" />
 /// <reference path="IComponent.ts" />
-module FishSim.Components {
-    export enum PlumberCharacter {
+module FishSim.Components
+{
+    export enum PlumberCharacter
+    {
         Mario,
         Luigi
     }
 
-    export class Plumber implements IComponent {
+    export class Plumber implements IComponent
+    {
         private static plumberCount = 0;
 
-        constructor(character: PlumberCharacter, y: number) {
+        constructor(character: PlumberCharacter, y: number)
+        {
             // Generate a new ID for this bubble
             this.id = 'plumber' + Plumber.plumberCount++;
 
@@ -26,9 +30,12 @@ module FishSim.Components {
             $('body').append(content);
             this.element = $('#' + this.id);
 
-            if (character == PlumberCharacter.Mario) {
+            if (character == PlumberCharacter.Mario)
+            {
                 this.element.addClass('mario');
-            } else {
+            }
+            else
+            {
                 this.element.addClass('luigi');
             }
 
@@ -45,15 +52,18 @@ module FishSim.Components {
 
         public bubbleType: string;
 
-        private setPosition(position: IVector) {
+        private setPosition(position: IVector)
+        {
             this.element.css({ left: position.x + 'px', top: position.y + 'px' });
             this.position = position;
         }
 
         private currentFrameIndex = -1;
 
-        public tick(time: ITime): void {
-            if (FishSim.App.paused) {
+        public tick(time: ITime): void
+        {
+            if (FishSim.App.paused)
+            {
                 return;
             }
 
@@ -67,8 +77,10 @@ module FishSim.Components {
             var frameIndex = Math.floor((time.total / (1000 / fps)) % frameCount);
 
             // Swap out the class which says which frame we're on
-            if (frameIndex != this.currentFrameIndex) {
-                if (this.currentFrameIndex > -1) {
+            if (frameIndex != this.currentFrameIndex)
+            {
+                if (this.currentFrameIndex > -1)
+                {
                     this.element.removeClass('swim' + this.currentFrameIndex);
                 }
 
@@ -101,12 +113,14 @@ module FishSim.Components {
 
             // If we've gone outside the top edge of the screen then 
             // we can be cleaned up
-            if (this.position.x > $(window).width()) {
+            if (this.position.x > $(window).width())
+            {
                 App.removeComponent(this);
             }
         }
 
-        public cleanUp(): void {
+        public cleanUp(): void
+        {
             // Remove bubble from dom
             var body = document.getElementById('body');
             var element = document.getElementById(this.id);

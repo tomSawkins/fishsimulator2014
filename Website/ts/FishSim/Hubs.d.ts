@@ -8,10 +8,7 @@
 //#region available hubs
 
 interface SignalR {
-
-    /**
-      * The hub implemented by FishSim2014.Hubs.FishSimHub
-      */
+    // The hub implemented by FishSim2014.Hubs.FishSimHub
     fishSimHub : FishSimHub;
 }
 //#endregion available hubs
@@ -58,6 +55,14 @@ interface FishSimHubServer {
       * @return {JQueryPromise of void}
       */
     marioMan() : JQueryPromise<void>
+
+    /** 
+      * Sends a "killEnvironment" message to the FishSimHub hub.
+      * Contract Documentation: ---
+      * @param name {string} 
+      * @return {JQueryPromise of void}
+      */
+    killEnvironment(name : string) : JQueryPromise<void>
 }
 
 interface FishSimHubClient
@@ -69,6 +74,14 @@ interface FishSimHubClient
       * @return {void}
       */
     marioMan : () => void;
+
+    /**
+      * Set this function with a "function(name : string){}" to receive the "killEnvironment" message from the FishSimHub hub.
+      * Contract Documentation: ---
+      * @param name {string} 
+      * @return {void}
+      */
+    killEnvironment : (name : string) => void;
 }
 
 //#endregion FishSimHub hub

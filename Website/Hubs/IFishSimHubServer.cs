@@ -15,5 +15,7 @@ namespace FishSim2014.Hubs
         ClientConfig GetConfig();
 
         void MarioMan();
+
+	    void KillEnvironment(string name);
     }
 }

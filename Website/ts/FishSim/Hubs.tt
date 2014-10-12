@@ -35,10 +35,7 @@ interface SignalR {
 foreach (var hub in hubmanager.GetHubs())
 {
 #>
-
-    /**
-      * The hub implemented by <#=hub.HubType.FullName#>
-      */
+    // The hub implemented by <#=hub.HubType.FullName#>
     <#= hub.Name.Substring(0, 1).ToLower() + hub.Name.Substring(1) #> : <#= hub.HubType.Name #>;
 <#
 }

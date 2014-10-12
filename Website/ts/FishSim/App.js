@@ -113,7 +113,12 @@ var FishSim;
 
             var fishHub = $.connection.fishSimHub;
 
-            $.connection.hub.logging = true;
+            //$.connection.hub.logging = true;
+            fishHub.client.killEnvironment = function (env) {
+                var envComponent = _this.getComponentById(env);
+                var fishy = envComponent;
+                fishy.makeBubble();
+            };
 
             fishHub.client.marioMan = function () {
                 _this.addPlumber();
