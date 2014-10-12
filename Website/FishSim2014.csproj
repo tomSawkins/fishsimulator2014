@@ -30,7 +30,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="images\bubble-small.png" />
     <Content Include="images\bubble.png" />
-    <Content Include="images\cantina.mp3" />
     <Content Include="images\castle.png" />
     <Content Include="images\fish-flag.gif" />
     <Content Include="images\luigi-swimming.png" />
