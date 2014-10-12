@@ -30,7 +30,7 @@ namespace FishSim2014.Hubs
 
             config.Environments.Add(new Environment { Name = "ts8", Health = Health.Unknown });
             config.Environments.Add(new Environment { Name = "ts9", Health = Health.Unknown });
-            config.Environments.Add(new Environment { Name = "ts10", Health = Health.Unknown });
+            config.Environments.Add(new Environment { Name = "t10", Health = Health.Unknown });
             config.Environments.Add(new Environment { Name = "t12", Health = Health.Unknown });
 
             config.StartupTime = GetStartupTime();
