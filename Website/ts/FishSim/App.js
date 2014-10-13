@@ -114,16 +114,22 @@ var FishSim;
             var fishHub = $.connection.fishSimHub;
 
             //$.connection.hub.logging = true;
-            /*
-            fishHub.client.killEnvironment = (env) =>
-            {
-            var envComponent : IComponent = this.getComponentById(env);
-            var fishy: IFish = <IFish>envComponent;
-            fishy.makeBubble();
-            };
-            */
             fishHub.client.updateEnvironment = function (name, health) {
                 console.log("Updated Health for " + name + " to " + health);
+
+                var envComponent = _this.getComponentById(name);
+                var fishy = envComponent;
+                fishy.makeBubble();
+
+                if (health == 2 /* Failing */) {
+                    $(document.body).css("background-color", "red");
+                } else if (health == 1 /* Okay */) {
+                    $(document.body).css("background-color", "green");
+                }
+
+                setTimeout(function () {
+                    $("body").css("background-color", "#272796");
+                }, 3000);
             };
 
             fishHub.client.marioMan = function () {
