@@ -3,8 +3,6 @@ body {
   border: 0;
   margin: 0;
   padding: 0;
-}
-body {
   background-color: #272796;
 }
 html {
@@ -23,10 +21,16 @@ html {
 #ts9 {
   background-image: url('../images/ts9.png');
 }
-#t10 {
+#t10.swim0 {
   background-image: url('../images/t10.png');
-  width: 90px !important;
-  height: 180px !important;
+  width: 72px !important;
+  height: 144px !important;
+}
+#t10.swim1 {
+  background-image: url('../images/t10.png');
+  width: 72px !important;
+  height: 144px !important;
+  background-position: 72px 0;
 }
 #t12 {
   background-image: url('../images/t12.png');

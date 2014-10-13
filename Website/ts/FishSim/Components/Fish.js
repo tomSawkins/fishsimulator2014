@@ -17,6 +17,7 @@
             function Fish(id) {
                 var _this = this;
                 this.state = 0 /* Idle */;
+                this.swimmingFrameIndex = 0;
                 this.calculateDimensions();
 
                 var body = $('body');
@@ -103,6 +104,19 @@
                     // Chance a bubble to occur roughly every x milliseconds
                     if (Math.chance(time.elapsed, 3000)) {
                         this.makeBubble();
+                    }
+
+                    // Animate the fishy swimming
+                    var swimmingFrameCount = 2;
+                    var swimmingFramesPerSecond = 2;
+                    var swimmingFrameDuration = 1000 / swimmingFramesPerSecond;
+                    var totalFramesPast = Math.floor(time.total / swimmingFrameDuration);
+                    var swimmingFrameIndex = totalFramesPast % swimmingFrameCount;
+
+                    if (this.swimmingFrameIndex != swimmingFrameIndex) {
+                        this.element.removeClass("swim" + this.swimmingFrameIndex);
+                        this.swimmingFrameIndex = swimmingFrameIndex;
+                        this.element.addClass("swim" + this.swimmingFrameIndex);
                     }
                 }
             };
