@@ -11,40 +11,40 @@
 module FishSim
 {
 	export class App
-	{
+{
 		private static components = <IComponent[]>[];
 
 		public static addComponent(component: IComponent)
-		{
+{
 			this.components.push(component);
 		}
 
 		public static removeComponent(component: IComponent)
-		{
+{
 			component.flaggedForRemoval = true;
 
 			if (component.cleanUp)
-			{
+{
 				component.cleanUp();
 			}
 
 			if (this.loopingThruComponentsCount == 0)
-			{
+{
 				this.removeFlaggedComponents();
 			}
 		}
 
 		private static removeFlaggedComponents(): void
-		{
+{
 			var index = 0;
 			while (index < this.components.length)
-			{
+{
 				if (this.components[index].flaggedForRemoval)
-				{
+{
 					this.components.splice(index, 1);
 				}
 				else
-				{
+{
 					index++;
 				}
 			}
@@ -53,18 +53,18 @@ module FishSim
 		private static loopingThruComponentsCount = 0;
 
 		public static forEachComponent(action: (IComponent) => any): void
-		{
+{
 			this.loopingThruComponentsCount++;
 			try
-			{
+{
 				// Do a while loop to allow for additions to the components array
 				var index = 0;
 				while (index < this.components.length)
-				{
+{
 					var component = this.components[index];
 
 					if (!component.flaggedForRemoval)
-					{
+{
 						action(component);
 					}
 
@@ -72,18 +72,18 @@ module FishSim
 				}
 			}
 			finally
-			{
+{
 				this.loopingThruComponentsCount--;
 
 				if (this.loopingThruComponentsCount == 0)
-				{
+{
 					this.removeFlaggedComponents();
 				}
 			}
 		}
 
 		public static getComponentById(id: string): FishSim.IComponent
-		{
+{
 			return Enumerable.From(this.components)
 				.FirstOrDefault(null, c => c.id == id);
 		}
@@ -95,7 +95,7 @@ module FishSim
 		private static startTime: number;
 
 		public static run(): void
-		{
+{
 			$('.title').blink();
 
 			// Subscribe to events
@@ -116,7 +116,7 @@ module FishSim
 			var screenWidth: number = $(window).width();
 			var space = (screenWidth / seaweedCount + 1);
 			for (var i = 0; i < seaweedCount; i++)
-			{
+{
 				var x = space * (i + 1) - (space / 2) + Math.randomRange(0, space);
 
 				this.addComponent(new FishSim.Components.Seaweed(x));
@@ -126,7 +126,7 @@ module FishSim
 			this.lastTickTime = this.startTime;
 
 			setInterval(() =>
-			{
+{
 				this.tick();
 			},
 				1000 / this.fps);
@@ -137,43 +137,49 @@ module FishSim
 
 			//$.connection.hub.logging = true;
 
-            /*
-			fishHub.client.killEnvironment = (env) =>
+			fishHub.client.updateEnvironment = (name: string, health: Health) =>
 			{
-				var envComponent : IComponent = this.getComponentById(env);
+				console.log("Updated Health for " + name + " to " + health);
+
+				var envComponent: IComponent = this.getComponentById(name);
 				var fishy: IFish = <IFish>envComponent;
 				fishy.makeBubble();
+
+				if (health == Health.Failing)
+				{
+					$(document.body).css("background-color", "red");
+				}
+				else if (health == Health.Okay)
+				{
+					$(document.body).css("background-color", "green");
+				}
+
+				setTimeout(() => { $("body").css("background-color", "#272796"); }, 3000);
 			};
-            */
 
-		    fishHub.client.updateEnvironment = (name: string, health: Health) =>
-		    {
-		        console.log("Updated Health for " + name + " to " + health);
-		    };
-
-		    fishHub.client.marioMan = () =>
-			{
+			fishHub.client.marioMan = () =>
+{
 				this.addPlumber();
 			};
 
 			$.connection.hub.start().done(() =>
-			{
+{
 				fishHub.server.getConfig().done((config) =>
-				{
+{
 					console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);
 					cachedStartupTime = config.StartupTime;
 
 					Enumerable.From(config.Environments).ForEach((p: Environment) =>
-					{
+{
 						this.addComponent(new FishSim.Components.Fish(p.Name));
 					});
 				});
 			});
 
 			$.connection.hub.reconnected(() =>
-			{
+{
 				fishHub.server.getStartupTime().done((startupTime) =>
-				{
+{
 					console.log("reconnected startupTime: " + startupTime);
 					console.log("cachedStartupTime: " + cachedStartupTime);
 
@@ -188,7 +194,7 @@ module FishSim
 		private static lastTickTime: number;
 
 		private static tick(): void
-		{
+{
 			var tickTime = (new Date()).getTime();
 
 			var time: ITime = {
@@ -197,52 +203,52 @@ module FishSim
 			};
 
 			try
-			{
+{
 				if (!this.paused)
-				{
+{
 					// Once an hour or so...
 					if (Math.chance(time.elapsed, 1000 * 60 * 60))
-					{
+{
 						this.addPlumber();
 					}
 
 					// Loop through each component in the scene and call their tick handler
 					this.forEachComponent((component: IComponent) =>
-					{
+{
 						component.tick(time);
 					});
 				}
 			}
 			finally
-			{
+{
 				this.lastTickTime = tickTime;
 			}
 		}
 
 		private static keydown(event: JQueryKeyEventObject)
-		{
+{
 			this.forEachComponent((component: IComponent) =>
-			{
+{
 				if (component.keydown)
-				{
+{
 					component.keydown(event);
 				}
 			});
 		}
 
 		private static keypress(event: JQueryKeyEventObject)
-		{
+{
 			this.forEachComponent((component: IComponent) =>
-			{
+{
 				if (component.keypress)
-				{
+{
 					component.keypress(event);
 				}
 			});
 		}
 
 		private static keyup(event: JQueryKeyEventObject)
-		{
+{
 			if (event.keyCode == 80) // P
 			{
 				// Pause / Resume the sim
@@ -260,20 +266,20 @@ module FishSim
 			}
 
 			this.forEachComponent((component: IComponent) =>
-			{
+{
 				if (component.keyup)
-				{
+{
 					component.keyup(event);
 				}
 			});
 		}
 
 		private static addPlumber(character?: FishSim.Components.PlumberCharacter): void
-		{
+{
 			var y = Math.randomRange(100, $(window).height() - 150);
 
 			if (character === undefined)
-			{
+{
 				character = Math.randomRange(0, 1);
 			}
 
@@ -282,7 +288,7 @@ module FishSim
 	}
 
 	window.onload = () =>
-	{
+{
 		App.run();
 	};
 }
