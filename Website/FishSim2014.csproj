@@ -52,6 +52,8 @@
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IFish.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\Rainbow.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\Seapony.ts" />
     <TypeScriptCompile Include="ts\FishSim\ControllerApp.ts" />
     <TypeScriptCompile Include="ts\FishSim\ControllerBootstrap.ts" />
     <TypeScriptCompile Include="ts\FishSim\ControllerConfig.ts" />

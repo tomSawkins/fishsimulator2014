@@ -54,9 +54,7 @@ module FishSim.Components
 
         public state: FishState = FishState.Idle;
 
-        public isFacingRight: boolean = true;
-
-        public tilePosition: IVector;
+        private tilePosition: IVector;
 
         private canMoveToTile(tile: IVector): boolean
         {
@@ -157,7 +155,7 @@ module FishSim.Components
             }
         }
 
-        public static tileToScreen(tile: IVector): IVector
+        private static tileToScreen(tile: IVector): IVector
         {
             return {
                 x: ($(window).width() / Fish.maxTileCounts.x) * tile.x,
@@ -190,13 +188,11 @@ module FishSim.Components
             {
                 // face left
                 scaleXAmount = -1;
-                this.isFacingRight = false;
             }
             else if (options.tile.x > this.tilePosition.x)
             {
                 // face right
                 scaleXAmount = 1;
-                this.isFacingRight = true;
             }
 
             var preAnimateProperties = {

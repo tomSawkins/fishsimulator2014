@@ -142,7 +142,15 @@ var FishSim;
                     cachedStartupTime = config.StartupTime;
 
                     Enumerable.From(config.Environments).ForEach(function (p) {
-                        _this.addComponent(new FishSim.Components.Fish(p.Name));
+                        var fish;
+
+                        if (p.Name == "t12") {
+                            fish = new FishSim.Components.SeaPony(p.Name);
+                        } else {
+                            fish = new FishSim.Components.Fish(p.Name);
+                        }
+
+                        _this.addComponent(fish);
                     });
                 });
             });
