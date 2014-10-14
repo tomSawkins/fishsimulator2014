@@ -29,7 +29,7 @@ module FishSim.Components
             // Generate a new ID for the fishy
             this.id = id;
 
-            body.append('<div id="{id}" class="fish"></div>'.format(this));
+            body.append('<div id="{id}" class="fish swim0"></div>'.format(this));
 
             this.element = $('#' + this.id);
 
