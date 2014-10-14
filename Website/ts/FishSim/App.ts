@@ -147,11 +147,11 @@ module FishSim
 
 				if (health == Health.Failing)
 				{
-					$(document.body).css("background-color", "red");
+					$("body").css("background-color", "red");
 				}
 				else if (health == Health.Okay)
 				{
-					$(document.body).css("background-color", "green");
+					$("body").css("background-color", "green");
 				}
 
 				setTimeout(() => { $("body").css("background-color", "#272796"); }, 3000);
