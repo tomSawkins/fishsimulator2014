@@ -122,9 +122,9 @@ var FishSim;
                 fishy.makeBubble();
 
                 if (health == 2 /* Failing */) {
-                    $(document.body).css("background-color", "red");
+                    $("body").css("background-color", "red");
                 } else if (health == 1 /* Okay */) {
-                    $(document.body).css("background-color", "green");
+                    $("body").css("background-color", "green");
                 }
 
                 setTimeout(function () {
