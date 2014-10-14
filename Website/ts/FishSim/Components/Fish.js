@@ -17,6 +17,7 @@
             function Fish(id) {
                 var _this = this;
                 this.state = 0 /* Idle */;
+                this.isFacingRight = true;
                 this.swimmingFrameIndex = 0;
                 this.calculateDimensions();
 
@@ -149,9 +150,11 @@
                 if (options.tile.x < this.tilePosition.x) {
                     // face left
                     scaleXAmount = -1;
+                    this.isFacingRight = false;
                 } else if (options.tile.x > this.tilePosition.x) {
                     // face right
                     scaleXAmount = 1;
+                    this.isFacingRight = true;
                 }
 
                 var preAnimateProperties = {

@@ -32,22 +32,26 @@ html {
 	background-image: url('../images/ts9.png');
 }
 
-#t10.swim0 {
+#t10 {
 	background-image: url('../images/t10.png');
-	width: 72px !important;
-	height: 144px !important;
-}
 
-#t10.swim1 {
-	background-image: url('../images/t10.png');
-	width: 72px !important;
-	height: 144px !important;
-	background-position: 72px 0;
+    &.swim0 {
+	    width: 72px !important;
+	    height: 144px !important;
+    }
+
+    &.swim1 {
+	    width: 72px !important;
+	    height: 144px !important;
+	    background-position: 72px 0;
+    }
 }
 
 #t12 {
 	background-image: url('../images/t12.gif');
 	background-repeat: no-repeat;
+    width: 100px;
+    height: 100px;
 }
 
 .faceLeft {
@@ -66,6 +70,7 @@ html {
 	z-index: -9;
 	position: fixed;
 	background-image: url('../images/bubble.png');
+    opacity: 0.7;
 }
 
 .bubble-small {
@@ -177,4 +182,13 @@ span.fatality {
 	&.swim5 {
 		background-position: 320px 0;
 	}
+}
+
+.rainbow {
+    background-image: url('../images/rainbow.png');
+
+    z-index: -9;
+	width: 66px;
+	height: 30px;
+	position: fixed;
 }
