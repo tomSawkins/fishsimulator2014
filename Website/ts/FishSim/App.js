@@ -119,7 +119,9 @@ var FishSim;
 
                 var envComponent = _this.getComponentById(name);
                 var fishy = envComponent;
-                fishy.makeBubble();
+
+                //fishy.makeBubble();
+                fishy.updateHealth(health);
 
                 if (health == 2 /* Failing */) {
                     $("body").css("background-color", "red");

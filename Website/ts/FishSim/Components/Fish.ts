@@ -9,7 +9,8 @@ module FishSim.Components
         Idle,
         Moving,
         Dying,
-        Dead
+        Dead,
+        Reviving,
     }
 
     export class Fish implements IFish
@@ -20,6 +21,8 @@ module FishSim.Components
 
         private tileSize: IVector;
 
+        private health = Health.Unknown;
+
         constructor(id)
         {
             this.calculateDimensions();
@@ -29,7 +32,7 @@ module FishSim.Components
             // Generate a new ID for the fishy
             this.id = id;
 
-            body.append('<div id="{id}" class="fish"></div>'.format(this));
+            body.append('<div id="{id}" class="fish swim0"></div>'.format(this));
 
             this.element = $('#' + this.id);
 
@@ -60,8 +63,7 @@ module FishSim.Components
 
         private canMoveToTile(tile: IVector): boolean
         {
-            if
-            (tile.x >= 0 && tile.x < Fish.maxTileCounts.x &&
+            if (tile.x >= 0 && tile.x < Fish.maxTileCounts.x &&
                 tile.y >= 0 && tile.y < Fish.maxTileCounts.y)
             {
                 return true;
@@ -298,6 +300,33 @@ module FishSim.Components
 
                         this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
                     }
+                }
+            }
+        }
+
+        public updateHealth(health: Health): void
+        {
+            if ((health == Health.Failing) == (this.state == FishState.Dying || this.state == FishState.Dead))
+            {
+                return;
+            }
+
+            var deadClassName = "dead";
+
+            if (health == Health.Failing)
+            {
+                if (!this.element.hasClass(deadClassName))
+                {
+                    this.element.addClass(deadClassName);
+                    this.state = FishState.Dead;
+                }
+            }
+            else
+            {
+                if (this.element.hasClass(deadClassName))
+                {
+                    this.element.removeClass(deadClassName);
+                    this.state = FishState.Idle;
                 }
             }
         }

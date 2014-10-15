@@ -135,7 +135,7 @@ while (viewTypes.Count != 0)
     if (type.IsEnum)
     {
 #>
-declare enum <#= GenericSpecificName(type) #>
+enum <#= GenericSpecificName(type) #>
 {
 <#
         var enumValues = type.GetFields();
