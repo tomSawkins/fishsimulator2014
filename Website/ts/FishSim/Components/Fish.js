@@ -10,12 +10,14 @@
             FishState[FishState["Moving"] = 1] = "Moving";
             FishState[FishState["Dying"] = 2] = "Dying";
             FishState[FishState["Dead"] = 3] = "Dead";
+            FishState[FishState["Reviving"] = 4] = "Reviving";
         })(Components.FishState || (Components.FishState = {}));
         var FishState = Components.FishState;
 
         var Fish = (function () {
             function Fish(id) {
                 var _this = this;
+                this.health = 0 /* Unknown */;
                 this.state = 0 /* Idle */;
                 this.isFacingRight = true;
                 this.swimmingFrameIndex = 0;
@@ -240,6 +242,26 @@
 
                             this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
                         }
+                    }
+                }
+            };
+
+            Fish.prototype.updateHealth = function (health) {
+                if ((health == 2 /* Failing */) == (this.state == 2 /* Dying */ || this.state == 3 /* Dead */)) {
+                    return;
+                }
+
+                var deadClassName = "dead";
+
+                if (health == 2 /* Failing */) {
+                    if (!this.element.hasClass(deadClassName)) {
+                        this.element.addClass(deadClassName);
+                        this.state = 3 /* Dead */;
+                    }
+                } else {
+                    if (this.element.hasClass(deadClassName)) {
+                        this.element.removeClass(deadClassName);
+                        this.state = 0 /* Idle */;
                     }
                 }
             };

@@ -9,7 +9,8 @@ module FishSim.Components
         Idle,
         Moving,
         Dying,
-        Dead
+        Dead,
+        Reviving,
     }
 
     export class Fish implements IFish
@@ -19,6 +20,8 @@ module FishSim.Components
         private screenSize: IVector;
 
         private tileSize: IVector;
+
+        private health = Health.Unknown;
 
         constructor(id)
         {
@@ -60,8 +63,7 @@ module FishSim.Components
 
         private canMoveToTile(tile: IVector): boolean
         {
-            if
-            (tile.x >= 0 && tile.x < Fish.maxTileCounts.x &&
+            if (tile.x >= 0 && tile.x < Fish.maxTileCounts.x &&
                 tile.y >= 0 && tile.y < Fish.maxTileCounts.y)
             {
                 return true;
@@ -298,6 +300,33 @@ module FishSim.Components
 
                         this.moveToTile({ tile: newPosition, animate: true, duration: 250 });
                     }
+                }
+            }
+        }
+
+        public updateHealth(health: Health): void
+        {
+            if ((health == Health.Failing) == (this.state == FishState.Dying || this.state == FishState.Dead))
+            {
+                return;
+            }
+
+            var deadClassName = "dead";
+
+            if (health == Health.Failing)
+            {
+                if (!this.element.hasClass(deadClassName))
+                {
+                    this.element.addClass(deadClassName);
+                    this.state = FishState.Dead;
+                }
+            }
+            else
+            {
+                if (this.element.hasClass(deadClassName))
+                {
+                    this.element.removeClass(deadClassName);
+                    this.state = FishState.Idle;
                 }
             }
         }

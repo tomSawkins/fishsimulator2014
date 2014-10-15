@@ -60,7 +60,7 @@ interface FishSimHubClient
 
 
 //#region Data Contracts
-declare enum Health
+enum Health
 {
     Unknown = 0,
     Okay = 1,
