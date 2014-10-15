@@ -143,7 +143,9 @@ module FishSim
 
                 var envComponent: IComponent = this.getComponentById(name);
                 var fishy: IFish = <IFish>envComponent;
-                fishy.makeBubble();
+                //fishy.makeBubble();
+
+                fishy.updateHealth(health);
 
                 if (health == Health.Failing)
                 {
