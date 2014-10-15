@@ -26,32 +26,46 @@ html {
 
 #ts8 {
 	background-image: url('../images/ts8.png');
+
+    &.dead {
+        background-position: 0 95px; 
+    }
 }
 
 #ts9 {
 	background-image: url('../images/ts9.png');
+    
+    &.dead {
+        background-position: 0 95px;
+    }
 }
 
 #t10 {
 	background-image: url('../images/t10.png');
+	width: 72px !important;
+	height: 144px !important;
+
+    &.dead {
+        background-position: 0 144px !important; 
+    }
 
     &.swim0 {
-	    width: 72px !important;
-	    height: 144px !important;
     }
 
     &.swim1 {
-	    width: 72px !important;
-	    height: 144px !important;
 	    background-position: 72px 0;
     }
 }
 
 #t12 {
 	background-image: url('../images/t12.gif');
-	background-repeat: no-repeat;
+	//background-repeat: no-repeat;
     width: 100px;
     height: 100px;
+
+    &.dead {
+        background-position: 0 100px !important;
+    }
 }
 
 .faceLeft {
