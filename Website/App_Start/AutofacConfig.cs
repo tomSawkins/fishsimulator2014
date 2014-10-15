@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
 using Autofac.Integration.SignalR;
 using Microsoft.AspNet.SignalR;
 using Owin;

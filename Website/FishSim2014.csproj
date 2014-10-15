@@ -149,6 +149,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\MetricsConfig.cs" />
     <Compile Include="AutofacModules\ServicesModule.cs" />
     <Compile Include="AutofacModules\SingletonModule.cs" />
     <Compile Include="Hubs\IFishSimHubServer.cs" />
@@ -174,6 +175,9 @@
     </Reference>
     <Reference Include="Autofac.Integration.SignalR">
       <HintPath>..\packages\Autofac.SignalR2.3.1.0\lib\net45\Autofac.Integration.SignalR.dll</HintPath>
+    </Reference>
+    <Reference Include="Metrics">
+      <HintPath>..\packages\Metrics.NET.0.2.5\lib\net45\Metrics.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.SignalR.Core">
       <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.1.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
@@ -203,6 +207,9 @@
     </Reference>
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin.Metrics">
+      <HintPath>..\packages\Owin.Metrics.0.1.10-alpha\lib\net45\Owin.Metrics.dll</HintPath>
     </Reference>
     <Reference Include="Serilog">
       <HintPath>..\packages\Serilog.1.4.11\lib\net45\Serilog.dll</HintPath>
