@@ -1,5 +1,7 @@
-﻿using FishSim2014.Interfaces;
+﻿using System.Threading.Tasks;
+using FishSim2014.Interfaces;
 using FishSim2014.Models;
+using Metrics;
 using Microsoft.AspNet.SignalR;
 
 namespace FishSim2014.Hubs
@@ -8,24 +10,25 @@ namespace FishSim2014.Hubs
     {
         private readonly AppInfo appInfo;
 
+        private readonly Counter connectionCounter = Metric.Counter("SignalR Connections", Unit.Custom("Connections"));
+        private readonly Meter callMeter = Metric.Meter("Method Calls", Unit.Calls, TimeUnit.Minutes);
+
         public FishSimHub(AppInfo appInfo)
         {
             this.appInfo = appInfo;
         }
 
-        /// <summary>
-        ///     Returns the Startup time of the ASP.NET Application
-        ///     This is used by the front-end application to determine whether
-        ///     to reload the application after a SignalR disconnection / reconnection.
-        /// </summary>
-        /// <returns>ISO formatted DateTime</returns>
         public string GetStartupTime()
         {
+            callMeter.Mark("GetStartupTime");
+
             return appInfo.StartupTime.ToString("O");
         }
 
         public ClientConfig GetConfig()
         {
+            callMeter.Mark("GetConfig");
+
             var config = new ClientConfig();
 
             config.Environments.Add(new Environment { Name = "ts8", Health = Health.Unknown });
@@ -40,12 +43,28 @@ namespace FishSim2014.Hubs
 
         public void MarioMan()
         {
+            callMeter.Mark("MarioMan");
+
             this.Clients.All.MarioMan();
         }
 
         public void UpdateEnvironment(string name, Health health)
         {
+            callMeter.Mark("UpdateEnvironment");
+
             this.Clients.All.UpdateEnvironment(name, health);
+        }
+
+        public override Task OnConnected()
+        {
+            connectionCounter.Increment();
+            return base.OnConnected();
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            connectionCounter.Decrement();
+            return base.OnDisconnected(stopCalled);
         }
     }
 }
