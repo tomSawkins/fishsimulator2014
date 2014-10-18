@@ -28,4 +28,9 @@ export class viewModel
     public environmentOkay(): void {
         this.fishSimHubServer().updateEnvironment(this.name.toString(), Health.Okay);
     }
+
+	public environmentAlert(): void
+	{
+		this.fishSimHubServer().showNotification(this.name.toString(), "hello world");
+	}
 }

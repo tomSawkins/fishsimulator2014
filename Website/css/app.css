@@ -92,7 +92,10 @@ html {
   position: fixed;
   bottom: 0;
   width: 100%;
+  font-size: 68pt;
   text-align: center;
+  opacity: 0.5;
+  background-color: #000000;
 }
 @font-face {
   font-family: arcadeclassic;
@@ -109,6 +112,14 @@ span.fatality {
   text-align: center;
   position: fixed;
   color: red;
+}
+#castle {
+  z-index: -11;
+  position: fixed;
+  width: 307px;
+  height: 264px;
+  right: 30px;
+  bottom: 0;
 }
 #castle {
   background-image: url('../images/castle.png');
