@@ -31,7 +31,9 @@ interface FishSimHubServer
 
     marioMan(): JQueryPromise<void>
 
-    updateEnvironment(name: string, health: Health): JQueryPromise<void>
+	updateEnvironment(name: string, health: Health): JQueryPromise<void>
+
+	showNotification(name: string, message: string): JQueryPromise<void>
 }
 
 interface FishSimHubClient
@@ -52,6 +54,15 @@ interface FishSimHubClient
       * @return {void}
       */
     updateEnvironment: (name: string, health: Health) => void;
+
+	/**
+	  * Set this function with a "function(name: string, message: string){}" to receive the "showNotification" message from the FishSimHub hub.
+	  * Contract Documentation: ---
+	  * @param name {string} 
+	  * @param message {string} 
+	  * @return {void}
+	  */
+	showNotification: (name: string, message: string) => void;
 }
 
 //#endregion FishSimHub Hub

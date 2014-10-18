@@ -27,17 +27,17 @@ html {
 #ts8 {
 	background-image: url('../images/ts8.png');
 
-    &.dead {
-        background-position: 0 95px; 
-    }
+	&.dead {
+		background-position: 0 95px;
+	}
 }
 
 #ts9 {
 	background-image: url('../images/ts9.png');
-    
-    &.dead {
-        background-position: 0 95px;
-    }
+
+	&.dead {
+		background-position: 0 95px;
+	}
 }
 
 #t10 {
@@ -45,27 +45,27 @@ html {
 	width: 72px !important;
 	height: 144px !important;
 
-    &.dead {
-        background-position: 0 144px !important; 
-    }
+	&.dead {
+		background-position: 0 144px !important;
+	}
 
-    &.swim0 {
-    }
+	&.swim0 {
+	}
 
-    &.swim1 {
-	    background-position: 72px 0;
-    }
+	&.swim1 {
+		background-position: 72px 0;
+	}
 }
 
 #t12 {
 	background-image: url('../images/t12.gif');
 	//background-repeat: no-repeat;
-    width: 100px;
-    height: 100px;
+	width: 100px;
+	height: 100px;
 
-    &.dead {
-        background-position: 0 100px !important;
-    }
+	&.dead {
+		background-position: 0 100px !important;
+	}
 }
 
 .faceLeft {
@@ -84,7 +84,7 @@ html {
 	z-index: -9;
 	position: fixed;
 	background-image: url('../images/bubble.png');
-    opacity: 0.7;
+	opacity: 0.7;
 }
 
 .bubble-small {
@@ -117,7 +117,10 @@ html {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
+	font-size: 68pt;
 	text-align: center;
+	opacity: 0.5;
+	background-color: #000000;
 }
 
 @font-face {
@@ -137,6 +140,15 @@ span.fatality {
 	text-align: center;
 	position: fixed;
 	color: red;
+}
+
+#castle {
+	z-index: -11;
+	position: fixed;
+	width: 307px;
+	height: 264px;
+	right: 30px;
+	bottom: 0;
 }
 
 #castle {
@@ -199,9 +211,8 @@ span.fatality {
 }
 
 .rainbow {
-    background-image: url('../images/rainbow.png');
-
-    z-index: -9;
+	background-image: url('../images/rainbow.png');
+	z-index: -9;
 	width: 66px;
 	height: 30px;
 	position: fixed;

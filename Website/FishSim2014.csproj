@@ -50,6 +50,7 @@
     <TypeScriptCompile Include="Scripts\typings\requirejs\require.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\signalr\signalr.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\webaudioapi\waa.d.ts" />
+    <TypeScriptCompile Include="ts\FishSim\Components\Notification.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IComponent.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\Fish.ts" />
     <TypeScriptCompile Include="ts\FishSim\Components\IFish.ts" />

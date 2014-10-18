@@ -45,8 +45,9 @@ namespace FishSim2014.Controller
             bool exitFlag = false;
             while (!exitFlag)
             {
-                Log.Information("Press 'm' for a new mario man, 'l' for a loop, or 'x' to exit");
-                key = Console.ReadKey();
+				Log.Information("Press 'e' for environment options");
+				Log.Information("Press 'm' for a new mario man, 'l' for a loop, or 'x' to exit");
+				key = Console.ReadKey();
                 Console.WriteLine();
 
                 if (key.KeyChar == 'm')
@@ -60,8 +61,12 @@ namespace FishSim2014.Controller
                         System.Threading.Thread.Sleep(900);
                     }
                 }
+                else if (key.KeyChar == 'e')
+                {
+
+                }
                 else if (key.KeyChar == 'x')
-                    exitFlag = true;
+	                exitFlag = true;
             }
 
             Console.WriteLine("done.");
@@ -83,7 +88,7 @@ namespace FishSim2014.Controller
             }
             catch (Exception ex)
             {
-
+				Log.Error(ex, "something went a bit wrong");
             }
         }
     }

@@ -7,5 +7,7 @@ namespace FishSim2014.Hubs
         void MarioMan();
 
         void UpdateEnvironment(string name, Health health);
+
+	    void ShowNotification(string name, string message);
     }
 }
