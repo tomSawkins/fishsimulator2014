@@ -7,6 +7,7 @@
 /// <reference path="Components/IVector.ts" />
 /// <reference path="Components/Seaweed.ts" />
 /// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
+/// <reference path="components/notification.ts" />
 /// <reference path="Hubs.ts" />
 var FishSim;
 (function (FishSim) {
@@ -138,6 +139,12 @@ var FishSim;
                 _this.addPlumber();
             };
 
+            fishHub.client.showNotification = function (name, message) {
+                console.log("show notification" + message);
+
+                _this.showNotification(name, message);
+            };
+
             $.connection.hub.start().done(function () {
                 fishHub.server.getConfig().done(function (config) {
                     console.log("SignalR Hub Starting -> Build Time: " + config.StartupTime);
@@ -228,6 +235,10 @@ var FishSim;
                     component.keyup(event);
                 }
             });
+        };
+
+        App.showNotification = function (name, message) {
+            this.components.push(new FishSim.Components.Notification(name, message));
         };
 
         App.addPlumber = function (character) {

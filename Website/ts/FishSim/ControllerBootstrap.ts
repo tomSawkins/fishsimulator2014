@@ -3,6 +3,12 @@
 /// <reference path="../../scripts/typings/requirejs/require.d.ts" />
 /// <reference path="../../scripts/typings/knockout/knockout.d.ts" />
 
+//require.onResourceLoad = (context, map, depArray) =>
+//{
+//	console.log("RequireJs Resource Load: " + (<RequireMap>map).name);
+//};
+
+
 require(
 	[
 		'knockout',
@@ -11,7 +17,8 @@ require(
 		'bootstrap',
 		'signalr.hubs',
 	],
-	(ko, app) => {
+	(ko, app) =>
+	{
 		'use strict';
 
 		$(document).ready(() =>
@@ -22,7 +29,7 @@ require(
 			ko.components.register('environment-button', { require: 'viewmodels/environment-button' });
 			ko.components.register('heading', { require: 'viewmodels/heading' });
 			ko.components.register('mario-button', { require: 'viewmodels/mario-button' });
-			
+
 			var instance = new app();
 
 			ko.applyBindings(instance);

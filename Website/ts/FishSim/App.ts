@@ -7,6 +7,7 @@
 /// <reference path="Components/IVector.ts" />
 /// <reference path="Components/Seaweed.ts" />
 /// <reference path="../../scripts/typings/signalr/signalr.d.ts" />
+/// <reference path="components/notification.ts" />
 /// <reference path="Hubs.ts" />
 module FishSim
 {
@@ -162,7 +163,14 @@ module FishSim
             fishHub.client.marioMan = () =>
             {
                 this.addPlumber();
-            };
+			};
+
+	        fishHub.client.showNotification = (name, message) =>
+	        {
+				console.log("show notification" + message);
+
+				this.showNotification(name, message);
+	        };
 
             $.connection.hub.start().done(() =>
             {
@@ -286,6 +294,11 @@ module FishSim
                 }
             });
         }
+
+		private static showNotification(name: string, message: string): void
+		{
+			this.components.push(new FishSim.Components.Notification(name, message));
+		}
 
         private static addPlumber(character?: FishSim.Components.PlumberCharacter): void
         {
